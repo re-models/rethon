@@ -95,53 +95,5 @@ class FullBranchREContainer(REContainer):
 
                 yield copy(re)
 
-class SimpleMultiAgentREContainer(REContainer):
-    """An :py:class:`REContainer` for multi-agent ensembles.
-
-    This container manages and executes model runs that are defined as an multi-agent ensemble. The container will
-    execute for each particular point in time the next step of all model and will then proceed accordingly
-    with the time point. Each model will be provided with the current model states of the other models by references
-    to the other models via the argument :code:`other_model_runs`. This argument is accessible by overriding or
-    extending the following methods in each model:
-
-    * :py:func:`ReflectiveEquilibrium.theory_candidates`,
-    * :py:func:`ReflectiveEquilibrium.commitment_candidates`,
-    * :py:func:`ReflectiveEquilibrium.pick_theory_candidate`,
-    * :py:func:`ReflectiveEquilibrium.pick_commitment_candidate` and
-    * :py:func:`ReflectiveEquilibrium.finished`.
-
-    """
-
-    def __init__(self, re_models: List[ReflectiveEquilibrium],
-                 initial_commitments_list: List[Position],
-                 max_re_length = 100):
-        super().__init__(re_models)
-        self._max_re_length = max_re_length
-        self._initial_commitments_list = initial_commitments_list
-
-    def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> List[ReflectiveEquilibrium]:
-        # set initial states and update internal attributes if necessary
-        if(re_models):
-            self.re_models = re_models
-        for index in range(len(self._initial_commitments_list)):
-            self.re_models[index].set_initial_state(self._initial_commitments_list[index])
-            self.re_models[index].update()
-
-        active_process_indices = set(range(len(self.re_models)))
-
-        step_counter = 0
-        while active_process_indices:
-            step_counter += 1
-            if step_counter > self._max_re_length:
-                raise RuntimeWarning("Reached max loop count for processes without finishing all processes.")
-            for index in active_process_indices.copy():
-                re = self.re_models[index]
-                if re.finished():
-                    active_process_indices.remove(index)
-                else:
-                    other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
-                    re.next_step(other_model_runs = other_model_runs)
-
-        return self.re_models
 
 

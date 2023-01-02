@@ -8,7 +8,7 @@ from tau import (
 from tau.util import inferential_density, get_principles
 from .base import ReflectiveEquilibrium
 from rethon import REState
-from .core import FullBranchREContainer, SimpleMultiAgentREContainer
+from .core import FullBranchREContainer, REContainer
 
 from abc import ABC, abstractmethod
 from copy import copy
@@ -282,7 +282,8 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
             :py:func:`ReflectiveEquilibrium.set_model_parameter`.
         create_branches: If :code:`True` all branches are created.
         implementations: A list of dicts, each representing a specific implementation. Each dict should contain
-            strings for the keys 'module_name', 'position_class_name', 'dialectical_structure_class_name'
+            strings for the keys 'tau_module_name', 'rethon_module_name', 'position_class_name',
+            'dialectical_structure_class_name'
             and 'reflective_equilibrium_class_name'. (If these classes are located in different modules, you can,
             alternatively, specify modules for each class by using the keys 'position_module_name',
             'dialectical_structure_module_name' and 'reflective_equilibrium_module_name')
@@ -293,11 +294,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                  initial_commitments_list: List[Set[int]],
                  model_parameters_list: List[Dict] = None,
                  create_branches = False,
-                 implementations: List[Dict] = [{'module_name': 'rethon.model',
-                                                 'position_class_name':'StandardPosition',
-                                                 'dialectical_structure_class_name': 'DAGDialecticalStructure',
-                                                 'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'
-                                                 }]):
+                 implementations: List[Dict] = None):
 
         super().__init__()
         self.arguments_list = arguments_list
@@ -305,7 +302,15 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
         self.create_branches = create_branches
-        self.implementations = _fill_in_all_modules_names(implementations)
+        if implementations is None:
+            self.implementations = _fill_module_names([{'tau_module_name': 'tau',
+                                                        'position_class_name': 'StandardPosition',
+                                                        'dialectical_structure_class_name': 'DAGDialecticalStructure',
+                                                        'rethon_module_name': 'rethon',
+                                                        'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'
+                                                        }])
+        else:
+            self.implementations = _fill_module_names(implementations)
 
     # returns iterator of dicts (which can serve as a row)
     def ensemble_iter(self) -> Iterator[ReflectiveEquilibrium]:
@@ -491,11 +496,7 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
 
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pool: int,
                  initial_commitments_list: List[Set[int]], model_parameters_list: List[Dict] = None,
-                 create_branches=False, implementations: List[Dict] = [{'module_name': 'rethon.model',
-                                                                       'position_class_name': 'StandardPosition',
-                                                                       'dialectical_structure_class_name': 'DAGDialecticalStructure',
-                                                                       'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'
-                                                                       }]):
+                 create_branches=False, implementations: List[Dict] = None):
         super().__init__(arguments_list, n_sentence_pool, initial_commitments_list, model_parameters_list,
                          create_branches, implementations)
         _add_simple_data_items(self)
@@ -623,11 +624,7 @@ class GlobalREEnsembleGenerator(SimpleEnsembleGenerator):
                  initial_commitments_list: List[Set[int]],
                  model_parameters_list: List[Dict] = None,
                  create_branches = False,
-                 implementations: List[Dict] = [{'module_name': 'rethon.model',
-                          'position_class_name':'StandardPosition',
-                          'dialectical_structure_class_name': 'DAGDialecticalStructure',
-                          'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'
-                          }]):
+                 implementations: List[Dict] = None):
 
         super().__init__(arguments_list, n_sentence_pool, initial_commitments_list,
                          model_parameters_list,
@@ -689,14 +686,59 @@ class LocalREEnsembleGenerator(SimpleEnsembleGenerator):
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pool: int,
                  initial_commitments_list: List[Set[int]], model_parameters_list: List[Dict] = None,
                  create_branches=False,
-                 implementations: List[Dict] = [{'module_name': 'rethon.model',
-                                                   'position_class_name': 'StandardPosition',
-                                                   'dialectical_structure_class_name': 'BDDDialecticalStructure',
-                                                   'reflective_equilibrium_class_name': 'StandardLocalReflectiveEquilibrium'
-                                                   }]):
+                 implementations: List[Dict] = None):
         super().__init__(arguments_list, n_sentence_pool, initial_commitments_list, model_parameters_list,
                          create_branches, implementations)
         _add_local_data_items(self)
+
+class SimpleMultiAgentREContainer(REContainer):
+    """An :py:class:`REContainer` for multi-agent ensembles.
+
+    This container manages and executes model runs that are defined as an multi-agent ensemble. The container will
+    execute for each particular point in time the next step of all model and will then proceed accordingly
+    with the time point. Each model will be provided with the current model states of the other models by references
+    to the other models via the argument :code:`other_model_runs`. This argument is accessible by overriding or
+    extending the following methods in each model:
+
+    * :py:func:`ReflectiveEquilibrium.theory_candidates`,
+    * :py:func:`ReflectiveEquilibrium.commitment_candidates`,
+    * :py:func:`ReflectiveEquilibrium.pick_theory_candidate`,
+    * :py:func:`ReflectiveEquilibrium.pick_commitment_candidate` and
+    * :py:func:`ReflectiveEquilibrium.finished`.
+
+    """
+
+    def __init__(self, re_models: List[ReflectiveEquilibrium],
+                 initial_commitments_list: List[Position],
+                 max_re_length = 100):
+        super().__init__(re_models)
+        self._max_re_length = max_re_length
+        self._initial_commitments_list = initial_commitments_list
+
+    def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> List[ReflectiveEquilibrium]:
+        # set initial states and update internal attributes if necessary
+        if(re_models):
+            self.re_models = re_models
+        for index in range(len(self._initial_commitments_list)):
+            self.re_models[index].set_initial_state(self._initial_commitments_list[index])
+            self.re_models[index].update()
+
+        active_process_indices = set(range(len(self.re_models)))
+
+        step_counter = 0
+        while active_process_indices:
+            step_counter += 1
+            if step_counter > self._max_re_length:
+                raise RuntimeWarning("Reached max loop count for processes without finishing all processes.")
+            for index in active_process_indices.copy():
+                re = self.re_models[index]
+                if re.finished():
+                    active_process_indices.remove(index)
+                else:
+                    other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
+                    re.next_step(other_model_runs = other_model_runs)
+
+        return self.re_models
 
 class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     """ Ensemble generator base class for multi-agent (=interdependent) model runs.
@@ -732,14 +774,22 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                  arguments_list: List[List[List[int]]],
                  n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
-                 implementations: List[Dict],
+                 implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__()
         self.arguments_list = arguments_list
         self.n_sentence_pools = n_sentence_pools
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
-        self.implementations = _fill_in_all_modules_names(implementations)
+        if implementations is None:
+            self.implementations = _fill_module_names([{'tau_module_name': 'tau',
+                                                        'position_class_name': 'StandardPosition',
+                                                        'dialectical_structure_class_name': 'DAGDialecticalStructure',
+                                                        'rethon_module_name': 'rethon',
+                                                        'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'
+                                                        }])
+        else:
+            self.implementations = _fill_module_names(implementations)
         self.ensemble_counter = 0
 
         self.add_item('ensemble_id', lambda x: x.get_obj('ensemble_id'))
@@ -831,7 +881,8 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
     """
 
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pools: List[int],
-                 initial_commitments_list: List[List[Set[int]]], implementations: List[Dict],
+                 initial_commitments_list: List[List[Set[int]]],
+                 implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__(arguments_list, n_sentence_pools, initial_commitments_list, implementations,
                          model_parameters_list)
@@ -1216,13 +1267,13 @@ def _min_ax_bases_com_given_theory(diastructure, commitments, theory):
 def _conditional_friedman_consistence(diastructure, commitments, theory):
     return _min_ax_bases_com_given_theory(diastructure, commitments, theory)[0].size()
 
-def _fill_in_all_modules_names(implementations: Dict) -> Dict:
+def _fill_module_names(implementations: List[Dict]) -> Dict:
     for impl in implementations:
         if 'position_module_name' not in impl.keys():
-            impl['position_module_name'] = impl['module_name']
+            impl['position_module_name'] = impl['tau_module_name']
         if 'dialectical_structure_module_name' not in impl.keys():
-            impl['dialectical_structure_module_name'] = impl['module_name']
+            impl['dialectical_structure_module_name'] = impl['tau_module_name']
         if 'reflective_equilibrium_module_name' not in impl.keys():
-            impl['reflective_equilibrium_module_name'] = impl['module_name']
+            impl['reflective_equilibrium_module_name'] = impl['rethon_module_name']
 
     return implementations

@@ -12,8 +12,7 @@ from .base import (
 from .core import (
     StandardGlobalReflectiveEquilibrium,
     StandardLocalReflectiveEquilibrium,
-    FullBranchREContainer,
-    SimpleMultiAgentREContainer
+    FullBranchREContainer
 )
 from .ensemble_generation import (
     AbstractEnsembleGenerator,
@@ -21,6 +20,7 @@ from .ensemble_generation import (
     SimpleEnsembleGenerator,
     GlobalREEnsembleGenerator,
     LocalREEnsembleGenerator,
+    SimpleMultiAgentREContainer,
     MultiAgentEnsemblesGenerator,
     SimpleMultiAgentEnsemblesGenerator
 )

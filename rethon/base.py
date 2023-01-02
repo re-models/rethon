@@ -245,7 +245,7 @@ class ReflectiveEquilibrium(ABC):
 
 
 class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
-    """ Abstract class that describes RE in terms of optimizing an achhievment function.
+    """ Abstract class that describes RE in terms of optimizing an achievement function.
 
     The class partially implements :py:class:`ReflectiveEquilibrium` and provides additional functions to
     calculate an achievement function :math:`Z` (:py:func:`achievement`) for each step that
