@@ -99,7 +99,7 @@ class TestRemodel:
 
     log = logging.getLogger("RE unit testing ")
 
-    def test_re_model_parameters(self):
+    def test_basic_re_model_parameters(self):
         # ToDo: check whether updating and setting dirty works as expected
         re = GlobalSetBasedReflectiveEquilibrium(DAGSetBasedDialecticalStructure.from_arguments([], 2))
         #print(re.default_model_parameters())
@@ -135,7 +135,7 @@ class TestRemodel:
         re.model_parameters_set_to_default()
         assert LocalNumpyReflectiveEquilibrium.default_model_parameters() == re.model_parameters()
 
-    def test_re_state(self):
+    def test_basic_re_state(self):
         # checking permissible instanciation
         with pytest.raises(ValueError):
             REState(finished=False, evolution=[SetBasedPosition({-1, 2}, 4)], alternatives=[set(),set()], time_line=[0])
@@ -330,7 +330,7 @@ class TestRemodel:
         assert re_state.past_theory(time=13) ==  SetBasedPosition({6}, 7)
         assert re_state.past_theory(time=100) ==  SetBasedPosition({6}, 7)
 
-    def test_re_hamming_distance(self):
+    def test_basic_re_hamming_distance(self):
         for re_impl in model_implementations:
             self.log.info(f"Testing reflective equilibrum class of type: {re_impl['re_class_name']}")
 
@@ -438,7 +438,7 @@ class TestRemodel:
 
     # todo: re-state give None until re_process was called
 
-    def test_re_process_standard_example(self):
+    def test_basic_re_process_standard_example(self):
         for re_impl in model_implementations:
             self.log.info(f"Testing reflective equilibrium class of type: {re_impl['re_class_name']}")
 
@@ -491,7 +491,7 @@ class TestRemodel:
 
     # testing all given implementations against a produced datasets (the datasets were produced with
     # the Bitarray implementation
-    def ttest_re_process_consistency(self):
+    def test_re_process_consistency(self):
         # Assumptions for the test:
         # (i)  The test data has the json-form:
         #      [{"full-branch":[model_run_11, model_run_12, ...]}, {"full-branch":[model_run_21, model_run_22, ...], ... ]
@@ -672,7 +672,7 @@ class TestRemodel:
                                     self.log.error(state.as_dict())
                             assert equal_state
 
-    def ttest_global_optima(self):
+    def test_global_optima(self):
 
         class BruteForceGlobalOptimaRE(GlobalSetBasedReflectiveEquilibrium):
 
