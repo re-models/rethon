@@ -913,10 +913,14 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
         """
         init_coms = reflective_equilibrium.state().initial_commitments()
         if dialectical_structure.is_consistent(init_coms):
-            init_com_min_ax_bases = _get_min_sets([axioms.as_set() for axioms in
-                                                    dialectical_structure.axioms(
-                                                        init_coms,
-                                                        init_coms.subpositions())])
+            init_com_min_ax_bases =  dialectical_structure.axioms(init_coms,
+                                                        init_coms.subpositions())
+            # init_com_min_ax_bases might be None
+            if init_com_min_ax_bases is not None:
+                init_com_min_ax_bases = _get_min_sets([axioms.as_set() for axioms in
+                                                       init_com_min_ax_bases])
+            else:
+                init_com_min_ax_bases = np.nan
         else:
             init_com_min_ax_bases = np.nan
         self.add_obj('init_com_min_ax_bases', init_com_min_ax_bases)
