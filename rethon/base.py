@@ -17,6 +17,7 @@ import numpy as np
 
 from tau import Position, DialecticalStructure
 
+logging.basicConfig(filename='re_process.log', level=logging.INFO)
 log = logging.getLogger()
 
 
@@ -101,7 +102,7 @@ class ReflectiveEquilibrium(ABC):
         """Checks whether the model demand an update of internal attributes."""
         return self.__dirty
 
-    def update(self):
+    def update(self, **kwargs):
         """Subclasses can extend/override this method to update internal attributes of the model."""
         pass
 
