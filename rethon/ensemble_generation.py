@@ -708,35 +708,39 @@ class SimpleMultiAgentREContainer(REContainer):
 
     """
 
-    def __init__(self, re_models: List[ReflectiveEquilibrium],
+    def __init__(self,
+                 re_models: List[ReflectiveEquilibrium],
                  initial_commitments_list: List[Position],
                  max_re_length = 100):
-        super().__init__(re_models)
+        if len(re_models) != len(initial_commitments_list):
+            raise ValueError("The containter must instantiated with a matching amount " +
+                             "of models and initial commitments.")
+        self.re_models = {index:re_models[index] for index in range(len(re_models))}
         self._max_re_length = max_re_length
         self._initial_commitments_list = initial_commitments_list
 
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> List[ReflectiveEquilibrium]:
         # set initial states and update internal attributes if necessary
         if(re_models):
-            self.re_models = re_models
-        for index in range(len(self._initial_commitments_list)):
-            self.re_models[index].set_initial_state(self._initial_commitments_list[index])
-            self.re_models[index].update()
+            self.re_models = {index:re_models[index] for index in range(len(re_models))}
+        for key in range(len(self._initial_commitments_list)):
+            self.re_models[key].set_initial_state(self._initial_commitments_list[key])
+            self.re_models[key].update()
 
-        active_process_indices = set(range(len(self.re_models)))
+        active_process_keys = set(self.re_models.keys()) #set(range(len(self.re_models)))
 
         step_counter = 0
-        while active_process_indices:
+        while active_process_keys:
             step_counter += 1
             if step_counter > self._max_re_length:
                 raise RuntimeWarning("Reached max loop count for processes without finishing all processes.")
-            for index in active_process_indices.copy():
-                re = self.re_models[index]
+            for key in active_process_keys.copy():
+                re = self.re_models[key]
                 if re.finished():
-                    active_process_indices.remove(index)
+                    active_process_keys.remove(key)
                 else:
-                    other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
-                    re.next_step(other_model_runs = other_model_runs)
+                    #other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
+                    re.next_step(model_runs = self.re_models, self_key = key)
 
         return self.re_models
 
