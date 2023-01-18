@@ -10,7 +10,7 @@ from abc import ABC, abstractmethod
 import logging
 from copy import copy
 from math import trunc
-from typing import List, Set, Tuple, Dict, Iterator
+from typing import List, Set, Tuple, Dict, Iterator, Any
 from itertools import product
 import random
 import numpy as np
@@ -314,6 +314,8 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
          :param initial_commitments: The initial commitments :math:`\\mathcal{C}_0`.
          :return:
         """
+        # ToDo: Shouldn't we normalise by the whole sentence pool?
+        #  (I.e., `.../2*self.dialectical_structure().sentence_pool().size()...`)
         return 1 - (self.hamming_distance(initial_commitments, commitments, self.model_parameter("faithfulness_penalties"))
              / self.dialectical_structure().sentence_pool().size()) ** 2
 
@@ -592,7 +594,7 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         self.__systematicity_groups = {}
         self.__faithfulness_groups = {}
 
-    def update(self):
+    def update(self, **kwargs):
         """Implements :py:func:`basics.ReflectiveEquilibrium.update`"""
         if self.is_dirty():
             # reset and create groups of positions with identical systematicity or faithfulness
@@ -781,16 +783,27 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         return optimal_pairs
 
 
+# ToDo: Add class docstring
 class REContainer:
 
     def __init__(self, re_models: List[ReflectiveEquilibrium] = None):
         self.re_models = re_models
+        self._objects = dict()
 
     @abstractmethod
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> Iterator[ReflectiveEquilibrium]:
         pass
 
+    def add_object(self, key: Any, object: Any):
+        self._objects[key] = object
 
+    def get_object(self, key: Any) -> [Any, None]:
+        if key in self._objects.keys():
+            return self._objects[key]
+        else:
+            return None
+
+# ToDo: Add for all methods more information and examples (see the defined test cases).
 class REState:
     """Class that represent the internal state of an RE process.
 
@@ -800,7 +813,8 @@ class REState:
     Attributes:
 
         finished (bool): A boolean indicating whether the process terminated in a fixed point.
-        evolution (List[Position]): The evolution of steps beginning with the initial state.
+        evolution (List[Position]): The evolution of steps beginning with the initial state
+            (i.e., a set of commitments).
         alternatives (List[Set[Position]]): For each step a set of possible alternatives the process could have
             used as step according to :py:func:`ReflectiveEquilibrium.commitment_candidates`
             (or :py:func:`ReflectiveEquilibrium.theory_candidates` respectively).
