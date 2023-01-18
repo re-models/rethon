@@ -725,7 +725,8 @@ class SimpleMultiAgentREContainer(REContainer):
             self.re_models = {index:re_models[index] for index in range(len(re_models))}
         for key in range(len(self._initial_commitments_list)):
             self.re_models[key].set_initial_state(self._initial_commitments_list[key])
-            self.re_models[key].update()
+            # Might be used to update internal things. So far, we do not need it though.
+            # self.re_models[key].update(self.re_models)
 
         active_process_keys = set(self.re_models.keys()) #set(range(len(self.re_models)))
 
@@ -740,7 +741,7 @@ class SimpleMultiAgentREContainer(REContainer):
                     active_process_keys.remove(key)
                 else:
                     #other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
-                    re.next_step(model_runs = self.re_models, self_key = key)
+                    re.next_step(model_runs = self.re_models, container = self, self_key = key)
 
         return self.re_models
 
@@ -835,10 +836,11 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                 pos = pos_class_.from_set(pos_as_set, self.n_sentence_pools[i])
                 agents.append(pos)
 
+            # ToDo: It should be possible for the user to dynamically provide an REContainer
             multi_agent_container = SimpleMultiAgentREContainer(res, agents)
             multi_agent_container.re_processes()
 
-            self.current_ensemble_states =  [re.state() for re in res]
+            self.current_ensemble_states = [re.state() for re in res]
             self.init_ensemble_fields(self.current_ensemble_states, ds)
             for re in res:
                 self.current_reflective_equilibrium = re
