@@ -712,6 +712,7 @@ class SimpleMultiAgentREContainer(REContainer):
                  re_models: List[ReflectiveEquilibrium],
                  initial_commitments_list: List[Position],
                  max_re_length = 100):
+        super().__init__(re_models)
         if len(re_models) != len(initial_commitments_list):
             raise ValueError("The containter must instantiated with a matching amount " +
                              "of models and initial commitments.")
@@ -748,14 +749,16 @@ class SimpleMultiAgentREContainer(REContainer):
 class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     """ Ensemble generator base class for multi-agent (=interdependent) model runs.
 
-    A class that provides iterators for interdependet model runs based on the given parameters of the constructor.
+    A class that provides iterators for interdependent model runs based on the given parameters of the constructor.
     One ensemble corresponds to a dialectical structure together with a set of agents (represented by their
     initial commitments). The generator will run all ensembles successively.
 
     This structure can be used to generate different ensembles.
-    (E.g., you can vary the number of agents for one particular dialectical structure by repeating the dialectical
-    structure in the above list and vary the list of initial positions.) However, this design adheres to the
-    following confinements: All agents in one ensemble share the implementating classes and their model parameters.
+    For instance, you can vary the number of agents for one particular dialectical structure by repeating the dialectical
+    structure in the above list and vary the list of initial positions. All list must have the same length and the
+    lenght of the lists corresponds to the number of ensembles (defined by them).
+    Note that this design adheres to the
+    following confinements: All agents in one ensemble share the implementing classes and their model parameters.
 
     The following data items are defined by default: 'ensemble_id' and 'ensemble_size' for each multi-agent ensemble.
 
@@ -763,10 +766,9 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         arguments_list: A list of n dialectical structures as list of argument lists. Each dialectical structure
             corresponds an multi-agent ensemble.
         n_sentence_pool: Number of (unnegated) sentences in the sentence pool.
-
         initial_commitments_list: For each dialectical structure a list of initial commitments.
             (The initial commitments can be thought of as different agents.)
-
+        tau_names: A list of names for the dialectical structures.
         model_parameters_list: For each dialectical structure a specification of model parameters as dictionary
             that can be set via :py:func:`ReflectiveEquilibrium.set_model_parameters`.
         implementations: A list of dicts, each representing a specific implementation. Each dict should contain
@@ -779,6 +781,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                  arguments_list: List[List[List[int]]],
                  n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
+                 tau_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__()
@@ -786,6 +789,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.n_sentence_pools = n_sentence_pools
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
+        self.tau_names = tau_names
+
         if implementations is None:
             self.implementations = _fill_module_names([{'tau_module_name': 'tau',
                                                         'position_class_name': 'StandardPosition',
@@ -803,7 +808,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     def ensemble_iter(self) -> Iterator[ReflectiveEquilibrium]:
         """ Iterator through the re processes.
 
-        An ensemble iterator through all model rus of all multi-agents ensembles as defined by the class
+        An ensemble iterator through all model runs of all multi-agents ensembles as defined by the class
         attributes (implements :py:func:`AbstractEnsembleGenerator.ensemble_iter`). Model runs that belong to
         the same multi-agent ensemble can be identified via their ensemble id, which can be accessed via
         :code:`get_obj('ensemble_id')`.
@@ -814,7 +819,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
             # instantiating dialectical structure
             ds_class_ = getattr(importlib.import_module(self.implementations[i]['dialectical_structure_module_name']),
                                 self.implementations[i]['dialectical_structure_class_name'])
-            ds = ds_class_.from_arguments(self.arguments_list[i], self.n_sentence_pools[i])
+            tau_name = None if self.tau_names is None else self.tau_names[i]
+            ds = ds_class_.from_arguments(self.arguments_list[i], self.n_sentence_pools[i], tau_name)
             self.current_dialectical_structure = ds
             self.init_tau_fields(ds)
 
@@ -823,10 +829,15 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                 self.implementations[i]['reflective_equilibrium_module_name']),
                 self.implementations[i]['reflective_equilibrium_class_name'])
 
+            # one re insance for each agents in the ensemble
             res = [reflective_equilibrium_class_(ds) for pos in self.initial_commitments_list[i]]
+
+            # getting specified model parameters for this ensemble
             if self.model_parameters_list:
-                for j in range(len(self.model_parameters_list)):
-                    res[j].reset_model_parameters(self.model_parameters_list[j])
+                # for j in range(len(self.model_parameters_list)):
+                #     res[j].reset_model_parameters(self.model_parameters_list[j])
+                for j in range(len(res)):
+                    res[j].reset_model_parameters(self.model_parameters_list[i])
 
             # instantiating initial coms (=agents) for the ensemble
             agents = []
@@ -888,9 +899,11 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
 
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
+                 tau_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
-        super().__init__(arguments_list, n_sentence_pools, initial_commitments_list, implementations,
+        super().__init__(arguments_list, n_sentence_pools, initial_commitments_list,
+                         tau_names, implementations,
                          model_parameters_list)
         _add_simple_data_items(self)
 
@@ -958,6 +971,9 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
                                 lambda x: x.reflective_equilibrium().model_name())
     ensemble_generator.add_item('ds',
                                 lambda x: x.dialectical_structure().get_arguments())  # dialectical structure
+    ensemble_generator.add_item('tau_name',
+                                lambda x: x.dialectical_structure().get_name())
+
     # number of unnegated sentences (half the full size)
     ensemble_generator.add_item('n_sentence_pool',
                                 lambda x: x.dialectical_structure().sentence_pool().size())
