@@ -535,9 +535,12 @@ class TestRemodel:
         # (ii) Model runs in one full branch represent all posible re-processes of one specific model, with a specific set of
         #      model parameter and one specific set of initial commitments.
         # working dir of notebook
+        # ToDo: That does only work if we start pytest from the package dir.
+        #  We should, rather, declare the data files as package resources!
         current_dir = getcwd()
         data_dir = path.join(current_dir, 'test_data')
         data_dir = path.abspath(data_dir)
+        #print(f'DATA DIR: {data_dir}')
         # The following data sets contain fullbranch model-runs with the standard model and standard parameters and
         # differ between number different dialectical structures and number of different initial conditions.
         # Remark: Failing these consistency checks for different implementations of the standard model does not
