@@ -691,6 +691,15 @@ class LocalREEnsembleGenerator(SimpleEnsembleGenerator):
                          create_branches, implementations)
         _add_local_data_items(self)
 
+class MaxLoopsWarning(RuntimeWarning):
+
+    def __init__(self, message: [str, None] = None ):
+        msg = "Reached max loop count for processes without finishing all processes."
+        if message:
+            super().__init__(message)
+        else:
+            super().__init__(msg)
+
 class SimpleMultiAgentREContainer(REContainer):
     """An :py:class:`REContainer` for multi-agent ensembles.
 
@@ -735,7 +744,7 @@ class SimpleMultiAgentREContainer(REContainer):
         while active_process_keys:
             step_counter += 1
             if step_counter > self._max_re_length:
-                raise RuntimeWarning("Reached max loop count for processes without finishing all processes.")
+                raise MaxLoopsWarning()
             for key in active_process_keys.copy():
                 re = self.re_models[key]
                 if re.finished():
@@ -807,6 +816,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.add_item('ensemble_id', lambda x: x.get_obj('ensemble_id'))
         self.add_item('ensemble_size', lambda x: x.get_obj('ensemble_size'))
         self.add_item('agents_name', lambda x: x.get_obj('agents_name'))
+        # ToDo: We should move that more prominently as a default item.
+        self.add_item('error_code', lambda x: x.state().error_code)
 
     def ensemble_iter(self) -> Iterator[ReflectiveEquilibrium]:
         """ Iterator through the re processes.
@@ -852,7 +863,14 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
 
             # ToDo: It should be possible for the user to dynamically provide an REContainer
             multi_agent_container = SimpleMultiAgentREContainer(res, agents)
-            multi_agent_container.re_processes()
+            try:
+                multi_agent_container.re_processes()
+            except MaxLoopsWarning:
+                for re in res:
+                    re.state().error_code = 1
+            except:
+                for re in res:
+                    re.state().error_code = 0
 
             self.current_ensemble_states = [re.state() for re in res]
             if self.initial_commitments_names:
