@@ -720,7 +720,7 @@ class SimpleMultiAgentREContainer(REContainer):
     def __init__(self,
                  re_models: List[ReflectiveEquilibrium],
                  initial_commitments_list: List[Position],
-                 max_re_length = 300):
+                 max_re_length: int = 250):
         super().__init__(re_models)
         if len(re_models) != len(initial_commitments_list):
             raise ValueError("The containter must instantiated with a matching amount " +
