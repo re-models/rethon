@@ -711,7 +711,7 @@ class SimpleMultiAgentREContainer(REContainer):
     def __init__(self,
                  re_models: List[ReflectiveEquilibrium],
                  initial_commitments_list: List[Position],
-                 max_re_length = 100):
+                 max_re_length = 300):
         super().__init__(re_models)
         if len(re_models) != len(initial_commitments_list):
             raise ValueError("The containter must instantiated with a matching amount " +
@@ -782,6 +782,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                  n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
                  tau_names: List[str] = None,
+                 initial_commitments_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__()
@@ -790,6 +791,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
         self.tau_names = tau_names
+        self.initial_commitments_names = initial_commitments_names
 
         if implementations is None:
             self.implementations = _fill_module_names([{'tau_module_name': 'tau',
@@ -804,6 +806,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
 
         self.add_item('ensemble_id', lambda x: x.get_obj('ensemble_id'))
         self.add_item('ensemble_size', lambda x: x.get_obj('ensemble_size'))
+        self.add_item('agents_name', lambda x: x.get_obj('agents_name'))
 
     def ensemble_iter(self) -> Iterator[ReflectiveEquilibrium]:
         """ Iterator through the re processes.
@@ -852,7 +855,11 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
             multi_agent_container.re_processes()
 
             self.current_ensemble_states = [re.state() for re in res]
-            self.init_ensemble_fields(self.current_ensemble_states, ds)
+            if self.initial_commitments_names:
+                self.init_ensemble_fields(self.current_ensemble_states, ds,
+                                          self.initial_commitments_names[i])
+            else:
+                self.init_ensemble_fields(self.current_ensemble_states, ds)
             for re in res:
                 self.current_reflective_equilibrium = re
                 self.current_initial_commitments = re.state().initial_commitments()
@@ -878,7 +885,10 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         super().ensemble_items_to_csv(output_file_name, output_dir_name, archive, save_preliminary_results,
                                       preliminary_results_interval, append)
 
-    def init_ensemble_fields(self, re_states: List[REState], dialectical_structure: DialecticalStructure):
+    def init_ensemble_fields(self,
+                             re_states: List[REState],
+                             dialectical_structure: DialecticalStructure,
+                             init_commitments_name: [str, None] = None):
         """Overrides :py:func:`AbstractEnsembleGenerator.init_ensemble_fields`
 
         Adds for every multi-agent ensemble the following data objects: 'ensemble_id' and 'ensemble_size'.
@@ -887,6 +897,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.add_obj('ensemble_id', self.ensemble_counter)
         self.ensemble_counter += 1
         self.add_obj('ensemble_size', len(re_states))
+        self.add_obj('agents_name', init_commitments_name)
 
 class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
     """A :py:class:`MultiAgentEnsembleGenerator` with predefined data items.
@@ -900,10 +911,13 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
                  tau_names: List[str] = None,
+                 initial_commitments_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__(arguments_list, n_sentence_pools, initial_commitments_list,
-                         tau_names, implementations,
+                         tau_names,
+                         initial_commitments_names,
+                         implementations,
                          model_parameters_list)
         _add_simple_data_items(self)
 
