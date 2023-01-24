@@ -17,7 +17,20 @@ import numpy as np
 
 from tau import Position, DialecticalStructure
 
-logging.basicConfig(filename='re_process.log', level=logging.INFO)
+# ToDo: Think about logging properties: We set this to ERROR only to avoid
+#  huge log files, which are caused by BDD. See info from Andreas:
+# "Die WARNINGs von dd.BDD (der Art "WARNING:dd.bdd:Missing bits:
+# support - care_vars = {'s5', 's2', 's6', 's1', 's4', 's3'}") entstehen in der
+# BDDNumpyDialecticalStructure-Methode "closure" (aus rethon/numpy_implementation.py).
+# Dort erhält ".bdd.pick.iter" eine leere Liste als "care_vars". In meiner Erinnerung hat
+# sich das als sinnvolle Optimierung herausgestellt: Wenn wir als care_vars zum Beispiel
+# alle Sätze des Satzpools angeben, verschwindet die Warnung, aber es werden viel mehr
+# Modelle (für uns: vollständig und konsistente Positionen) zurückgegeben, die
+# anschliessend miteinander geschnitten werden müssen.
+# Ich sehe im Moment keine schnelle Lösung ausser das log-level von INFO auf
+# ERROR zu setzen, aber vielleicht gibt es in der Methode "closure" ungeahntes
+# Verbesserungspotential.
+logging.basicConfig(filename='re_process.log', level=logging.ERROR)
 log = logging.getLogger()
 
 
@@ -435,7 +448,7 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
 
         if len(commitments_candidates) == 1:
             return next(iter(commitments_candidates))
-        # randomly select a theory for the current branch
+        # randomly select commitment for the current branch
         return random.choice(list(commitments_candidates))
 
     def finished(self, re_states:List[REState] = None) -> bool:
@@ -820,13 +833,22 @@ class REState:
             (or :py:func:`ReflectiveEquilibrium.theory_candidates` respectively).
         time_line (List[int]): For each step an integer that represents a point in time according to an (external)
             timeline.
+        error_code: An integer that represents an error code and which can be set if the process throws an error.
     """
+
+    error_codes = {# Should be used if there is no more specific error code available.
+                   0: 'The process could not finish due to an unexpected error.',
+                   # Should be used if some max_loop value was exceeded.
+                   1: 'The process did not converge under a specified maximum number of steps (see process logs for' +\
+                      ' further details).'
+                  }
 
     def __init__(self,
                  finished: bool,
                  evolution: List[Position],
                  alternatives: List[Set[Position]],
-                 time_line: List[int]):
+                 time_line: List[int],
+                 error_code: int = None):
         # check wither the time_line is ordered
         if not all(time_line[i] < time_line[i + 1] for i in range(len(time_line) - 1)):
             raise ValueError("Timeline must be an ordered sequence of integers.")
@@ -837,6 +859,7 @@ class REState:
         self.evolution = evolution
         self.alternatives = alternatives
         self.time_line = time_line
+        self.error_code = error_code
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
