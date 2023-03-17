@@ -728,6 +728,10 @@ class SimpleMultiAgentREContainer(REContainer):
         self.re_models = {index:re_models[index] for index in range(len(re_models))}
         self._max_re_length = max_re_length
         self._initial_commitments_list = initial_commitments_list
+        # each process in the ensemble gets an id, which can be used to refer to them.
+        for id in range(len(re_models)):
+            re_models[id].set_id(id)
+
 
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> List[ReflectiveEquilibrium]:
         # set initial states and update internal attributes if necessary
@@ -769,7 +773,16 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     Note that this design adheres to the
     following confinements: All agents in one ensemble share the implementing classes and their model parameters.
 
-    The following data items are defined by default: 'ensemble_id' and 'ensemble_size' for each multi-agent ensemble.
+    The following data items are defined by default for each multi-agent ensemble:
+
+    * :code:`ensemble_id`: An id for each ensemble, which is (only) unique within one data file.
+    * :code:`ensemble_size`: The size of the ensemble (i.e., the number of agents/initial commitments).
+    * :code:`agents_name`: For each ensemble a name for the set of agents, which can be passed by the constructor.
+    * :code:`error_code`: If a process did not terminate correctly an error code is provided.
+      The container will execute subsequent processes in this case. Error code `1` indicates that the process did
+      not finish within the given maximum number of loops (as set via :class:`SimpleMultiAgentREContainer`).
+      Error code `0` indicates all other thrown exceptions.
+      If the process terminates without errors the field is empty (nan).
 
     Args:
         arguments_list: A list of n dialectical structures as list of argument lists. Each dialectical structure
@@ -778,6 +791,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         initial_commitments_list: For each dialectical structure a list of initial commitments.
             (The initial commitments can be thought of as different agents.)
         tau_names: A list of names for the dialectical structures.
+        agents_names: For each ensemble a name for the set of agents.
         model_parameters_list: For each dialectical structure a specification of model parameters as dictionary
             that can be set via :py:func:`ReflectiveEquilibrium.set_model_parameters`.
         implementations: A list of dicts, each representing a specific implementation. Each dict should contain
@@ -791,7 +805,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                  n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
                  tau_names: List[str] = None,
-                 initial_commitments_names: List[str] = None,
+                 agents_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__()
@@ -800,7 +814,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
         self.tau_names = tau_names
-        self.initial_commitments_names = initial_commitments_names
+        self.initial_commitments_names = agents_names
 
         if implementations is None:
             self.implementations = _fill_module_names([{'tau_module_name': 'tau',
@@ -811,10 +825,13 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                                                         }])
         else:
             self.implementations = _fill_module_names(implementations)
+        # used as an id for each ensemble
         self.ensemble_counter = 0
 
         self.add_item('ensemble_id', lambda x: x.get_obj('ensemble_id'))
         self.add_item('ensemble_size', lambda x: x.get_obj('ensemble_size'))
+        self.add_item('agent_id', lambda x: x.reflective_equilibrium().get_id())
+
         self.add_item('agents_name', lambda x: x.get_obj('agents_name'))
         # ToDo: We should move that more prominently as a default item.
         self.add_item('error_code', lambda x: x.state().error_code)
@@ -909,7 +926,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                              init_commitments_name: [str, None] = None):
         """Overrides :py:func:`AbstractEnsembleGenerator.init_ensemble_fields`
 
-        Adds for every multi-agent ensemble the following data objects: 'ensemble_id' and 'ensemble_size'.
+        Adds for every multi-agent ensemble the following data objects: 'ensemble_id', 'agents_name'
+        and 'ensemble_size'.
         """
         super().init_ensemble_fields(re_states, dialectical_structure)
         self.add_obj('ensemble_id', self.ensemble_counter)
@@ -929,12 +947,12 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
     def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pools: List[int],
                  initial_commitments_list: List[List[Set[int]]],
                  tau_names: List[str] = None,
-                 initial_commitments_names: List[str] = None,
+                 agents_names: List[str] = None,
                  implementations: List[Dict] = None,
                  model_parameters_list: List[Dict] = None):
         super().__init__(arguments_list, n_sentence_pools, initial_commitments_list,
                          tau_names,
-                         initial_commitments_names,
+                         agents_names,
                          implementations,
                          model_parameters_list)
         _add_simple_data_items(self)
@@ -962,6 +980,7 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
         Adds the following data object that can be accessed via :py:func:`AbstractEnsembleGenerator.get_obj`:
         'init_com_min_ax_bases'.
         """
+        super().init_re_start_fields(reflective_equilibrium, dialectical_structure)
         init_coms = reflective_equilibrium.state().initial_commitments()
         if dialectical_structure.is_consistent(init_coms):
             init_com_min_ax_bases =  dialectical_structure.axioms(init_coms,

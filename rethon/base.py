@@ -62,6 +62,7 @@ class ReflectiveEquilibrium(ABC):
         self.__dirty = True
         self.__model_parameter = {}
         self.__state = None
+        self.id = None
         if initial_commitments:
             self.set_initial_state(initial_commitments)
 
@@ -79,6 +80,12 @@ class ReflectiveEquilibrium(ABC):
     def dialectical_structure(self) -> DialecticalStructure:
         """Return the dialectical structure on which the model is based."""
         return self.__dialectical_structure
+
+    def set_id(self, id:int):
+        self.id = id
+
+    def get_id(self):
+        return self.id
 
     @abstractmethod
     def theory_candidates(self, time: int = None, **kwargs) -> Set[Position]:
