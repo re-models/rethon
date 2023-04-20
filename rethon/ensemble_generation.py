@@ -725,7 +725,7 @@ class SimpleMultiAgentREContainer(REContainer):
         if len(re_models) != len(initial_commitments_list):
             raise ValueError("The containter must instantiated with a matching amount " +
                              "of models and initial commitments.")
-        self.re_models = {index:re_models[index] for index in range(len(re_models))}
+        self.re_models = re_models
         self._max_re_length = max_re_length
         self._initial_commitments_list = initial_commitments_list
         # each process in the ensemble gets an id, which can be used to refer to them.
@@ -736,26 +736,30 @@ class SimpleMultiAgentREContainer(REContainer):
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> List[ReflectiveEquilibrium]:
         # set initial states and update internal attributes if necessary
         if(re_models):
-            self.re_models = {index:re_models[index] for index in range(len(re_models))}
-        for key in range(len(self._initial_commitments_list)):
-            self.re_models[key].set_initial_state(self._initial_commitments_list[key])
+            self.re_models = re_models
+            for id in range(len(re_models)):
+                re_models[id].set_id(id)
+        for index in range(len(self._initial_commitments_list)):
+            self.re_models[index].set_initial_state(self._initial_commitments_list[index])
             # Might be used to update internal things. So far, we do not need it though.
-            # self.re_models[key].update(self.re_models)
+            # self.re_models[index].update(self.re_models)
 
-        active_process_keys = set(self.re_models.keys()) #set(range(len(self.re_models)))
+        active_process_keys = {re.id for re in self.re_models}
 
+        # for convenience we use a dict[id,re]
+        re_dict = {re.id:re for re in self.re_models}
         step_counter = 0
         while active_process_keys:
             step_counter += 1
             if step_counter > self._max_re_length:
                 raise MaxLoopsWarning()
             for key in active_process_keys.copy():
-                re = self.re_models[key]
+                re = re_dict[key]
                 if re.finished():
                     active_process_keys.remove(key)
                 else:
                     #other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
-                    re.next_step(model_runs = self.re_models, container = self, self_key = key)
+                    re.next_step(model_runs = self.re_models, container = self)
 
         return self.re_models
 
@@ -780,7 +784,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     * :code:`agents_name`: For each ensemble a name for the set of agents, which can be passed by the constructor.
     * :code:`error_code`: If a process did not terminate correctly an error code is provided.
       The container will execute subsequent processes in this case. Error code `1` indicates that the process did
-      not finish within the given maximum number of loops (as set via :class:`SimpleMultiAgentREContainer`).
+      not finish within the given maximum number of loops (as set via :class:`SimpleMultiAgentREContainer`,
+      see also :class:`REState`.).
       Error code `0` indicates all other thrown exceptions.
       If the process terminates without errors the field is empty (nan).
 
