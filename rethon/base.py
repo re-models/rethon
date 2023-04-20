@@ -814,14 +814,19 @@ class REContainer:
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> Iterator[ReflectiveEquilibrium]:
         pass
 
+    # ToDo: add docstring
     def add_object(self, key: Any, object: Any):
         self._objects[key] = object
 
+    # ToDo: Add docstring
     def get_object(self, key: Any) -> [Any, None]:
         if key in self._objects.keys():
             return self._objects[key]
         else:
             return None
+
+    def get_objects(self):
+        return self._objects
 
 # ToDo: Add for all methods more information and examples (see the defined test cases).
 class REState:
