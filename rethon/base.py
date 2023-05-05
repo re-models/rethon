@@ -194,7 +194,8 @@ class ReflectiveEquilibrium(ABC):
                                f"candidates for the RE process.")
         canditates.remove(next_position)
         self.state().add_step(next_position, canditates, time)
-        self.state().finished = self.finished()
+        # ToDo: That should be redundant
+        self.state().finished = self.finished(**kwargs)
 
     # ToDo-Question: do we need a method that returns pareto optimal theory-commitment pairs?
 
@@ -458,7 +459,7 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
         # randomly select commitment for the current branch
         return random.choice(list(commitments_candidates))
 
-    def finished(self, re_states:List[REState] = None) -> bool:
+    def finished(self, **kwargs) -> bool:
         """ Implements :py:func:`ReflectiveEquilibrium.finished`.
 
         An re process of the standard model finishes with a state :math:`(\\mathcal{C}_i,\\mathcal{T}_i)` iff
