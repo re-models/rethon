@@ -755,7 +755,9 @@ class SimpleMultiAgentREContainer(REContainer):
                 raise MaxLoopsWarning()
             for key in active_process_keys.copy():
                 re = re_dict[key]
-                if re.finished():
+                # once an agent found their fixed point it will no longer interact with
+                # other agents (even though their state might still change)
+                if re.finished(model_runs = self.re_models, container = self):
                     active_process_keys.remove(key)
                 else:
                     #other_model_runs = self.re_models[0:index] + self.re_models[index+1:len(self.re_models)]
