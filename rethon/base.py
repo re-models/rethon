@@ -175,17 +175,6 @@ class ReflectiveEquilibrium(ABC):
         self.state().add_step(next_position, canditates, time)
         self.state().finished = self.finished()
 
-
-    # @abstractmethod
-    # # todo: rewrite doc (we return tuples)
-    # def global_optima(self, initial_commitments: Position) -> List[Position]:
-    #     """Epistemic states that maximise the :py:func:`achievement`-function.
-    #
-    #     :param initial_commitments: The initial commitments :math:`\\mathcal{C}_0`.
-    #     :return: A list of :class:`Position`s of global optima.
-    #     """
-    #     pass
-
     def model_name(self) -> str:
         """Model name.
 
