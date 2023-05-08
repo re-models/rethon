@@ -175,7 +175,6 @@ class ReflectiveEquilibrium(ABC):
         self.state().add_step(next_position, canditates, time)
         self.state().finished = self.finished()
 
-    # ToDo-Question: do we need a method that returns pareto optimal theory-commitment pairs?
 
     # @abstractmethod
     # # todo: rewrite doc (we return tuples)
