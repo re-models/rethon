@@ -41,8 +41,7 @@ class GlobalBitarrayReflectiveEquilibrium(GlobalReflectiveEquilibrium):
         pos1_xor_pos2 = ~(p1 ^ p2)
         pos1_ext_pos2 = p1 & ~p2
 
-        # todo: Unresolved attribute reference 'n' for class 'DialecticalStructure'
-        for i in range(self.dialectical_structure().n):
+        for i in range(self.dialectical_structure().sentence_pool().size()):
             # contradiction
             if all(pos1_or_pos2[2*i:2*i+2]):
                 d += penalties[3]
