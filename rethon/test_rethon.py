@@ -210,9 +210,9 @@ class TestRemodel:
 
 
         re_state = REState(finished=True,
-                           evolution=[SetBasedPosition({-1, 2}, 4),
-                                      SetBasedPosition({-1, 2, 3}, 4),
-                                      SetBasedPosition({-1, 2, 3, 4}, 4)],
+                           evolution=[SetBasedPosition({-1, 2}, 4), # init coms (time = 0)
+                                      SetBasedPosition({-1, 2, 3}, 4), # first theory (time = 1)
+                                      SetBasedPosition({-1, 2, 3, 4}, 4)], # second coms (time = 2)
                            alternatives=[[],[],[]],
                            time_line = [0,1,2])
         assert re_state.next_step_is_theory() == True
@@ -254,11 +254,11 @@ class TestRemodel:
             re_state.past(1)
 
         re_state = REState(finished=True,
-                           evolution=[SetBasedPosition({-1, 2}, 4),
-                                      SetBasedPosition({-1, 2, 3}, 4),
-                                      SetBasedPosition({-1, 2, 3, 4}, 4), # com
-                                      SetBasedPosition({-1, 2, 3, 4, 5}, 4), # th
-                                      SetBasedPosition({-1, 2, 3, 4, 5, 6}, 4) #com
+                           evolution=[SetBasedPosition({-1, 2}, 4), # init coms (time = 0)
+                                      SetBasedPosition({-1, 2, 3}, 4), # th (time = 1)
+                                      SetBasedPosition({-1, 2, 3, 4}, 4), # com (time = 3)
+                                      SetBasedPosition({-1, 2, 3, 4, 5}, 4), # th (time = 5)
+                                      SetBasedPosition({-1, 2, 3, 4, 5, 6}, 4) #com (time = 7)
                                       ],
                            alternatives=[set(), set(), set(),set(),set()],
                            time_line = [0,1,3,5,7])
@@ -272,7 +272,44 @@ class TestRemodel:
         assert re_state.past_theory(0) == SetBasedPosition({-1, 2, 3, 4, 5}, 4)
         assert re_state.past_theory(-1) == SetBasedPosition({-1, 2, 3}, 4)
         assert re_state.past_theory(-2) == None
+        # testing with time parameter
 
+        assert re_state.past_commitments(time=0) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=1) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=2) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=3) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(time=-1) == None
+
+        re_state = REState(finished=True,
+                           evolution=[SetBasedPosition({-1, 2}, 4),  # init coms (time = 0)
+                                      SetBasedPosition({-1, 2, 3}, 4),  # th (time = 1)
+                                      SetBasedPosition({-1, 2, 3, 4}, 4),  # com (time = 3)
+                                      SetBasedPosition({-1, 2, 3, 4, 5}, 4),  # th (time = 5)
+                                      ],
+                           alternatives=[set(), set(), set(), set()],
+                           time_line=[0, 1, 3, 5])
+
+        assert re_state.last_commitments() == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(0) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(-1) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(-2) == None
+        assert re_state.past_commitments(-3) == None
+        assert re_state.last_theory() == SetBasedPosition({-1, 2, 3, 4, 5}, 4)
+        assert re_state.past_theory(0) == SetBasedPosition({-1, 2, 3, 4, 5}, 4)
+        assert re_state.past_theory(-1) == SetBasedPosition({-1, 2, 3}, 4)
+        assert re_state.past_theory(-2) == None
+        # testing with time parameter
+
+        assert re_state.past_commitments(time=0) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=1) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=2) == SetBasedPosition({-1, 2}, 4)
+        assert re_state.past_commitments(time=3) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(time=4) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(time=5) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(time=6) == SetBasedPosition({-1, 2, 3, 4}, 4)
+        assert re_state.past_commitments(time=100) == SetBasedPosition({-1, 2, 3, 4}, 4)
+
+        assert re_state.past_commitments(time=-1) == None
 
         # testing behaviour of adding step or initializing states with impermissible times
         re_state = REState(finished=False,
@@ -498,9 +535,12 @@ class TestRemodel:
         # (ii) Model runs in one full branch represent all posible re-processes of one specific model, with a specific set of
         #      model parameter and one specific set of initial commitments.
         # working dir of notebook
+        # ToDo: That does only work if we start pytest from the package dir.
+        #  We should, rather, declare the data files as package resources!
         current_dir = getcwd()
         data_dir = path.join(current_dir, 'test_data')
         data_dir = path.abspath(data_dir)
+        #print(f'DATA DIR: {data_dir}')
         # The following data sets contain fullbranch model-runs with the standard model and standard parameters and
         # differ between number different dialectical structures and number of different initial conditions.
         # Remark: Failing these consistency checks for different implementations of the standard model does not

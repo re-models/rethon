@@ -4,7 +4,7 @@ from tau import Position
 from typing import List
 
 import logging
-logging.basicConfig(filename='bitarray_implementation.log', level=logging.INFO)
+#logging.basicConfig(filename='bitarray_implementation.log', level=logging.INFO)
 
 
 class GlobalBitarrayReflectiveEquilibrium(GlobalReflectiveEquilibrium):

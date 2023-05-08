@@ -10,13 +10,27 @@ from abc import ABC, abstractmethod
 import logging
 from copy import copy
 from math import trunc
-from typing import List, Set, Tuple, Dict, Iterator
+from typing import List, Set, Tuple, Dict, Iterator, Any
 from itertools import product
 import random
 import numpy as np
 
 from tau import Position, DialecticalStructure
 
+# ToDo: Think about logging properties: We set this to ERROR only to avoid
+#  huge log files, which are caused by BDD. See info from Andreas:
+# "Die WARNINGs von dd.BDD (der Art "WARNING:dd.bdd:Missing bits:
+# support - care_vars = {'s5', 's2', 's6', 's1', 's4', 's3'}") entstehen in der
+# BDDNumpyDialecticalStructure-Methode "closure" (aus rethon/numpy_implementation.py).
+# Dort erhält ".bdd.pick.iter" eine leere Liste als "care_vars". In meiner Erinnerung hat
+# sich das als sinnvolle Optimierung herausgestellt: Wenn wir als care_vars zum Beispiel
+# alle Sätze des Satzpools angeben, verschwindet die Warnung, aber es werden viel mehr
+# Modelle (für uns: vollständig und konsistente Positionen) zurückgegeben, die
+# anschliessend miteinander geschnitten werden müssen.
+# Ich sehe im Moment keine schnelle Lösung ausser das log-level von INFO auf
+# ERROR zu setzen, aber vielleicht gibt es in der Methode "closure" ungeahntes
+# Verbesserungspotential.
+logging.basicConfig(filename='re_process.log', level=logging.ERROR)
 log = logging.getLogger()
 
 
@@ -48,6 +62,7 @@ class ReflectiveEquilibrium(ABC):
         self.__dirty = True
         self.__model_parameter = {}
         self.__state = None
+        self.id = None
         if initial_commitments:
             self.set_initial_state(initial_commitments)
 
@@ -65,6 +80,12 @@ class ReflectiveEquilibrium(ABC):
     def dialectical_structure(self) -> DialecticalStructure:
         """Return the dialectical structure on which the model is based."""
         return self.__dialectical_structure
+
+    def set_id(self, id:int):
+        self.id = id
+
+    def get_id(self):
+        return self.id
 
     @abstractmethod
     def theory_candidates(self, time: int = None, **kwargs) -> Set[Position]:
@@ -101,7 +122,7 @@ class ReflectiveEquilibrium(ABC):
         """Checks whether the model demand an update of internal attributes."""
         return self.__dirty
 
-    def update(self):
+    def update(self, **kwargs):
         """Subclasses can extend/override this method to update internal attributes of the model."""
         pass
 
@@ -173,7 +194,8 @@ class ReflectiveEquilibrium(ABC):
                                f"candidates for the RE process.")
         canditates.remove(next_position)
         self.state().add_step(next_position, canditates, time)
-        self.state().finished = self.finished()
+        # ToDo: That should be redundant
+        self.state().finished = self.finished(**kwargs)
 
     def model_name(self) -> str:
         """Model name.
@@ -301,6 +323,8 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
          :param initial_commitments: The initial commitments :math:`\\mathcal{C}_0`.
          :return:
         """
+        # ToDo: Shouldn't we normalise by the whole sentence pool?
+        #  (I.e., `.../2*self.dialectical_structure().sentence_pool().size()...`)
         return 1 - (self.hamming_distance(initial_commitments, commitments, self.model_parameter("faithfulness_penalties"))
              / self.dialectical_structure().sentence_pool().size()) ** 2
 
@@ -420,10 +444,10 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
 
         if len(commitments_candidates) == 1:
             return next(iter(commitments_candidates))
-        # randomly select a theory for the current branch
+        # randomly select commitment for the current branch
         return random.choice(list(commitments_candidates))
 
-    def finished(self, re_states:List[REState] = None) -> bool:
+    def finished(self, **kwargs) -> bool:
         """ Implements :py:func:`ReflectiveEquilibrium.finished`.
 
         An re process of the standard model finishes with a state :math:`(\\mathcal{C}_i,\\mathcal{T}_i)` iff
@@ -579,7 +603,7 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         self.__systematicity_groups = {}
         self.__faithfulness_groups = {}
 
-    def update(self):
+    def update(self, **kwargs):
         """Implements :py:func:`basics.ReflectiveEquilibrium.update`"""
         if self.is_dirty():
             # reset and create groups of positions with identical systematicity or faithfulness
@@ -768,16 +792,32 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         return optimal_pairs
 
 
+# ToDo: Add class docstring
 class REContainer:
 
     def __init__(self, re_models: List[ReflectiveEquilibrium] = None):
         self.re_models = re_models
+        self._objects = dict()
 
     @abstractmethod
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> Iterator[ReflectiveEquilibrium]:
         pass
 
+    # ToDo: add docstring
+    def add_object(self, key: Any, object: Any):
+        self._objects[key] = object
 
+    # ToDo: Add docstring
+    def get_object(self, key: Any) -> [Any, None]:
+        if key in self._objects.keys():
+            return self._objects[key]
+        else:
+            return None
+
+    def get_objects(self):
+        return self._objects
+
+# ToDo: Add for all methods more information and examples (see the defined test cases).
 class REState:
     """Class that represent the internal state of an RE process.
 
@@ -787,19 +827,29 @@ class REState:
     Attributes:
 
         finished (bool): A boolean indicating whether the process terminated in a fixed point.
-        evolution (List[Position]): The evolution of steps beginning with the initial state.
+        evolution (List[Position]): The evolution of steps beginning with the initial state
+            (i.e., a set of commitments).
         alternatives (List[Set[Position]]): For each step a set of possible alternatives the process could have
             used as step according to :py:func:`ReflectiveEquilibrium.commitment_candidates`
             (or :py:func:`ReflectiveEquilibrium.theory_candidates` respectively).
         time_line (List[int]): For each step an integer that represents a point in time according to an (external)
             timeline.
+        error_code: An integer that represents an error code and which can be set if the process throws an error.
     """
+
+    error_codes = {# Should be used if there is no more specific error code available.
+                   0: 'The process could not finish due to an unexpected error.',
+                   # Should be used if some max_loop value was exceeded.
+                   1: 'The process did not converge under a specified maximum number of steps (see process logs for' +\
+                      ' further details).'
+                  }
 
     def __init__(self,
                  finished: bool,
                  evolution: List[Position],
                  alternatives: List[Set[Position]],
-                 time_line: List[int]):
+                 time_line: List[int],
+                 error_code: int = None):
         # check wither the time_line is ordered
         if not all(time_line[i] < time_line[i + 1] for i in range(len(time_line) - 1)):
             raise ValueError("Timeline must be an ordered sequence of integers.")
@@ -810,6 +860,7 @@ class REState:
         self.evolution = evolution
         self.alternatives = alternatives
         self.time_line = time_line
+        self.error_code = error_code
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
