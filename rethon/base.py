@@ -878,7 +878,6 @@ class REState:
                 'alternatives': self.alternatives,
                 'time_line': self.time_line}
 
-    # todo: add key checking
     @staticmethod
     def from_dict(state_dict: Dict) -> REState:
         """Instantiation via dict.
@@ -886,6 +885,13 @@ class REState:
         Args:
             state_dict (Dict): A dictionary with key-value pairs representing the attribute of :class:`REState`
         """
+        if any(key not in state_dict for key in ['finished',
+                                                 'evolution',
+                                                 'alternatives',
+                                                 'time_line']):
+            raise KeyError("state_dict needs to comprise the following keys: "
+                           "finished, evolution , alternatives, time_line")
+
         return REState(state_dict['finished'],
                        state_dict['evolution'],
                        state_dict['alternatives'],
