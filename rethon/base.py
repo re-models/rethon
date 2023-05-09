@@ -323,8 +323,8 @@ class StandardReflectiveEquilibrium(ReflectiveEquilibrium):
          :param initial_commitments: The initial commitments :math:`\\mathcal{C}_0`.
          :return:
         """
-        # ToDo: Shouldn't we normalise by the whole sentence pool?
-        #  (I.e., `.../2*self.dialectical_structure().sentence_pool().size()...`)
+        # Normalisation by the size of the unnegated half of the sentence pool
+        # (Beisbart, Betz, Brun 2021, p. 463ff)
         return 1 - (self.hamming_distance(initial_commitments, commitments, self.model_parameter("faithfulness_penalties"))
              / self.dialectical_structure().sentence_pool().size()) ** 2
 
