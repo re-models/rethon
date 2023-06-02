@@ -146,18 +146,27 @@ class ReflectiveEquilibrium(ABC):
         """
         return self.__state
 
-    def re_process(self, initial_commitments: Position = None):
+    def re_process(self, initial_commitments: Position = None,
+                   max_steps: int = 50):
         """Process of finding a reflective equilibrium based on given initial commitments.
 
-        Starting with the initial commitments :math:`\\mathcal{C}_0` as the initial epistemic state, the epistemic
-        state is successively revised until the process is finished (as defined by :py:func:`finished`).
+        Starting with the initial commitments :math:`\\mathcal{C}_0` as the \
+        initial epistemic state, the epistemic state is successively revised \
+        until the process is finished (as defined by :py:func:`finished`).
+
+        :param initial_commitments: A position representing the initial \
+        commitments at the outset of an RE process.
+
+        :param max_steps: The number of steps (i.e. theory or commitments \
+        adjustments) before the process is aborted, raising a \
+        :code:`RuntimeWarning`. :code:`max_steps` defaults to 50.
 
         """
         if initial_commitments:
             self.set_initial_state(initial_commitments)
-        if self.dialectical_structure() == None:
+        if self.dialectical_structure() is None:
             raise AttributeError("Before running an RE-process a dialectical structure must be set.")
-        if self.state().initial_commitments() == None:
+        if self.state().initial_commitments() is None:
             raise AttributeError("Before running an RE-process initial commitments must be set.")
         # if the process already finished reset to initial state
         if self.state().finished:
@@ -167,10 +176,9 @@ class ReflectiveEquilibrium(ABC):
         self.update()
         step_counter = 0
 
-        while (not self.state().finished):
-            # ToDo: Think of a better way than hardcoding max iterations
+        while not self.state().finished:
             step_counter += 1
-            if step_counter > 50:
+            if step_counter > max_steps:
                 raise RuntimeWarning("Reached max loop count for re_process without finding a fixed point."
                                      f"Current state is: {self.state().as_dict()}")
             self.next_step()

@@ -1,3 +1,5 @@
+"""Implementing abstract base classes for RE on the basis of numpy."""
+
 from __future__ import annotations
 
 from .base import StandardReflectiveEquilibrium, GlobalReflectiveEquilibrium, LocalReflectiveEquilibrium
@@ -7,8 +9,8 @@ from tau import Position, DialecticalStructure, NumpyPosition
 import numpy as np
 from typing import List
 
-class NumpyReflectiveEquilibrium(StandardReflectiveEquilibrium):
 
+class NumpyReflectiveEquilibrium(StandardReflectiveEquilibrium):
     # not needed, since penalties are summed up in Hamming distance (see below)
     # ToDo: To discuss with @Andreas (either we provide an implementation or we remove the method from the interface).
     def penalty(self, pos1: Position, pos2: Position, sentence: int, penalties: List[float]) -> float:
@@ -24,27 +26,19 @@ class NumpyReflectiveEquilibrium(StandardReflectiveEquilibrium):
                                        NumpyPosition.as_np_array(position2),
                                        penalties)
 
+
 class GlobalNumpyReflectiveEquilibrium(GlobalReflectiveEquilibrium, NumpyReflectiveEquilibrium):
 
     def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
                  model_name="GlobalNumpyReflectiveEquilibrium"):
         super().__init__(dialectical_structure, initial_commitments, model_name)
 
+
 class LocalNumpyReflectiveEquilibrium(LocalReflectiveEquilibrium, NumpyReflectiveEquilibrium):
     """Numpy implementation of a locally searching RE process."""
 
-    # def first_theory(self) -> Position:
-    #     """Implementation of :py:class:`LocalReflectiveEquilibrium.first_theory`.
-    #
-    #     Chooses the empty positin as initial theory.
-    #     """
-    #     return NumpyPosition.from_set(set(), self.dialectical_structure().sentence_pool().size())
-
     def first_theory(self) -> Position:
-        """Implementation of :py:class:`LocalReflectiveEquilibrium.first_theory`.
-
-        Chooses an initial theory in the neighbourhood of the empty position.
-        """
+        """Choose an initial theory in the neighbourhood of the empty position."""
 
         empty_pos = NumpyPosition.from_set(set(), self.dialectical_structure().sentence_pool().size())
 
