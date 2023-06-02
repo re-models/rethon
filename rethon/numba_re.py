@@ -1,6 +1,7 @@
+"""Auxiliary methods to speed up the handling of numpy arrays with numba."""
+
 import numpy as np
 from numba import jit
-
 
 @jit(nopython=True)
 def numpy_hamming_distance(pos1: np.ndarray, pos2: np.ndarray, penalites: np.ndarray) -> float:
