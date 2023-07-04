@@ -14,6 +14,9 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/debatelab/rethon",
     packages=find_packages(),
+    package_dir={'rethon': 'rethon'},
+    # Todo: add testdata similarly as config files (such that we can load it via `importlib.resources.path`)
+    package_data={'rethon': ['config/*.json']},
     classifiers=["Programming Language :: Python :: 3.8",
                  "License :: MIT License",
                  "Operating System :: OS Independent"],
