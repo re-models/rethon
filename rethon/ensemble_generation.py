@@ -23,6 +23,8 @@ import tarfile
 import importlib
 import logging
 
+logger = logging.getLogger("rethon")
+
 class AbstractEnsembleGenerator(ABC):
     """Abstract base class for all ensemble generators.
 
@@ -327,7 +329,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         ensemble_size = len(self.implementations)*len(self.arguments_list)\
                         *(len(self.model_parameters_list) if self.model_parameters_list else 1)\
                         *len(self.initial_commitments_list)
-        logging.info(f"Starting ensemble generation with {ensemble_size} models runs (without branches)")
+        logger.info(f"Starting ensemble generation with {ensemble_size} models runs (without branches)")
         for impl in self.implementations:
 
             for arguments in self.arguments_list:
@@ -349,9 +351,9 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                     self.model_parameters_list = [reflective_equilibrium_class_.default_model_parameters()]
 
                 for model_parameters in self.model_parameters_list:
-                    #logging.info(f"Re model param {re.model_parameter('weights')}")
+                    #logger.info(f"Re model param {re.model_parameter('weights')}")
                     re.reset_model_parameters(model_parameters)
-                    #logging.info(f"Re set model param to {re.model_parameter('weights')}")
+                    #logger.info(f"Re set model param to {re.model_parameter('weights')}")
                     for pos_as_set in self.initial_commitments_list:
                         pos_class_ = getattr(importlib.import_module(impl['position_module_name']),
                                              impl['position_class_name'])
@@ -369,13 +371,13 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                             self.current_ensemble_states = branching_states
                             self.init_ensemble_fields(branching_states, ds)
 
-                            #logging.info(f"n branches: {len(branching_states)}")
+                            #logger.info(f"n branches: {len(branching_states)}")
                             for rec in branching_res:
                                 self.current_reflective_equilibrium = rec
                                 self.current_state = rec.state()
                                 self.init_re_final_fields(rec, ds)
-                                #logging.info(f"Yield re with params: {rec.model_parameter('weights')}")
-                                #logging.info(f"branch copy is orig?: {re is rec}")
+                                #logger.info(f"Yield re with params: {rec.model_parameter('weights')}")
+                                #logger.info(f"branch copy is orig?: {re is rec}")
                                 yield rec
                         else:
                             re.re_process()

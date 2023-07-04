@@ -18,15 +18,6 @@ import numpy as np
 from tau import Position, DialecticalStructure
 
 
-# global logging setting
-logging.basicConfig(filename='re_process.log', level=logging.INFO)
-
-# list of modules for individual logging settings
-module_list = ["dd",
-               ]
-for module in module_list:
-    logging.getLogger(module).setLevel(logging.ERROR)
-
 
 class ReflectiveEquilibrium(ABC):
     """Abstract class representing a process of finding epistemic states that are in a reflective quilibrium.

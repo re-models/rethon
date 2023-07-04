@@ -4,7 +4,8 @@ from tau import Position
 from typing import List
 
 import logging
-#logging.basicConfig(filename='bitarray_implementation.log', level=logging.INFO)
+
+logger = logging.getLogger("rethon")
 
 
 class GlobalBitarrayReflectiveEquilibrium(GlobalReflectiveEquilibrium):

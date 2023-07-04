@@ -12,8 +12,7 @@ from copy import copy
 
 import logging
 
-logging.basicConfig(filename='re_process.log', level=logging.INFO)
-# logging.basicConfig(filename='re_process.log', level=logging.ERROR)
+logger = logging.getLogger("rethon")
 
 
 class StandardGlobalReflectiveEquilibrium(GlobalNumpyReflectiveEquilibrium):
