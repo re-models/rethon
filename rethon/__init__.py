@@ -1,3 +1,8 @@
+import logging
+import json
+import importlib.resources as pkg_resources
+from . import config
+
 
 # Todo: Add and test checking dependencies
 
@@ -70,3 +75,9 @@ __all__ = [
     # "standard_model_params_varied_alphas",
     # "local_re_model_params_varied_alphas"
 ]
+
+# Configure logging
+with pkg_resources.path(config, "logging-config.json") as path:
+    with open(path) as config_file:
+        config_dict = json.load(config_file)
+        logging.config.dictConfig(config_dict)
