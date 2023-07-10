@@ -282,7 +282,11 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         initial_commitments_list: List of initial commitments. Each commitments is represent as set of integers.
         model_parameters_list: A list of dictionaries that represents the model parameters and can be set by
             :py:func:`ReflectiveEquilibrium.set_model_parameter`.
+        max_re_length: If the number of adjustment steps in an RE process exeed
+            `max_re_length`, the generator raises a `RunTimeWarning`.
         create_branches: If :code:`True` all branches are created.
+        max_branches: Only active if `create_branches = True`. If the number of
+            branches exceeds `max_branches`, the generator raises a `RunTimeWarning`.
         implementations: A list of dicts, each representing a specific implementation. Each dict should contain
             strings for the keys 'tau_module_name', 'rethon_module_name', 'position_class_name',
             'dialectical_structure_class_name'
@@ -295,7 +299,9 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                  n_sentence_pool: int,
                  initial_commitments_list: List[Set[int]],
                  model_parameters_list: List[Dict] = None,
-                 create_branches = False,
+                 max_re_length: int = 50,
+                 create_branches: bool = False,
+                 max_branches: int = 50,
                  implementations: List[Dict] = None):
 
         super().__init__()
@@ -303,7 +309,9 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         self.n_sentence_pool = n_sentence_pool
         self.initial_commitments_list = initial_commitments_list
         self.model_parameters_list = model_parameters_list
+        self.max_re_length = max_re_length
         self.create_branches = create_branches
+        self.max_branches = max_branches
         if implementations is None:
             self.implementations = _fill_module_names([{'tau_module_name': 'tau',
                                                         'position_class_name': 'StandardPosition',
@@ -364,7 +372,8 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                         if self.create_branches:
                             # Idea: we first collect all finished states of the branches for 'init_branching_fields'
                             # and then iter through them.
-                            re_container = FullBranchREContainer()
+                            re_container = FullBranchREContainer(self.max_re_length,
+                                                                 self.max_branches)
                             branching_res = list(re_container.re_processes([re]))
                             branching_states = [re.state() for re in branching_res]
 
@@ -380,7 +389,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                                 #logger.info(f"branch copy is orig?: {re is rec}")
                                 yield rec
                         else:
-                            re.re_process()
+                            re.re_process(max_steps=self.max_re_length)
                             self.init_re_final_fields(re, ds)
                             self.current_state = re.state()
                             # yield a copy since we reuse the instance with new model-parameters
@@ -496,11 +505,23 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
 
     """
 
-    def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pool: int,
-                 initial_commitments_list: List[Set[int]], model_parameters_list: List[Dict] = None,
-                 create_branches=False, implementations: List[Dict] = None):
-        super().__init__(arguments_list, n_sentence_pool, initial_commitments_list, model_parameters_list,
-                         create_branches, implementations)
+    def __init__(self,
+                 arguments_list: List[List[List[int]]],
+                 n_sentence_pool: int,
+                 initial_commitments_list: List[Set[int]],
+                 model_parameters_list: List[Dict] = None,
+                 max_re_length: int = 50,
+                 create_branches: bool = False,
+                 max_branches: int = 50,
+                 implementations: List[Dict] = None):
+        super().__init__(arguments_list,
+                         n_sentence_pool,
+                         initial_commitments_list,
+                         model_parameters_list,
+                         max_re_length,
+                         create_branches,
+                         max_branches,
+                         implementations)
         _add_simple_data_items(self)
         if create_branches:
             _add_full_branch_data_items(self)
@@ -625,12 +646,16 @@ class GlobalREEnsembleGenerator(SimpleEnsembleGenerator):
                  n_sentence_pool: int,
                  initial_commitments_list: List[Set[int]],
                  model_parameters_list: List[Dict] = None,
-                 create_branches = False,
+                 max_re_length: int = 50,
+                 create_branches: bool = False,
+                 max_branches: int = 50,
                  implementations: List[Dict] = None):
 
         super().__init__(arguments_list, n_sentence_pool, initial_commitments_list,
                          model_parameters_list,
+                         max_re_length,
                          create_branches,
+                         max_branches,
                          implementations)
         _add_global_data_items(self)
         if create_branches:
@@ -685,12 +710,23 @@ class LocalREEnsembleGenerator(SimpleEnsembleGenerator):
         and theory candidates.
     """
 
-    def __init__(self, arguments_list: List[List[List[int]]], n_sentence_pool: int,
-                 initial_commitments_list: List[Set[int]], model_parameters_list: List[Dict] = None,
-                 create_branches=False,
+    def __init__(self,
+                 arguments_list: List[List[List[int]]],
+                 n_sentence_pool: int,
+                 initial_commitments_list: List[Set[int]],
+                 model_parameters_list: List[Dict] = None,
+                 max_re_length: int = 50,
+                 create_branches: bool = False,
+                 max_branches: int = 50,
                  implementations: List[Dict] = None):
-        super().__init__(arguments_list, n_sentence_pool, initial_commitments_list, model_parameters_list,
-                         create_branches, implementations)
+        super().__init__(arguments_list,
+                         n_sentence_pool,
+                         initial_commitments_list,
+                         model_parameters_list,
+                         max_re_length,
+                         create_branches,
+                         max_branches,
+                         implementations)
         _add_local_data_items(self)
 
 class MaxLoopsWarning(RuntimeWarning):
