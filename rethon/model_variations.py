@@ -1,11 +1,14 @@
 # see: https://stackoverflow.com/questions/33533148
 from __future__ import annotations
 
+from typing import Set, Tuple
 
 from .core import StandardGlobalReflectiveEquilibrium, StandardLocalReflectiveEquilibrium
-from tau import DialecticalStructure, Position
+from tau import DialecticalStructure, Position, DAGDialecticalStructure
+
 
 class StandardGlobalReflectiveEquilibriumLinearG(StandardGlobalReflectiveEquilibrium):
+    # ToDo: Add docstring
 
     # overwrite model name initialization (otherwise ensemble data will be labelled wrongly!)
     def __init__(self, dialectical_structure: DialecticalStructure = None,
@@ -32,6 +35,7 @@ class StandardGlobalReflectiveEquilibriumLinearG(StandardGlobalReflectiveEquilib
                      / self.dialectical_structure().sentence_pool().size()))
 
 class StandardLocalReflectiveEquilibriumLinearG(StandardLocalReflectiveEquilibrium):
+    # ToDo: Add docstring
 
     # overwrite model name initialization (otherwise ensemble data will be labelled wrongly!)
     def __init__(self, dialectical_structure: DialecticalStructure = None,
@@ -56,3 +60,26 @@ class StandardLocalReflectiveEquilibriumLinearG(StandardLocalReflectiveEquilibri
                                            commitments,
                                            self.model_parameter("faithfulness_penalties"))
                      / self.dialectical_structure().sentence_pool().size()))
+
+
+class StandardLocalReflectiveEquilibriumWitGO(StandardLocalReflectiveEquilibrium):
+    # ToDo: Add docstring
+
+    #def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
+    #             model_name="StandardLocalReflectiveEquilibrium"):
+    #    super().__init__(dialectical_structure, initial_commitments, model_name)
+
+    def global_optima(self, initial_commitments: Position) -> Set[Tuple[Position, Position]]:
+        dag_ds = DAGDialecticalStructure.from_arguments(self.dialectical_structure().get_arguments(),
+                                                        self.dialectical_structure().sentence_pool().size())
+        global_re = StandardGlobalReflectiveEquilibrium(dag_ds)
+        return global_re.global_optima(initial_commitments)
+
+
+class StandardLocalReflectiveEquilibriumLinearGWithGO(StandardLocalReflectiveEquilibriumLinearG):
+
+    def global_optima(self, initial_commitments: Position) -> Set[Tuple[Position, Position]]:
+        dag_ds = DAGDialecticalStructure.from_arguments(self.dialectical_structure().get_arguments(),
+                                                        self.dialectical_structure().sentence_pool().size())
+        global_re = StandardGlobalReflectiveEquilibrium(dag_ds)
+        return global_re.global_optima(initial_commitments)

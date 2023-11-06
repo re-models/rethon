@@ -37,7 +37,12 @@ from .numpy_implementation import (
 )
 from .set_implementation import GlobalSetBasedReflectiveEquilibrium
 
-from .model_variations import StandardGlobalReflectiveEquilibriumLinearG, StandardLocalReflectiveEquilibriumLinearG
+from .model_variations import (
+    StandardGlobalReflectiveEquilibriumLinearG,
+    StandardLocalReflectiveEquilibriumLinearG,
+    StandardLocalReflectiveEquilibriumWitGO,
+    StandardLocalReflectiveEquilibriumLinearGWithGO
+)
 # from .util import (
 #     re_weight_variations,
 #     re_from_text_file,
@@ -77,7 +82,9 @@ __all__ = [
     # "standard_model_params_varied_alphas",
     # "local_re_model_params_varied_alphas"
     "StandardGlobalReflectiveEquilibriumLinearG",
-    "StandardLocalReflectiveEquilibriumLinearG"
+    "StandardLocalReflectiveEquilibriumLinearG",
+    "StandardLocalReflectiveEquilibriumWithGO",
+    "StandardLocalReflectiveEquilibriumLinearGWithGo"
 ]
 
 # Configure logging
