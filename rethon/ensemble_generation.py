@@ -360,7 +360,12 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
 
                 for model_parameters in self.model_parameters_list:
                     #logger.info(f"Re model param {re.model_parameter('weights')}")
-                    re.reset_model_parameters(model_parameters)
+                    # We rather add the given model_parameters (that is, replace existing key and add new one)
+                    # than resetting the model parameters. In this way, the calling code does not have
+                    # to specify all model parameters. (Additionally, the one ensemble generator can deal
+                    # with different models.)
+                    re.set_model_parameters(model_parameters)
+                    #re.reset_model_parameters(model_parameters)
                     #logger.info(f"Re set model param to {re.model_parameter('weights')}")
                     for pos_as_set in self.initial_commitments_list:
                         pos_class_ = getattr(importlib.import_module(impl['position_module_name']),
