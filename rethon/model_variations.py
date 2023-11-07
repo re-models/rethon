@@ -62,7 +62,7 @@ class StandardLocalReflectiveEquilibriumLinearG(StandardLocalReflectiveEquilibri
                      / self.dialectical_structure().sentence_pool().size()))
 
 
-class StandardLocalReflectiveEquilibriumWitGO(StandardLocalReflectiveEquilibrium):
+class StandardLocalReflectiveEquilibriumWithGO(StandardLocalReflectiveEquilibrium):
     # ToDo: Add docstring
 
     #def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
@@ -72,7 +72,10 @@ class StandardLocalReflectiveEquilibriumWitGO(StandardLocalReflectiveEquilibrium
     def global_optima(self, initial_commitments: Position) -> Set[Tuple[Position, Position]]:
         dag_ds = DAGDialecticalStructure.from_arguments(self.dialectical_structure().get_arguments(),
                                                         self.dialectical_structure().sentence_pool().size())
+
         global_re = StandardGlobalReflectiveEquilibrium(dag_ds)
+        global_re.set_model_parameters(self.model_parameters())
+
         return global_re.global_optima(initial_commitments)
 
 
@@ -81,5 +84,8 @@ class StandardLocalReflectiveEquilibriumLinearGWithGO(StandardLocalReflectiveEqu
     def global_optima(self, initial_commitments: Position) -> Set[Tuple[Position, Position]]:
         dag_ds = DAGDialecticalStructure.from_arguments(self.dialectical_structure().get_arguments(),
                                                         self.dialectical_structure().sentence_pool().size())
-        global_re = StandardGlobalReflectiveEquilibrium(dag_ds)
+
+        global_re = StandardGlobalReflectiveEquilibriumLinearG(dag_ds)
+        global_re.set_model_parameters(self.model_parameters())
+
         return global_re.global_optima(initial_commitments)
