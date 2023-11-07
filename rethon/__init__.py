@@ -1,4 +1,4 @@
-import logging
+import logging.config
 import json
 import importlib.resources as pkg_resources
 from . import config
@@ -40,7 +40,7 @@ from .set_implementation import GlobalSetBasedReflectiveEquilibrium
 from .model_variations import (
     StandardGlobalReflectiveEquilibriumLinearG,
     StandardLocalReflectiveEquilibriumLinearG,
-    StandardLocalReflectiveEquilibriumWitGO,
+    StandardLocalReflectiveEquilibriumWithGO,
     StandardLocalReflectiveEquilibriumLinearGWithGO
 )
 # from .util import (
@@ -84,7 +84,7 @@ __all__ = [
     "StandardGlobalReflectiveEquilibriumLinearG",
     "StandardLocalReflectiveEquilibriumLinearG",
     "StandardLocalReflectiveEquilibriumWithGO",
-    "StandardLocalReflectiveEquilibriumLinearGWithGo"
+    "StandardLocalReflectiveEquilibriumLinearGWithGO"
 ]
 
 # Configure logging
