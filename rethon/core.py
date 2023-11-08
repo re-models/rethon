@@ -1,7 +1,7 @@
 # see: https://stackoverflow.com/questions/33533148
 from __future__ import annotations
 
-from tau import Position
+from tau import Position, DialecticalStructure
 from .base import ReflectiveEquilibrium, REContainer, REState
 from .numpy_implementation import GlobalNumpyReflectiveEquilibrium, LocalNumpyReflectiveEquilibrium
 
@@ -20,14 +20,18 @@ class StandardGlobalReflectiveEquilibrium(GlobalNumpyReflectiveEquilibrium):
     Class that simply tags :py:class:`GlobalNumpyReflectiveEquilibrium` as the default implementation of
     :py:class:`GlobalReflectiveEquilibrium`.
     """
-    pass
+    def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
+                 model_name='StandardGlobalReflectiveEquilibrium'):
+        super().__init__(dialectical_structure, initial_commitments, model_name)
 
 class StandardLocalReflectiveEquilibrium(LocalNumpyReflectiveEquilibrium):
     """
     Class that simply tags :py:class:`LocalNumpyReflectiveEquilibrium` as the default implementation of
     :py:class:`LocalReflectiveEquilibrium`
     """
-    pass
+    def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
+                 model_name='StandardLocalReflectiveEquilibrium'):
+        super().__init__(dialectical_structure, initial_commitments, model_name)
 
 class FullBranchREContainer(REContainer):
     """An REContainer generating all branches of model runs.

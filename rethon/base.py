@@ -477,7 +477,7 @@ class LocalReflectiveEquilibrium(StandardReflectiveEquilibrium):
     """
 
     def __init__(self, dialectical_structure: DialecticalStructure = None, initial_commitments: Position = None,
-                 model_name='LocalStandardReflectiveEquilibrium'):
+                 model_name='LocalReflectiveEquilibrium'):
         super().__init__(dialectical_structure, initial_commitments, model_name)
 
     @abstractmethod
