@@ -150,7 +150,7 @@ class ReflectiveEquilibrium(ABC):
 
         :param max_steps: The number of steps (i.e. theory or commitments \
         adjustments) before the process is aborted, raising a \
-        :code:`RuntimeWarning`. :code:`max_steps` defaults to 50.
+        :code:`MaxLoopsWarning`. :code:`max_steps` defaults to 50.
 
         """
         if initial_commitments:
@@ -170,7 +170,7 @@ class ReflectiveEquilibrium(ABC):
         while not self.state().finished:
             step_counter += 1
             if step_counter > max_steps:
-                raise RuntimeWarning("Reached max loop count for re_process without finding a fixed point."
+                raise MaxLoopsWarning("Reached max loop count for re_process without finding a fixed point."
                                      f"Current state is: {self.state().as_dict()}")
             self.next_step()
 
@@ -1064,3 +1064,21 @@ class REState:
                        evolution=copy(self.evolution[0:len(self.evolution) + past]),
                        alternatives=copy(self.alternatives[0:len(self.alternatives) + past]),
                        time_line=copy(self.time_line[0:len(self.time_line) + past]))
+
+class MaxLoopsWarning(RuntimeWarning):
+
+    def __init__(self, message: [str, None] = None ):
+        msg = "Reached max loop count for processes without finishing all processes."
+        if message:
+            super().__init__(message)
+        else:
+            super().__init__(msg)
+
+class MaxBranchesWarning(RuntimeWarning):
+
+    def __init__(self, message: [str, None] = None ):
+        msg = "Reached max branches count for processes without finishing all processes."
+        if message:
+            super().__init__(message)
+        else:
+            super().__init__(msg)

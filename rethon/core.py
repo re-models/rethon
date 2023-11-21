@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from tau import Position, DialecticalStructure
-from .base import ReflectiveEquilibrium, REContainer, REState
+from .base import ReflectiveEquilibrium, REContainer, REState, MaxLoopsWarning, MaxBranchesWarning
 from .numpy_implementation import GlobalNumpyReflectiveEquilibrium, LocalNumpyReflectiveEquilibrium
 
 from typing import List, Iterator
@@ -81,10 +81,10 @@ class FullBranchREContainer(REContainer):
                 while (not re.state().finished):
                     step_counter += 1
                     if step_counter > self._max_re_length:
-                        raise RuntimeWarning("Reached max loop count for re_process without finding a fixed point."
+                        raise MaxLoopsWarning("Reached max loop count for re_process without finding a fixed point."
                                              f"Current state is: {re.state().as_dict()}")
                     if branch_counter > self._max_branches:
-                        raise RuntimeWarning("Reached max amount of branches."
+                        raise MaxBranchesWarning("Reached max amount of branches."
                                              f"Current state is: {re.state().as_dict()}")
 
                     re.next_step()

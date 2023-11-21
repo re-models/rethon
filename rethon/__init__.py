@@ -12,7 +12,9 @@ from .base import (
     LocalReflectiveEquilibrium,
     GlobalReflectiveEquilibrium,
     REContainer,
-    REState
+    REState,
+    MaxLoopsWarning,
+    MaxBranchesWarning
 )
 from .core import (
     StandardGlobalReflectiveEquilibrium,
@@ -60,6 +62,8 @@ __all__ = [
     "GlobalReflectiveEquilibrium",
     "REContainer",
     "REState",
+    "MaxLoopsWarning",
+    "MaxBranchesWarning",
     "StandardGlobalReflectiveEquilibrium",
     "StandardLocalReflectiveEquilibrium",
     "FullBranchREContainer",

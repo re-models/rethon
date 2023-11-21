@@ -1,11 +1,14 @@
 # see: https://stackoverflow.com/questions/33533148
 from __future__ import annotations
 
-from typing import Set, Tuple
+from typing import Set, Tuple, Dict
 
 from .core import StandardGlobalReflectiveEquilibrium, StandardLocalReflectiveEquilibrium
 from tau import DialecticalStructure, Position, DAGDialecticalStructure
 
+import logging
+
+logger = logging.getLogger("rethon")
 
 class StandardGlobalReflectiveEquilibriumLinearG(StandardGlobalReflectiveEquilibrium):
     # ToDo: Add docstring

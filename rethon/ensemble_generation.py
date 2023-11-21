@@ -6,7 +6,7 @@ from tau import (
     BitarrayPosition
 )
 from tau.util import inferential_density, get_principles
-from .base import ReflectiveEquilibrium
+from .base import ReflectiveEquilibrium, MaxLoopsWarning
 from rethon import REState
 from .core import FullBranchREContainer, REContainer
 
@@ -283,10 +283,10 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         model_parameters_list: A list of dictionaries that represents the model parameters and can be set by
             :py:func:`ReflectiveEquilibrium.set_model_parameter`.
         max_re_length: If the number of adjustment steps in an RE process exeed
-            `max_re_length`, the generator raises a `RunTimeWarning`.
+            `max_re_length`, the generator raises a `MaxLoopsWarning`.
         create_branches: If :code:`True` all branches are created.
         max_branches: Only active if `create_branches = True`. If the number of
-            branches exceeds `max_branches`, the generator raises a `RunTimeWarning`.
+            branches exceeds `max_branches`, the generator raises a `MaxBranchesWarning`.
         implementations: A list of dicts, each representing a specific implementation. Each dict should contain
             strings for the keys 'tau_module_name', 'rethon_module_name', 'position_class_name',
             'dialectical_structure_class_name'
@@ -734,14 +734,6 @@ class LocalREEnsembleGenerator(SimpleEnsembleGenerator):
                          implementations)
         _add_local_data_items(self)
 
-class MaxLoopsWarning(RuntimeWarning):
-
-    def __init__(self, message: [str, None] = None ):
-        msg = "Reached max loop count for processes without finishing all processes."
-        if message:
-            super().__init__(message)
-        else:
-            super().__init__(msg)
 
 class SimpleMultiAgentREContainer(REContainer):
     """An :py:class:`REContainer` for multi-agent ensembles.
@@ -917,6 +909,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
             if self.model_parameters_list:
                 # for j in range(len(self.model_parameters_list)):
                 #     res[j].reset_model_parameters(self.model_parameters_list[j])
+                # ToDo: rather set_model_parameters (?), compare line 367
                 for j in range(len(res)):
                     res[j].reset_model_parameters(self.model_parameters_list[i])
 
