@@ -829,7 +829,10 @@ class REState:
             timeline.
         error_code: An integer that represents an error code and which can be set if the process throws an error.
     """
-
+    # ToDo: Setting an error code should some how invalidate other state attributes (by setting them to none and
+    #  finished to False. (Otherwise, data produced by EnsembleGenerators might be interpreted as there being fps
+    #  even thought the process did not finish (for instance).
+    # ToDo: Unify error code handling (I also use class variables in the defined Warning Classes.
     error_codes = {# Should be used if there is no more specific error code available.
                    0: 'The process could not finish due to an unexpected error.',
                    # Should be used if some max_loop value was exceeded.
@@ -1067,6 +1070,8 @@ class REState:
 
 class MaxLoopsWarning(RuntimeWarning):
 
+    ERROR_CODE = 1
+
     def __init__(self, message: [str, None] = None ):
         msg = "Reached max loop count for processes without finishing all processes."
         if message:
@@ -1075,6 +1080,8 @@ class MaxLoopsWarning(RuntimeWarning):
             super().__init__(msg)
 
 class MaxBranchesWarning(RuntimeWarning):
+
+    ERROR_CODE = 2
 
     def __init__(self, message: [str, None] = None ):
         msg = "Reached max branches count for processes without finishing all processes."

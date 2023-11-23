@@ -6,7 +6,7 @@ from tau import (
     BitarrayPosition
 )
 from tau.util import inferential_density, get_principles
-from .base import ReflectiveEquilibrium, MaxLoopsWarning
+from .base import ReflectiveEquilibrium, MaxLoopsWarning, MaxBranchesWarning
 from rethon import REState
 from .core import FullBranchREContainer, REContainer
 
@@ -379,8 +379,31 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                             # and then iter through them.
                             re_container = FullBranchREContainer(self.max_re_length,
                                                                  self.max_branches)
-                            branching_res = list(re_container.re_processes([re]))
-                            branching_states = [re.state() for re in branching_res]
+                            try:
+                                branching_res = list(re_container.re_processes([re]))
+                                branching_states = [re.state() for re in branching_res]
+                            except MaxLoopsWarning as w:
+                                # we only save one failed re-instance (i.e., one resulting row with the corresponding
+                                # error code in the result data frame.
+                                logger.warning(msg=str(w))
+                                re.state().error_code = MaxLoopsWarning.ERROR_CODE
+                                branching_res = [re]
+                                branching_states = [re.state()]
+                            except MaxBranchesWarning as w:
+                                # we only save one failed re-instance (i.e., one resulting row with the corresponding
+                                # error code in the result data frame.
+                                logger.warning(msg=str(w))
+                                re.state().error_code = MaxBranchesWarning.ERROR_CODE
+                                branching_res = [re]
+                                branching_states = [re.state()]
+                            # any other warning/error
+                            except Exception as e:
+                                # we only save one failed re-instance (i.e., one resulting row with the corresponding
+                                # error code in the result data frame.
+                                logger.exception(msg=str(e))
+                                re.state().error_code = 0
+                                branching_res = [re]
+                                branching_states = [re.state()]
 
                             self.current_ensemble_states = branching_states
                             self.init_ensemble_fields(branching_states, ds)
@@ -394,7 +417,20 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                                 #logger.info(f"branch copy is orig?: {re is rec}")
                                 yield rec
                         else:
-                            re.re_process(max_steps=self.max_re_length)
+
+                            try:
+                                re.re_process(max_steps=self.max_re_length)
+                            except MaxLoopsWarning as w:
+                                logger.warning(msg=str(w))
+                                re.state().error_code = MaxLoopsWarning.ERROR_CODE
+                            except MaxBranchesWarning as w:
+                                logger.warning(msg=str(w))
+                                re.state().error_code = MaxBranchesWarning.ERROR_CODE
+                            # any other warning/error
+                            except Exception as e:
+                                logger.exception(msg=str(e))
+                                re.state().error_code = 0
+
                             self.init_re_final_fields(re, ds)
                             self.current_state = re.state()
                             # yield a copy since we reuse the instance with new model-parameters
@@ -437,6 +473,16 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
 
     **PROCESS-FEATURES**
 
+    * :code:`error_code`: If a process did not terminate correctly an error code is provided.
+      The container will execute subsequent processes in this case. Error code :code:`MaxLoopsWarning.ERROR_CODE` (`1`)
+      indicates that the process did
+      not finish within the given maximum number of loops (as set via :class:`EnsembleGenerator`,
+      see also :class:`REState`.).
+      Error code :code:`MaxBranchesWarning.ERROR_CODE` (`2`)
+      indicates that the execution of all branches exceeded the maximum number of allowed branches (set by
+      `max_branches`).
+      Error code `0` indicates all other thrown exceptions.
+      If the process terminates without errors the field is empty (nan).
     * :code:`init_coms`: The initial commitments.
     * :code:`init_coms_size`: Number of initial commitments.
     * :code:`init_coms_n_tau_truths`: Number of tau-true propositions in the initial commitments.
@@ -819,12 +865,6 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
     * :code:`ensemble_id`: An id for each ensemble, which is (only) unique within one data file.
     * :code:`ensemble_size`: The size of the ensemble (i.e., the number of agents/initial commitments).
     * :code:`agents_name`: For each ensemble a name for the set of agents, which can be passed by the constructor.
-    * :code:`error_code`: If a process did not terminate correctly an error code is provided.
-      The container will execute subsequent processes in this case. Error code `1` indicates that the process did
-      not finish within the given maximum number of loops (as set via :class:`SimpleMultiAgentREContainer`,
-      see also :class:`REState`.).
-      Error code `0` indicates all other thrown exceptions.
-      If the process terminates without errors the field is empty (nan).
 
     Args:
         arguments_list: A list of n dialectical structures as list of argument lists. Each dialectical structure
@@ -875,8 +915,6 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
         self.add_item('agent_id', lambda x: x.reflective_equilibrium().get_id())
 
         self.add_item('agents_name', lambda x: x.get_obj('agents_name'))
-        # ToDo: We should move that more prominently as a default item.
-        self.add_item('error_code', lambda x: x.state().error_code)
 
     def ensemble_iter(self) -> Iterator[ReflectiveEquilibrium]:
         """ Iterator through the re processes.
@@ -922,13 +960,16 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                 agents.append(pos)
 
             # ToDo: It should be possible for the user to dynamically provide an REContainer
+            # But what happens if it is a Fullbranchcontainer?
             multi_agent_container = SimpleMultiAgentREContainer(res, agents)
             try:
                 multi_agent_container.re_processes()
-            except MaxLoopsWarning:
+            except MaxLoopsWarning as w:
+                logger.warning(msg=str(w))
                 for re in res:
-                    re.state().error_code = 1
-            except:
+                    re.state().error_code = MaxLoopsWarning.ERROR_CODE
+            except Exception as e:
+                logger.exception(msg=str(e))
                 for re in res:
                     re.state().error_code = 0
 
@@ -1218,6 +1259,8 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
 
     ensemble_generator.add_item('process_length',
                                 lambda x: len(x.state()))
+
+    ensemble_generator.add_item('error_code', lambda x: x.state().error_code)
 
 # Classes using this method to add data item must provide the following key-object pairs:
 # 'n_branches', 'fixed_points'
