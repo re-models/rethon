@@ -21,6 +21,7 @@ setup(
                  "License :: MIT License",
                  "Operating System :: OS Independent"],
     python_requires='>=3.8',
-    install_requires=['bitarray', 'py-aiger-cnf>=2.0.0', 'pypblib>=0.0.3', 'python-sat', 'numpy',
-                      'numba', 'dd', 'Deprecated', 'pandas', 'tau'],
+    install_requires=['Deprecated',
+                      'pandas',
+                      'tau'],
 )
