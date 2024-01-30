@@ -11,13 +11,26 @@ from typing import List
 
 
 class NumpyReflectiveEquilibrium(StandardReflectiveEquilibrium):
-    # not needed, since penalties are summed up in Hamming distance (see below)
-    # ToDo: To discuss with @Andreas (either we provide an implementation or we remove the method from the interface).
+
     def penalty(self, pos1: Position, pos2: Position, sentence: int, penalties: List[float]) -> float:
-        pass
+
+        s1 = NumpyPosition.as_np_array(pos1)[abs(sentence)-1]
+        s2 = NumpyPosition.as_np_array(pos2)[abs(sentence)-1]
+
+        # agreement
+        if s1 == s2:
+            return penalties[0]
+        # contradiction
+        elif s1+s2 == 3:
+            return penalties[3]
+        # pos1 extends pos2
+        elif s2 == 0:
+            return penalties[2]
+        # pos2 extends pos1
+        else:
+            return penalties[1]
 
     # overwrite Hamming distance in core.py
-
     def hamming_distance(self, position1: Position, position2: Position, penalties) -> float:
 
         if not isinstance(penalties, np.ndarray):
