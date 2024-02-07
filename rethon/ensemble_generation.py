@@ -337,7 +337,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         ensemble_size = len(self.implementations)*len(self.arguments_list)\
                         *(len(self.model_parameters_list) if self.model_parameters_list else 1)\
                         *len(self.initial_commitments_list)
-        logger.info(f"Starting ensemble generation with {ensemble_size} models runs (without branches)")
+        logger.info(f"Starting ensemble generation with {ensemble_size} models runs (not counting branches)")
         for impl in self.implementations:
 
             for arguments in self.arguments_list:
@@ -523,13 +523,14 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
       attention: counts also sentences on which both positions are indifferent.
     * :code:`random_choices`:
     * :code:`n_random_choices`: Number of random choice of the process.
-    * :code:`comms_evolution`: The dynamic evolution of theories during the process. (Depicting the algorithmic
+    * :code:`coms_evolution`: The dynamic evolution of theories during the process. (Depicting the algorithmic
       process.)
     * :code:`theory_evolution`: The dynamic evolution of commitments during the process. (Depicting the algorithmic
       process.)
-    * :code:`process_length`: The length of the process. Defined as the number of steps that will either produce a change
-      in the commitments or a change in the theory, beginning the choosing the first theory. (I.e. this number will generally
-      be smaller than the amount of elements combined in :code:`commitments_evolution` and :code:`theory_evolution`.)
+    * :code:`process_length`: The length of the process. Defined as the number of number of theories and commitment
+      sets in the evolution of the epistemic state, including the initial and final state. The minimal length
+      of a process is 4 and represents a case of no change in the epistemic state. I.e., a case where
+      the achievement of initial commitments and the first chosen theory cannot be further improved.
 
     **PROCESS-INDEPENDENT FEATURES**
 
