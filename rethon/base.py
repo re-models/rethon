@@ -15,7 +15,7 @@ from itertools import product
 import random
 import numpy as np
 
-from tau import Position, DialecticalStructure
+from theodias import Position, DialecticalStructure
 
 
 

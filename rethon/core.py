@@ -1,7 +1,7 @@
 # see: https://stackoverflow.com/questions/33533148
 from __future__ import annotations
 
-from tau import Position, DialecticalStructure
+from theodias import Position, DialecticalStructure
 from .base import ReflectiveEquilibrium, REContainer, REState, MaxLoopsWarning, MaxBranchesWarning
 from .numpy_implementation import GlobalNumpyReflectiveEquilibrium, LocalNumpyReflectiveEquilibrium
 

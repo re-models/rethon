@@ -4,8 +4,8 @@ A collection of convenient helper-functions.
 """
 from __future__ import annotations
 
-from tau import Position
-from tau.util import TauJSONEncoder, tau_decoder
+from theodias import Position
+from theodias.util import TauJSONEncoder, tau_decoder
 from .base import ReflectiveEquilibrium, StandardReflectiveEquilibrium
 from rethon import REState
 
@@ -19,9 +19,9 @@ from json import dumps, dump, loads, load
 
 def re_from_text_file(dir: str, file_name: str,
                       re_implementations: List[Tuple[str, str]] = [('rethon', 'BitarrayReflectiveEquilibrium')],
-                      ds_module_name: str = 'tau',
+                      ds_module_name: str = 'theodias',
                       ds_class_name: str = 'BitarrayDialecticalStructure',
-                      position_module_name: str = 'tau',
+                      position_module_name: str = 'theodias',
                       position_class_name: str = 'BitarrayPosition') -> List[Tuple[ReflectiveEquilibrium, List[Position]]]:
     """Creates a list of RE classes  from a text-file.
 
@@ -253,9 +253,9 @@ class RethonJSONEncoder(TauJSONEncoder):
 
 def rethon_decoder(json_obj,
                    use_json_specified_type=False,
-                   position_module='tau',
+                   position_module='theodias',
                    position_class='BitarrayPosition',
-                   dialectical_structure_module='tau',
+                   dialectical_structure_module='theodias',
                    dialectical_structure_class='BitarrayDialecticalStructure',
                    reflective_equilibrium_module='rethon',
                    reflective_equilibrium_class='BitarrayReflectiveEquilibrium'):
@@ -328,9 +328,9 @@ def rethon_dump(re_object, fp, cls=RethonJSONEncoder, serialize_implementation=F
 
 def rethon_loads(json_obj,
                  use_json_specified_type=False,
-                 position_module='tau',
+                 position_module='theodias',
                  position_class='BitarrayPosition',
-                 dialectical_structure_module='tau',
+                 dialectical_structure_module='theodias',
                  dialectical_structure_class='BitarrayDialecticalStructure',
                  reflective_equilibrium_module='rethon',
                  reflective_equilibrium_class='BitarrayReflectiveEquilibrium'):
@@ -355,9 +355,9 @@ def rethon_loads(json_obj,
 
 def rethon_load(fp,
                 use_json_specified_type=False,
-                position_module='tau',
+                position_module='theodias',
                 position_class='BitarrayPosition',
-                dialectical_structure_module='tau',
+                dialectical_structure_module='theodias',
                 dialectical_structure_class='BitarrayDialecticalStructure',
                 reflective_equilibrium_module='rethon',
                 reflective_equilibrium_class='BitarrayReflectiveEquilibrium'):

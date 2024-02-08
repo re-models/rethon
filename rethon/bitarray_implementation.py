@@ -1,5 +1,5 @@
 from .base import GlobalReflectiveEquilibrium
-from tau import Position
+from theodias import Position
 
 from typing import List
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from .base import StandardReflectiveEquilibrium, GlobalReflectiveEquilibrium, LocalReflectiveEquilibrium
 from .numba_re import numpy_hamming_distance2
-from tau import Position, DialecticalStructure, NumpyPosition
+from theodias import Position, DialecticalStructure, NumpyPosition
 
 import numpy as np
 from typing import List

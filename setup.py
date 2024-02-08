@@ -23,5 +23,5 @@ setup(
     python_requires='>=3.8',
     install_requires=['Deprecated',
                       'pandas',
-                      'tau'],
+                      'theodias'],
 )

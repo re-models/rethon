@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from tau import (
+from theodias import (
     Position,
     DialecticalStructure,
     BitarrayPosition
 )
-from tau.util import inferential_density, get_principles
+from theodias.util import inferential_density, get_principles
 from .base import ReflectiveEquilibrium, MaxLoopsWarning, MaxBranchesWarning
 from rethon import REState
 from .core import FullBranchREContainer, REContainer

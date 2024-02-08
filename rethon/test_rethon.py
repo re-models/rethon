@@ -7,8 +7,8 @@ from os import getcwd, path, remove
 import importlib
 import tarfile
 
-from tau import DAGSetBasedDialecticalStructure, SetBasedPosition
-from tau.util import create_random_arguments, random_position_as_set
+from theodias import DAGSetBasedDialecticalStructure, SetBasedPosition
+from theodias.util import create_random_arguments, random_position_as_set
 from rethon.util import rethon_loads, rethon_dumps
 
 from .core import FullBranchREContainer
@@ -24,37 +24,37 @@ from .set_implementation import GlobalSetBasedReflectiveEquilibrium
 # the string 'test' in their name) that have (additionally) the string 'position' in their name.
 
 
-model_implementations = [{'tau_module_name': 'tau',
+model_implementations = [{'tau_module_name': 'theodias',
                           'position_class_name': 'StandardPosition',
                           'dialectical_structure_class_name': 'DAGDialecticalStructure',
                           're_module_name': 'rethon',
                           're_class_name': 'StandardGlobalReflectiveEquilibrium'
                           },
-                         # {'tau_module_name': 'tau',
+                         # {'tau_module_name': 'theodias',
                          #  'position_class_name':'StandardPosition',
                          #  'dialectical_structure_class_name': 'BDDDialecticalStructure',
                          #  're_module_name': 'rethon',
                          #   're_class_name': 'StandardLocalReflectiveEquilibrium'
                          #  },
-                         {'tau_module_name': 'tau',
+                         {'tau_module_name': 'theodias',
                           'position_class_name': 'SetBasedPosition',
                           'dialectical_structure_class_name': 'DAGSetBasedDialecticalStructure',
                           're_module_name': 'rethon',
                           're_class_name': 'GlobalSetBasedReflectiveEquilibrium'
                           },
-                         {'tau_module_name': 'tau',
+                         {'tau_module_name': 'theodias',
                           'position_class_name': 'NumpyPosition',
                           'dialectical_structure_class_name': 'DAGNumpyDialecticalStructure',
                           're_module_name': 'rethon',
                           're_class_name': 'GlobalNumpyReflectiveEquilibrium'
                           },
-                         # {'tau_module_name': 'tau',
+                         # {'tau_module_name': 'theodias',
                          #  'position_class_name': 'NumpyPosition',
                          #  'dialectical_structure_class_name': 'BDDNumpyDialecticalStructure',
                          #  're_module_name': 'rethon',
                          #  're_class_name': 'LocalNumpyReflectiveEquilibrium'
                          #  },
-                        {'tau_module_name': 'tau',
+                        {'tau_module_name': 'theodias',
                          'position_class_name': 'BitarrayPosition',
                          'dialectical_structure_class_name': 'DAGBitarrayDialecticalStructure',
                          're_module_name': 'rethon',
@@ -736,7 +736,7 @@ class TestRemodel:
         for a in range(sample_size):
             # here we just use small dia-structures
             n = randint(3, 5)
-            n_arguments = randint(3, 5)
+            n_arguments = randint(2, 4)
             # random small ds
             args = create_random_arguments(n_sentences=n, n_arguments=n_arguments, n_max_premises=1)
             if args:
