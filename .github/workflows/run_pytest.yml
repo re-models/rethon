@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Checkout tau repo
+    - name: Checkout theodias repo
       uses: actions/checkout@v3
       with:
         repository: re-models/theodias
