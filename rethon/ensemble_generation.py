@@ -437,9 +437,6 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
                             yield copy(re)
 
 
-
-
-#todo: comment those fields that are only visible if branching is switched on
 class SimpleEnsembleGenerator(EnsembleGenerator):
     """
     This class extends :py:class:`EnsembleGenerator` by adding the following data items that are produced by
@@ -448,14 +445,14 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
     **FEATURES OF THE DIALECTICAL STRUCTURE**
 
     * :code:`model_name`: A name of the model as string.
-    * :code:`ds`: The dialectical structure as list of int-lists. The first numbers of each list represent the premises,
+    * :code:`tau`: The dialectical structure as list of int-lists. The first numbers of each list represent the premises,
       the last one the conclusion.
     * :code:`n_sentence_pool`: Number of unnegated sentences (half the full size).
-    * :code:`ds_arg_size`: Number of arguments.
-    * :code:`ds_infer_dens`: The inferential density of the structure.
-    * :code:`ds_n_consistent_complete_positions`: Number of dialectically complete and consistent positions.
-    * :code:`ds_mean_prem`: Mean number of premises per argument.
-    * :code:`ds_variance_prem`: Variance of the number of premises per argument.
+    * :code:`tau_arg_size`: Number of arguments.
+    * :code:`tau_infer_dens`: The inferential density of the structure.
+    * :code:`tau_n_consistent_complete_positions`: Number of dialectically complete and consistent positions.
+    * :code:`tau_mean_prem`: Mean number of premises per argument.
+    * :code:`tau_variance_prem`: Variance of the number of premises per argument.
     * :code:`tau_truths`: Propositions that are true in every complete consistent position.
     * :code:`principles`: A list of tuples of the form :code:`(principle, multiplicity)` with :code:`multiplicity`
       indicating the multiplicity of the principle.
@@ -554,7 +551,6 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
     * :code:`fp_faithfulness`: The faithfulness of each fixed as :code:`List[float]`. The order of the list represents
       the order in `fixed_points`.
 
-
     """
 
     def __init__(self,
@@ -582,9 +578,9 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
         """Overrides :py:class:`AbstractEnsembleGenerator.init_tau_fields`.
 
         Adds the following data objects that can be accessed via :py:func:`AbstractEnsembleGenerator.get_obj`:
-        'ds_infer_dens', 'n_premises', 'principles', 'tau_truths' and 'tau_falsehoods'.
+        'tau_infer_dens', 'n_premises', 'principles', 'tau_truths' and 'tau_falsehoods'.
         """
-        self.add_obj('ds_infer_dens', inferential_density(tau))
+        self.add_obj('tau_infer_dens', inferential_density(tau))
         self.add_obj('n_premises', [len(arg) for arg in tau.get_arguments()])
         self.add_obj('principles', get_principles(tau.get_arguments()))
         tau_truths = tau.closure(BitarrayPosition(set(),
@@ -1046,9 +1042,9 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
         """Overrides :py:class:`AbstractEnsembleGenerator.init_tau_fields`.
 
         Adds the following data objects that can be accessed via :py:func:`AbstractEnsembleGenerator.get_obj`:
-        'ds_infer_dens', 'n_premises', 'principles', 'tau_truths' and 'tau_falsehoods'.
+        'tau_infer_dens', 'n_premises', 'principles', 'tau_truths' and 'tau_falsehoods'.
         """
-        self.add_obj('ds_infer_dens', inferential_density(tau))
+        self.add_obj('tau_infer_dens', inferential_density(tau))
         self.add_obj('n_premises', [len(arg) for arg in tau.get_arguments()])
         self.add_obj('principles', get_principles(tau.get_arguments()))
         tau_truths = tau.closure(BitarrayPosition(set(),
@@ -1096,34 +1092,31 @@ class SimpleMultiAgentEnsemblesGenerator(MultiAgentEnsemblesGenerator):
     #     self.add_obj('fixed_point_coms_min_ax_bases_theory', fp_comms_min_ax_bases_th)
 
 
-
 # Classes using this method to add data item must provide the following key-object pairs:
-# 'ds_infer_dens', 'n_premises', 'tau_truths', 'principles',
+# 'tau_infer_dens', 'n_premises', 'tau_truths', 'principles',
 # 'tau_falsehoods', 'init_com_min_ax_bases'
-
-# todo: rename 'ds_x' to 'tau_x'
 def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
     ensemble_generator.add_item('model_name',
                                 lambda x: x.reflective_equilibrium().model_name())
-    ensemble_generator.add_item('ds',
-                                lambda x: x.dialectical_structure().get_arguments())  # dialectical structure
+    ensemble_generator.add_item('tau',
+                                lambda x: x.dialectical_structure().get_arguments())
     ensemble_generator.add_item('tau_name',
                                 lambda x: x.dialectical_structure().get_name())
 
     # number of unnegated sentences (half the full size)
     ensemble_generator.add_item('n_sentence_pool',
                                 lambda x: x.dialectical_structure().sentence_pool().size())
-    ensemble_generator.add_item('ds_arg_size',
+    ensemble_generator.add_item('tau_arg_size',
                                 lambda x: len(x.dialectical_structure().get_arguments()))
 
     # FEATURES OF DIALECTICAL STRUCTURE
-    ensemble_generator.add_item('ds_infer_dens',
-                                lambda x: x.get_obj('ds_infer_dens'))
-    ensemble_generator.add_item('ds_n_consistent_complete_positions',
+    ensemble_generator.add_item('tau_infer_dens',
+                                lambda x: x.get_obj('tau_infer_dens'))
+    ensemble_generator.add_item('tau_n_consistent_complete_positions',
                                 lambda x: x.dialectical_structure().n_complete_extensions())
-    ensemble_generator.add_item('ds_mean_prem',
+    ensemble_generator.add_item('tau_mean_prem',
                                 lambda x: statistics.mean(x.get_obj('n_premises')))
-    ensemble_generator.add_item('ds_variance_prem',
+    ensemble_generator.add_item('tau_variance_prem',
                                 lambda x: statistics.variance(x.get_obj('n_premises')))
     ensemble_generator.add_item('tau_truths',
                                 lambda x: x.get_obj('tau_truths'))
