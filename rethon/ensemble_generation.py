@@ -1348,6 +1348,7 @@ def _add_global_data_items(ensemble_generator: AbstractEnsembleGenerator):
                                 lambda x: [axioms.as_set() for axioms in
                                            x.dialectical_structure().axioms(x.state().last_theory())])
 
+
 # Classes using this method to add data item must provide the following key-object pairs:
 # 'global_optima', 're_states', 'full_re_states', 'fixed_points'
 def _add_full_branch_global_data_items(ensemble_generator: AbstractEnsembleGenerator):
@@ -1365,6 +1366,7 @@ def _add_full_branch_global_data_items(ensemble_generator: AbstractEnsembleGener
                   lambda x:  [fixed_point in x.get_obj('global_optima')
                               for fixed_point in x.get_obj('fixed_points')])
 
+
 def _add_local_data_items(ensemble_generator: AbstractEnsembleGenerator):
     ####### PARAMETERS OF RE-PROCESS ##############################################################
     ensemble_generator.add_item('neigbourhood_depth',
@@ -1377,6 +1379,7 @@ def _fp_comms_min_ax_bases(dia_structure, final_commitments):
                                                                                final_commitments.subpositions())])
     return np.nan
 
+
 def _fp_comms_min_ax_bases_given_theory(dia_structure, final_commitments, final_theory):
     # ToDo: rewrite "casting" if we have difference function of positions (axioms.as_set())
     if dia_structure.is_consistent(BitarrayPosition.union({final_commitments, final_theory})):
@@ -1388,7 +1391,7 @@ def _fp_comms_min_ax_bases_given_theory(dia_structure, final_commitments, final_
 
 # returns from a list of lists or sets those sets with minimal length (as list of lists/sets)
 def _get_min_sets(sets):
-    
+
     # initialize the comparison with the first element
     min_len = len(sets[0])
     min_sets = [sets[0]]
@@ -1408,24 +1411,31 @@ def _get_min_sets(sets):
 
 # searches for the smallest subset C* within the commitments C such that there is an axiomatic
 # basis AB for the commitments C with: AB =  C* U T* (with T* being a subset of the theory)
-# ToDo: Does not check for consistency of coms and theory (that is, will throw an uncatched error in this case)
 def _min_ax_bases_com_given_theory(diastructure, commitments, theory):
-    # ToDo: rewrite when we have difference functions for Positions
+
+    if not diastructure.is_consistent(commitments):
+        raise ValueError("The commitments are required to be dialectically consistent.")
+    elif not diastructure.is_consistent(theory):
+        raise ValueError("The theory is required to be dialectically consistent.")
+
     axioms_sets_coms_given_theory = diastructure.axioms(commitments,
                                                         BitarrayPosition.union({commitments, theory}).subpositions())
     res = []
     for axioms in axioms_sets_coms_given_theory:
         if len(res) > 0:
-            if len(axioms.as_set().difference(theory.as_set())) < len(res[0]): #res[0].size():
-                res = [axioms.as_set().difference(theory.as_set())]
-            elif len(axioms.as_set().difference(theory.as_set())) == len(res[0]): #res[0].size():
-                res.append(axioms.as_set().difference(theory.as_set()))
+            if axioms.difference(theory).size() < res[0].size():
+                res = [axioms.difference(theory)]
+            elif axioms.difference(theory).size() == res[0].size():
+                res.append(axioms.difference(theory))
         else:
-            res = [axioms.as_set().difference(theory.as_set())]
+            res = [axioms.difference(theory)]
+
     return res
 
-def _conditional_friedman_consistence(diastructure, commitments, theory):
+
+def _conditional_friedman_consistency(diastructure, commitments, theory):
     return _min_ax_bases_com_given_theory(diastructure, commitments, theory)[0].size()
+
 
 def _fill_module_names(implementations: List[Dict]) -> Dict:
     for impl in implementations:
