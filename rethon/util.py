@@ -127,43 +127,6 @@ def re_from_text_file(dir: str, file_name: str,
 
     return re_list
 
-def re_weight_variations(re, initial_commitments, DIR, fileName, resolution=20):
-    """Simulate RE processes with
-    todo
-    """
-    with open(os.path.join(DIR, fileName), "w") as fi:
-        writer = csv.writer(fi, delimiter=',')
-
-        # Headers
-        to_file = ['initial_coms', 'account', 'systematicity', 'faithfulness',
-                   'RE_coms', 'RE_the', 'achievements', 'random_choices', 'com_evo',
-                   'the_evo']
-        writer.writerow(to_file)
-
-        for i in range(1, resolution):
-            for j in range(1, (resolution - i) + 1):
-                a = i / resolution
-                s = j / resolution
-                f = 1 - (a + s)
-
-                re.set_weights(a, s, f)
-                # simulate RE process with
-                results = re.re_process(initial_commitments)
-
-                to_file2 = [initial_commitments.as_set(),
-                            re.weights['account'],
-                            re.weights['systematicity'],
-                            re.weights['faithfulness'],
-                            results['commitments'].as_set(),
-                            results['theory'].as_set(),
-                            results['achievements'],
-                            results['random_choices'],
-                            results['commitments_evolution'],
-                            results['theory_evolution']]
-                writer.writerow(to_file2)
-
-    return None
-
 
 def varied_alphas(alpha_resolution, with_extremes=False) -> Iterator[List[float]]:
     """A list of alpha values that can be used as model parameters."""
