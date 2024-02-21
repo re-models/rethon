@@ -1385,22 +1385,25 @@ def _fp_comms_min_ax_bases_given_theory(dia_structure, final_commitments, final_
                                                                        final_theory)]
     return np.nan
 
+
 # returns from a list of lists or sets those sets with minimal length (as list of lists/sets)
-# ToDo: a little bit cumbersome; perhaps a simple for loop will do
-def _get_min_sets(sets, min_sets=None):
-    if not min_sets and len(sets) == 1:
-        return sets
-    elif not min_sets:
-        return _get_min_sets(sets[1:], [sets[0]])
-    elif len(sets) == 0:
-        return min_sets
-    elif len(sets[0]) == len(min_sets[0]):
-        min_sets.append(sets[0])
-        return _get_min_sets(sets[1:], min_sets)
-    elif len(sets[0]) < len(min_sets[0]):
-        return _get_min_sets(sets[1:], [sets[0]])
-    else:
-        return _get_min_sets(sets[1:], min_sets)
+def _get_min_sets(sets):
+    
+    # initialize the comparison with the first element
+    min_len = len(sets[0])
+    min_sets = [sets[0]]
+
+    # loop through the rest
+    for s in sets[1:]:
+
+        if len(s) < min_len:
+            min_len = len(s)
+            min_sets = [s]
+
+        elif len(s) == min_len:
+            min_sets.append(s)
+
+    return min_sets
 
 
 # searches for the smallest subset C* within the commitments C such that there is an axiomatic
