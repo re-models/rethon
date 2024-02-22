@@ -39,7 +39,7 @@
             ],
             "propagate": false
         },
-        "tau": {
+        "theodias": {
             "level": "DEBUG",
             "handlers": [
                 "stderr",
