@@ -944,7 +944,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
             if self.model_parameters_list:
                 # for j in range(len(self.model_parameters_list)):
                 #     res[j].reset_model_parameters(self.model_parameters_list[j])
-                # ToDo: rather set_model_parameters (?), compare line 367
+                # ToDo (@Basti): rather set_model_parameters (?), compare line 367
                 for j in range(len(res)):
                     res[j].reset_model_parameters(self.model_parameters_list[i])
 
@@ -956,7 +956,7 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                 pos = pos_class_.from_set(pos_as_set, self.n_sentence_pools[i])
                 agents.append(pos)
 
-            # ToDo: It should be possible for the user to dynamically provide an REContainer
+            # ToDo (@Basti): It should be possible for the user to dynamically provide an REContainer
             # But what happens if it is a Fullbranchcontainer?
             multi_agent_container = SimpleMultiAgentREContainer(res, agents)
             try:
@@ -1150,7 +1150,6 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
                                     BitarrayPosition.intersection({x.initial_commitments(),
                                                                    x.get_obj('tau_falsehoods')}).as_set()))
 
-    # ToDo: behavior so far unclear - what to do with (minimally) inconsistent positions (ex falso quodlibet?)
     ensemble_generator.add_item('init_coms_n_consistent_complete_positions',
                                 lambda x: x.dialectical_structure().n_complete_extensions(x.initial_commitments())
                                 if x.dialectical_structure().is_consistent(x.initial_commitments()) else 0)
@@ -1381,7 +1380,7 @@ def _fp_comms_min_ax_bases(dia_structure, final_commitments):
 
 
 def _fp_comms_min_ax_bases_given_theory(dia_structure, final_commitments, final_theory):
-    # ToDo: rewrite "casting" if we have difference function of positions (axioms.as_set())
+    # ToDo (@Basti): rewrite "casting" if we have difference function of positions (axioms.as_set())
     if dia_structure.is_consistent(BitarrayPosition.union({final_commitments, final_theory})):
         return [axioms for axioms in _min_ax_bases_com_given_theory(dia_structure,
                                                                        final_commitments,

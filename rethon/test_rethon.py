@@ -653,7 +653,7 @@ class TestRemodel:
                                                                 impl['re_class_name'])
                         re = reflective_equilibrium_class_(ds)
                         re.set_model_parameters(branches[0]['model_parameters'])
-                        # ToDo: will be later set by `set_model_parameters`
+                        # ToDo (@Basti): will be later set by `set_model_parameters`
                         # LocalNumpyRE should have the same results if we set neighbourdepth to sentencepool
 
                         # initial position

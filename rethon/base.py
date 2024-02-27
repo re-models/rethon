@@ -187,7 +187,7 @@ class ReflectiveEquilibrium(ABC):
                                f"candidates for the RE process.")
         canditates.remove(next_position)
         self.state().add_step(next_position, canditates, time)
-        # ToDo: That should be redundant
+        # ToDo (@Basti): That should be redundant
         self.state().finished = self.finished(**kwargs)
 
     def model_name(self) -> str:
@@ -785,7 +785,7 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         return optimal_pairs
 
 
-# ToDo: Add class docstring
+# ToDo (@basti): Add class docstring
 class REContainer:
 
     def __init__(self, re_models: List[ReflectiveEquilibrium] = None):
@@ -796,11 +796,11 @@ class REContainer:
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> Iterator[ReflectiveEquilibrium]:
         pass
 
-    # ToDo: add docstring
+    # ToDo (@Basti): add docstring
     def add_object(self, key: Any, object: Any):
         self._objects[key] = object
 
-    # ToDo: Add docstring
+    # ToDo (@Basti): Add docstring
     def get_object(self, key: Any) -> [Any, None]:
         if key in self._objects.keys():
             return self._objects[key]
@@ -810,7 +810,7 @@ class REContainer:
     def get_objects(self):
         return self._objects
 
-# ToDo: Add for all methods more information and examples (see the defined test cases).
+# ToDo (@Basti): Add for all methods more information and examples (see the defined test cases).
 class REState:
     """Class that represent the internal state of an RE process.
 
@@ -829,10 +829,10 @@ class REState:
             timeline.
         error_code: An integer that represents an error code and which can be set if the process throws an error.
     """
-    # ToDo: Setting an error code should some how invalidate other state attributes (by setting them to none and
+    # ToDo (@Basti): Setting an error code should some how invalidate other state attributes (by setting them to none and
     #  finished to False. (Otherwise, data produced by EnsembleGenerators might be interpreted as there being fps
     #  even thought the process did not finish (for instance).
-    # ToDo: Unify error code handling (I also use class variables in the defined Warning Classes.
+    # ToDo (@Basti): Unify error code handling (I also use class variables in the defined Warning Classes.
     error_codes = {# Should be used if there is no more specific error code available.
                    0: 'The process could not finish due to an unexpected error.',
                    # Should be used if some max_loop value was exceeded.

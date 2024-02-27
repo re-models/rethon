@@ -111,8 +111,6 @@ def re_from_text_file(dir: str, file_name: str,
             if 'faithfulness_penalties' in re_dict.keys():
                 re.faithfulness_penalties = re_dict['faithfulness_penalties']
 
-            # ToDo: Alternatively, we could integrate initial commitments into the RE
-            #  class as a variable and define a method to set/change them
             if 'initial_commitments' in re_dict.keys():
                 # if implementation == "SetBased":
                 #     re_list.append([re, [SetBasedPosition(pos) for pos in re_dict['initial_commitments']]])
