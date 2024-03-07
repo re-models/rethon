@@ -8,7 +8,7 @@ import importlib
 import tarfile
 
 from theodias import DAGSetBasedDialecticalStructure, SetBasedPosition
-from theodias.util import create_random_arguments, random_position_as_set
+from theodias.util import create_random_arguments, random_positions
 from rethon.util import rethon_loads, rethon_dumps
 
 from .core import FullBranchREContainer
@@ -749,9 +749,7 @@ class TestRemodel:
                 ds = DAGSetBasedDialecticalStructure(n, args)
                 brute_force_re = BruteForceGlobalOptimaRE(ds)
                 # random position
-                for i in range(20):
-                    pos = random_position_as_set(n)
-                    # print(pos)
+                for pos in random_positions(n, k=20, allow_empty_position=False):
                     global_optima_2 = brute_force_re.global_optima(SetBasedPosition(pos, n))
                     for re in res_to_compare:
                         global_optima_1 = re.global_optima(SetBasedPosition(pos, n))
