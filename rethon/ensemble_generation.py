@@ -313,7 +313,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
         self.create_branches = create_branches
         self.max_branches = max_branches
         if implementations is None:
-            self.implementations = _fill_module_names([{'tau_module_name': 'tau',
+            self.implementations = _fill_module_names([{'tau_module_name': 'theodias',
                                                         'position_class_name': 'StandardPosition',
                                                         'dialectical_structure_class_name': 'DAGDialecticalStructure',
                                                         'rethon_module_name': 'rethon',
@@ -1143,12 +1143,9 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
     ensemble_generator.add_item('init_coms_size',
                                 lambda x: x.initial_commitments().size())
     ensemble_generator.add_item('init_coms_n_tau_truths',
-                                lambda x: len(BitarrayPosition.intersection({x.initial_commitments(),
-                                                                             x.get_obj('tau_truths')}).as_set()))
+                                lambda x: x.initial_commitments().intersection(x.get_obj('tau_truths')).size())
     ensemble_generator.add_item('init_coms_n_tau_falsehoods',
-                                lambda x: len(
-                                    BitarrayPosition.intersection({x.initial_commitments(),
-                                                                   x.get_obj('tau_falsehoods')}).as_set()))
+                                lambda x: x.initial_commitments().intersection(x.get_obj('tau_falsehoods')).size())
 
     ensemble_generator.add_item('init_coms_n_consistent_complete_positions',
                                 lambda x: x.dialectical_structure().n_complete_extensions(x.initial_commitments())
@@ -1163,11 +1160,9 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
     ensemble_generator.add_item('fixed_point_coms_size',
                                 lambda x: x.state().last_commitments().size()),
     ensemble_generator.add_item('fixed_point_coms_n_tau_truths',
-                                lambda x: len(BitarrayPosition.intersection({x.state().last_commitments(),
-                                                                             x.get_obj('tau_truths')}).as_set()))
+                                lambda x: x.state().last_commitments().intersection(x.get_obj('tau_truths')).size())
     ensemble_generator.add_item('fixed_point_coms_n_tau_falsehoods',
-                                lambda x: len(BitarrayPosition.intersection({x.state().last_commitments(),
-                                                                             x.get_obj('tau_falsehoods')}).as_set()))
+                                lambda x: x.state().last_commitments().intersection(x.get_obj('tau_falsehoods')).size())
 
     ensemble_generator.add_item('fixed_point_coms_closed',
                                 lambda x: x.dialectical_structure().is_closed(
@@ -1202,8 +1197,8 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
 
     # whether the union of final theory & commitments is dialectically consistent
     ensemble_generator.add_item('fixed_point_dia_consistent',
-                                lambda x: x.dialectical_structure().is_consistent(
-                                    BitarrayPosition.union({x.state().last_commitments(), x.state().last_theory()})))
+                                lambda x: x.dialectical_structure().is_consistent(x.state().last_commitments().union(x.state().last_theory())))
+              #                      BitarrayPosition.union({x.state().last_commitments(), x.state().last_theory()})))
     ensemble_generator.add_item('init_final_coms_simple_hamming',
                                 lambda x: len(BitarrayPosition.union({x.state().last_commitments(), x
                                                                      .state().initial_commitments()}).as_set().
