@@ -1,8 +1,8 @@
 # RE Model Python Implementation
 
-Python implementation of a model developed in our SNF-DFG project ["Formal Models of Reflective Equilibrium - How Far Does Reflective Equilibrium Take Us?"](https://www.philosophie.unibe.ch/forschung/forschungsprojekte/how_far_does_reflective_equilibrium_take_us/project/index_ger.html).
+Python implementation of a model developed in our SNF-DFG project ["Formal Models of Reflective Equilibrium - How Far Does Reflective Equilibrium Take Us?"](https://re-models.github.io/).
 
-Further information (including installation instructions) can be found under [https://debatelab.github.io/re-docs/](https://debatelab.github.io/re-docs/).
+Further information (including installation instructions) can be found under [https://re-models.github.io/rethon/](https://re-models.github.io/rethon/).
 
 ---
 
