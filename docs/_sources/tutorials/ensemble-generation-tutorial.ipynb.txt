@@ -1,0 +1,555 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Ensemble generation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `rethon` package contains several methods and classes to generate RE ensembles using the different implementations.\n",
+    "\n",
+    "There are four classes with the following class hierarchy:\n",
+    "\n",
+    "+ `EnsembleGenerator`\n",
+    "   + `SimpleEnsembleGenerator`\n",
+    "   + `GlobalREEnsembleGenerator`\n",
+    "   + `LocalREEnsembleGenerator`\n",
+    "   \n",
+    "*Source:* You can download this notebook from [here](https://github.com/debatelab/re-docs/blob/master/source/rethon-docs/tutorials/ensemble-generation-tutorial.ipynb)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## How to run this notebook"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are several possibilities to execute this notebook. You can, for instance,\n",
+    "\n",
+    "1. execute this notebook on Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/re-models/rethon/blob/master/docs-source/tutorials/ensemble-generation-tutorial.ipynb), or\n",
+    "2. execute this notebook locally in, for instance, [JupyterLab](https://jupyter.org/). You can download this notebook from [here](https://github.com/re-models/rethon/blob/master/docs-source/tutorials/rensemble-generation-tutorial.ipynb)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Installing libraries"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%pip install rethon"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Are we on Colab? No!\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Are we on Colab?\n",
+    "on_colab = 'google.colab' in str(get_ipython())\n",
+    "print(f\"Are we on Colab? {'Yes' if on_colab else 'No'}!\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Generating ensembles with the `EnsembleGenerator` "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The ensemble generator provides different [iterators](https://www.w3schools.com/python/python_iterators.asp) and has to be instantiated with \n",
+    "\n",
+    "+ a list of dialectical structures in a simplified format (arguments are represented as integer lists),\n",
+    "+ the size of the sentence pool,\n",
+    "+ a list of initial commitments,\n",
+    "+ a list of model-parameters,\n",
+    "+ a list of implementations of `Position`, `DialecticalStructure` and `ReflectiveEquilibrium` and\n",
+    "+ a switch indicating whether all branches of each model run should be created as well.\n",
+    "\n",
+    "The iterator will loop through the cartesian product of the given model implementations, dialectical structures, different model parameters, initial commitments and, if desired, through all branches. \n",
+    "\n",
+    "Let's take a look at a simple example. The algorithm will take standard model parameters if we do not specify model parameters and it will take a standard implementation if we do not specify implementations. The simple example will use one dialectical structure and two initial commitments: "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-03-07 10:36:07,182 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)\n",
+      "The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.\n",
+      "The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.\n",
+      "New ensemble with all branches:\n",
+      "2024-03-07 10:36:11,903 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)\n",
+      "The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.\n",
+      "The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.\n",
+      "The model run ended with {2, 5, 6, 7, -4, -1} as its final commitments.\n"
+     ]
+    }
+   ],
+   "source": [
+    "from rethon import EnsembleGenerator \n",
+    "\n",
+    "# the standard example with a sentence pool n=7\n",
+    "n = 7\n",
+    "arguments = [[1, 3],[1, 4],[1, 5],[1, -6], [2, -4],[2, 5],[2, 6],[2, 7]]\n",
+    "dia_structure_list = [arguments]\n",
+    "# two initial commitments\n",
+    "init_coms_1 = {3, 4, 5}\n",
+    "init_coms_2 = {3, 4, 5, 6, 7}\n",
+    "coms_list = [init_coms_1, init_coms_2]\n",
+    "\n",
+    "ensemble_gen = EnsembleGenerator(arguments_list = dia_structure_list, \n",
+    "                                 n_sentence_pool = n,\n",
+    "                                 initial_commitments_list = coms_list)\n",
+    "# looping through the ensemble\n",
+    "for model_run in ensemble_gen.ensemble_iter():\n",
+    "    print(f\"The model run ended with {model_run.state().last_commitments()} as its final commitments.\")\n",
+    "\n",
+    "print(\"New ensemble with all branches:\")\n",
+    "# running all branches and looping through them:\n",
+    "ensemble_gen = EnsembleGenerator(arguments_list = dia_structure_list, \n",
+    "                                 n_sentence_pool = n,\n",
+    "                                 initial_commitments_list = coms_list,\n",
+    "                                 create_branches = True)\n",
+    "for model_run in ensemble_gen.ensemble_iter():\n",
+    "    print(f\"The model run ended with {model_run.state().last_commitments()} as its final commitments.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The module provides several helper methods to produce random arguments, initial commitments and a variation of model parameters that can be used to generate more complex ensembles:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-03-07 10:25:56,133 [INFO] rethon: Starting ensemble generation with 24 models runs (not counting branches)\n",
+      "Generated 24 ensembles.\n",
+      "The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.\n",
+      "The model run ended with {3, -4, -1, 6} as its final commitments.\n",
+      "The model run ended with {2, 4, 5, -6, -3, -1} as its final commitments.\n",
+      "The model run ended with {1, 3, -4, 6} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.\n",
+      "The model run ended with {1, 2, 3, 5, 6, -4} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.\n",
+      "The model run ended with {3, 6, -1, -5, -4, -2} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.\n",
+      "The model run ended with {3, -4, 6} as its final commitments.\n",
+      "The model run ended with {1, 2, 5, -6, -4, -3} as its final commitments.\n",
+      "The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.\n",
+      "The model run ended with {3, -4, -1, 6} as its final commitments.\n",
+      "The model run ended with {1, 2, 3, 4, 5, -6} as its final commitments.\n",
+      "The model run ended with {1, 3, -4, 6} as its final commitments.\n",
+      "The model run ended with {1, 2, 3, 4, 5, -6} as its final commitments.\n",
+      "The model run ended with {1, 2, 3, 5, 6, -4} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.\n",
+      "The model run ended with {3, 5, 6, -1, -4, -2} as its final commitments.\n",
+      "The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.\n",
+      "The model run ended with {-4, -1} as its final commitments.\n",
+      "The model run ended with {1, 2, 5, -6, -4, -3} as its final commitments.\n",
+      "The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.\n"
+     ]
+    }
+   ],
+   "source": [
+    "from rethon import EnsembleGenerator\n",
+    "from theodias.util import create_random_argument_list, random_positions, create_random_arguments\n",
+    "from rethon.util import standard_model_params_varied_alphas\n",
+    "    \n",
+    "# Sentence pool\n",
+    "n=6\n",
+    "# Two implementations:\n",
+    "implementations = [{'tau_module_name': 'theodias',\n",
+    "                    'position_class_name':'StandardPosition',\n",
+    "                    'dialectical_structure_class_name': 'DAGDialecticalStructure',\n",
+    "                    'rethon_module_name': 'rethon',\n",
+    "                    'reflective_equilibrium_class_name': 'StandardGlobalReflectiveEquilibrium'},\n",
+    "                   {'tau_module_name': 'theodias',\n",
+    "                    'position_class_name':'SetBasedPosition',\n",
+    "                    'dialectical_structure_class_name': 'DAGSetBasedDialecticalStructure',\n",
+    "                    'rethon_module_name': 'rethon',\n",
+    "                    'reflective_equilibrium_class_name': 'GlobalSetBasedReflectiveEquilibrium'\n",
+    "                    }]\n",
+    "\n",
+    "# Two random dialectical structures with 7 arguments each\n",
+    "n_dialectical_structures = 2\n",
+    "arguments_list = [create_random_arguments(n_sentences=n, \n",
+    "                                          n_arguments=7,\n",
+    "                                          n_max_premises=2) for i in range(n_dialectical_structures)]\n",
+    "\n",
+    "# Standard model parameters with varied alpha weights\n",
+    "model_parameters_list = list(standard_model_params_varied_alphas(alpha_resolution =3))\n",
+    "   \n",
+    "# Two random initial commitments\n",
+    "n_positions = 2\n",
+    "coms_list = random_positions(n_sentences = n, k=n_positions)\n",
+    "    \n",
+    "\n",
+    "ensemble_gen = EnsembleGenerator(arguments_list = arguments_list, \n",
+    "                                 n_sentence_pool = n,\n",
+    "                                 initial_commitments_list = coms_list,\n",
+    "                                 model_parameters_list = model_parameters_list,\n",
+    "                                 implementations = implementations)\n",
+    "\n",
+    "model_runs = list(ensemble_gen.ensemble_iter())\n",
+    "print(f\"Generated {len(model_runs)} ensembles.\")\n",
+    "# looping through the ensemble\n",
+    "for model_run in model_runs:\n",
+    "    print(f\"The model run ended with {model_run.state().last_commitments()} as its final commitments.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Using json serialization to serialize the model runs"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By using the module `rethon.util` you can serialize the resulting model runs in the json format---for instance, in the following way:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from rethon.util import rethon_dump\n",
+    "from os import getcwd, path\n",
+    "\n",
+    "if not on_colab:\n",
+    "    # serializing the ensemble JSON into a file\n",
+    "    with open(file=path.join(getcwd(), 'ensemble_as_json.json'), mode='w') as output_file:\n",
+    "        rethon_dump({'ensemble': model_runs}, output_file, indent=4)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Generating ensemble data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The method `ensemble_items_iter` can be used to generate data of your ensembles by **defining data items** that are generated for each model run. The method `ensemble_items_iter` will return a dictionary with these data items for each model run.\n",
+    "\n",
+    "Data items can be defined by using the `add_item` method of `EnsembleGenerator`. The function expects a key for the data item and a function with `EnsembleGenerator` as one argument. The idea: The ensemble generator will call this function to generate the data item for each model run. The ensemble generator provides several methods that you can use to define a particular data item. \n",
+    "\n",
+    "Let's have a look at a simple example: We want to define a data item that stores the last commitments:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-03-07 10:27:38,389 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)\n",
+      "The model run produced the following data items:  {'last_coms': {1, 3, 4, 5, -6, -2}}.\n",
+      "The model run produced the following data items:  {'last_coms': {2, 5, 6, 7, -4, -1}}.\n"
+     ]
+    }
+   ],
+   "source": [
+    "from rethon import EnsembleGenerator \n",
+    "\n",
+    "# our standard example with a sentence pool n=7\n",
+    "n = 7\n",
+    "arguments = [[1, 3],[1, 4],[1, 5],[1, -6], [2, -4],[2, 5],[2, 6],[2, 7]]\n",
+    "dia_structure_list = [arguments]\n",
+    "init_coms_1 = {3, 4, 5}\n",
+    "init_coms_2 = {3, 4, 5, 6, 7}\n",
+    "coms_list = [init_coms_1, init_coms_2]\n",
+    "\n",
+    "ensemble_gen = EnsembleGenerator(arguments_list = dia_structure_list, \n",
+    "                                 n_sentence_pool = n,\n",
+    "                                 initial_commitments_list = coms_list)\n",
+    "\n",
+    "# defining the function\n",
+    "def data_last_coms(ensemble_generator):\n",
+    "    return ensemble_generator.state().last_commitments()\n",
+    "# adding the data item\n",
+    "ensemble_gen.add_item('last_coms', data_last_coms)\n",
+    "\n",
+    "# looping through the ensemble using the item_iter\n",
+    "for model_run_data_items in ensemble_gen.ensemble_items_iter():\n",
+    "    print(f\"The model run produced the following data items:  {model_run_data_items}.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can use ananymous functions to add data fields in a compact way: "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-03-07 10:27:42,049 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)\n",
+      "The model run produced the following data items:  {'last_coms': {1, 3, 4, 5, -6, -2}, 'last_theory': {1}}.\n",
+      "The model run produced the following data items:  {'last_coms': {1, 3, 4, 5, -6, -2}, 'last_theory': {1}}.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# adding the data item\n",
+    "ensemble_gen.add_item('last_theory', lambda x: x.state().last_theory())\n",
+    "\n",
+    "# looping through the ensemble using the item_iter\n",
+    "for model_run_data_items in ensemble_gen.ensemble_items_iter():\n",
+    "    print(f\"The model run produced the following data items:  {model_run_data_items}.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In a similar way, you have access to the RE instance itself and the dialectical structure of each model run. Refer to the [api docs](https://debatelab.github.io/re-docs/api-docs/api-ensemble-generation.html#ensemblegenerator) for more information. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Generating ensemble data with standard data items "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The classes `SimpleEnsembleGenerator`, `GlobalREEnsembleGenerator`, `LocalREEnsembleGenerator` have already a bunch of predefined data fields that can be extended by additional data items if you need them. (For details refer to the [api-docs](https://debatelab.github.io/re-docs/api-docs/api-ensemble-generation.html). [LINK NEEDS UPDATE])\n",
+    "\n",
+    "+ `SimpleEnsembleGenerator`: Defines data fields that should work well with every implementation. Depending on whether branches are created, the generator will add fields for all fixed points for each model run.\n",
+    "+ `GlobalREEnsembleGenerator`: Extends `SimpleEnsembleGenerator` with additional data items that are available for globally searching RE processes.\n",
+    "+ `LocalREEnsembleGenerator`: Extends `SimpleEnsembleGenerator` with additional data items that are available for locally searching RE processes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-03-07 10:36:15,127 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)\n"
+     ]
+    },
+    {
+     "ename": "AttributeError",
+     "evalue": "'set' object has no attribute 'sentence_pool'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+      "Cell \u001b[0;32mIn[2], line 7\u001b[0m\n\u001b[1;32m      3\u001b[0m ensemble_gen \u001b[38;5;241m=\u001b[39m SimpleEnsembleGenerator(arguments_list \u001b[38;5;241m=\u001b[39m dia_structure_list, \n\u001b[1;32m      4\u001b[0m                                  n_sentence_pool \u001b[38;5;241m=\u001b[39m n,\n\u001b[1;32m      5\u001b[0m                                  initial_commitments_list \u001b[38;5;241m=\u001b[39m coms_list)\n\u001b[1;32m      6\u001b[0m \u001b[38;5;66;03m# looping through the ensemble using the item_iter\u001b[39;00m\n\u001b[0;32m----> 7\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m model_run_data_items \u001b[38;5;129;01min\u001b[39;00m ensemble_gen\u001b[38;5;241m.\u001b[39mensemble_items_iter():\n\u001b[1;32m      8\u001b[0m     \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124mf\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mThe model run produced the following data items:  \u001b[39m\u001b[38;5;132;01m{\u001b[39;00mmodel_run_data_items\u001b[38;5;132;01m}\u001b[39;00m\u001b[38;5;124m.\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n",
+      "File \u001b[0;32m~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:69\u001b[0m, in \u001b[0;36mAbstractEnsembleGenerator.ensemble_items_iter\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     62\u001b[0m \u001b[38;5;250m\u001b[39m\u001b[38;5;124;03m\"\"\" Iterator through data items of model runs.\u001b[39;00m\n\u001b[1;32m     63\u001b[0m \n\u001b[1;32m     64\u001b[0m \u001b[38;5;124;03mThis methods uses :py:func:`ensemble_iter` to return for each model run a dictionary with\u001b[39;00m\n\u001b[1;32m     65\u001b[0m \u001b[38;5;124;03mpredefined data items as key-value pairs. The data items can be added with :py:func:`add_item`.\u001b[39;00m\n\u001b[1;32m     66\u001b[0m \n\u001b[1;32m     67\u001b[0m \u001b[38;5;124;03m\"\"\"\u001b[39;00m\n\u001b[1;32m     68\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m re \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39mensemble_iter():\n\u001b[0;32m---> 69\u001b[0m     \u001b[38;5;28;43mself\u001b[39;49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m_fill_cols\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\n\u001b[1;32m     70\u001b[0m     \u001b[38;5;28;01myield\u001b[39;00m copy(\u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_items)\n",
+      "File \u001b[0;32m~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:266\u001b[0m, in \u001b[0;36mAbstractEnsembleGenerator._fill_cols\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m    264\u001b[0m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_items\u001b[38;5;241m.\u001b[39mclear()\n\u001b[1;32m    265\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m key \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_item_funs\u001b[38;5;241m.\u001b[39mkeys():\n\u001b[0;32m--> 266\u001b[0m     \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_items[key] \u001b[38;5;241m=\u001b[39m \u001b[38;5;28;43mself\u001b[39;49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m_item_funs\u001b[49m\u001b[43m[\u001b[49m\u001b[43mkey\u001b[49m\u001b[43m]\u001b[49m\u001b[43m(\u001b[49m\u001b[38;5;28;43mself\u001b[39;49m\u001b[43m)\u001b[49m\n",
+      "File \u001b[0;32m~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:1200\u001b[0m, in \u001b[0;36m_add_simple_data_items.<locals>.<lambda>\u001b[0;34m(x)\u001b[0m\n\u001b[1;32m   1195\u001b[0m ensemble_generator\u001b[38;5;241m.\u001b[39madd_item(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124machievements_evolution\u001b[39m\u001b[38;5;124m'\u001b[39m,\n\u001b[1;32m   1196\u001b[0m                             \u001b[38;5;28;01mlambda\u001b[39;00m x: achievements(x\u001b[38;5;241m.\u001b[39mreflective_equilibrium(), x\u001b[38;5;241m.\u001b[39mstate()))\n\u001b[1;32m   1198\u001b[0m \u001b[38;5;66;03m# whether the union of final theory & commitments is dialectically consistent\u001b[39;00m\n\u001b[1;32m   1199\u001b[0m ensemble_generator\u001b[38;5;241m.\u001b[39madd_item(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mfixed_point_dia_consistent\u001b[39m\u001b[38;5;124m'\u001b[39m,\n\u001b[0;32m-> 1200\u001b[0m                             \u001b[38;5;28;01mlambda\u001b[39;00m x: \u001b[43mx\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mdialectical_structure\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mis_consistent\u001b[49m\u001b[43m(\u001b[49m\n\u001b[1;32m   1201\u001b[0m \u001b[43m                                \u001b[49m\u001b[43mBitarrayPosition\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43munion\u001b[49m\u001b[43m(\u001b[49m\u001b[43m{\u001b[49m\u001b[43mx\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mstate\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mlast_commitments\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mx\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mstate\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43mlast_theory\u001b[49m\u001b[43m(\u001b[49m\u001b[43m)\u001b[49m\u001b[43m}\u001b[49m\u001b[43m)\u001b[49m\u001b[43m)\u001b[49m)\n\u001b[1;32m   1202\u001b[0m ensemble_generator\u001b[38;5;241m.\u001b[39madd_item(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124minit_final_coms_simple_hamming\u001b[39m\u001b[38;5;124m'\u001b[39m,\n\u001b[1;32m   1203\u001b[0m                             \u001b[38;5;28;01mlambda\u001b[39;00m x: \u001b[38;5;28mlen\u001b[39m(BitarrayPosition\u001b[38;5;241m.\u001b[39munion({x\u001b[38;5;241m.\u001b[39mstate()\u001b[38;5;241m.\u001b[39mlast_commitments(), x\n\u001b[1;32m   1204\u001b[0m                                                                  \u001b[38;5;241m.\u001b[39mstate()\u001b[38;5;241m.\u001b[39minitial_commitments()})\u001b[38;5;241m.\u001b[39mas_set()\u001b[38;5;241m.\u001b[39m\n\u001b[1;32m   1205\u001b[0m                                           difference(BitarrayPosition\u001b[38;5;241m.\u001b[39mintersection({x\u001b[38;5;241m.\u001b[39mstate()\u001b[38;5;241m.\u001b[39mlast_commitments(),\n\u001b[1;32m   1206\u001b[0m                                                                                     x\u001b[38;5;241m.\u001b[39minitial_commitments()})\u001b[38;5;241m.\u001b[39mas_set())))\n\u001b[1;32m   1207\u001b[0m \u001b[38;5;66;03m# SetBasedPosition.union({pos1, pos2}).difference(SetBasedPosition.intersection({pos1, pos2})).size()\u001b[39;00m\n\u001b[1;32m   1208\u001b[0m \u001b[38;5;66;03m# hamming distance as defined in BBB with d_3 = 1, d_2 = 1, d_1 = 1, d_0 = 0\u001b[39;00m\n",
+      "File \u001b[0;32m~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/theodias/theodias/numpy_implementation.py:432\u001b[0m, in \u001b[0;36mDAGNumpyDialecticalStructure.is_consistent\u001b[0;34m(self, position)\u001b[0m\n\u001b[1;32m    431\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21mis_consistent\u001b[39m(\u001b[38;5;28mself\u001b[39m, position: Position) \u001b[38;5;241m-\u001b[39m\u001b[38;5;241m>\u001b[39m \u001b[38;5;28mbool\u001b[39m:\n\u001b[0;32m--> 432\u001b[0m     \u001b[38;5;28;43mself\u001b[39;49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43m__raise_value_error_if_sentence_pool_mismatch\u001b[49m\u001b[43m(\u001b[49m\u001b[43mposition\u001b[49m\u001b[43m)\u001b[49m\n\u001b[1;32m    433\u001b[0m     \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m_update()\n\u001b[1;32m    435\u001b[0m     \u001b[38;5;28;01mreturn\u001b[39;00m NumpyPosition\u001b[38;5;241m.\u001b[39mto_numpy_position(position) \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39m__complete_consistent_extensions\n",
+      "File \u001b[0;32m~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/theodias/theodias/numpy_implementation.py:361\u001b[0m, in \u001b[0;36mDAGNumpyDialecticalStructure.__raise_value_error_if_sentence_pool_mismatch\u001b[0;34m(self, position)\u001b[0m\n\u001b[1;32m    360\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21m__raise_value_error_if_sentence_pool_mismatch\u001b[39m(\u001b[38;5;28mself\u001b[39m, position: Position):\n\u001b[0;32m--> 361\u001b[0m     \u001b[38;5;28;01mif\u001b[39;00m position \u001b[38;5;129;01mand\u001b[39;00m \u001b[38;5;28mself\u001b[39m\u001b[38;5;241m.\u001b[39msentence_pool() \u001b[38;5;241m!=\u001b[39m \u001b[43mposition\u001b[49m\u001b[38;5;241;43m.\u001b[39;49m\u001b[43msentence_pool\u001b[49m():\n\u001b[1;32m    362\u001b[0m         \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mValueError\u001b[39;00m(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mThe function you called expects positions to be based on the same sentence pool as\u001b[39m\u001b[38;5;124m\"\u001b[39m,\n\u001b[1;32m    363\u001b[0m                          \u001b[38;5;124m\"\u001b[39m\u001b[38;5;124m the dialectical structure.\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n",
+      "\u001b[0;31mAttributeError\u001b[0m: 'set' object has no attribute 'sentence_pool'"
+     ]
+    }
+   ],
+   "source": [
+    "from rethon import SimpleEnsembleGenerator \n",
+    "\n",
+    "ensemble_gen = SimpleEnsembleGenerator(arguments_list = dia_structure_list, \n",
+    "                                 n_sentence_pool = n,\n",
+    "                                 initial_commitments_list = coms_list)\n",
+    "# looping through the ensemble using the item_iter\n",
+    "for model_run_data_items in ensemble_gen.ensemble_items_iter():\n",
+    "    print(f\"The model run produced the following data items:  {model_run_data_items}.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Storing ensemble data as CSV files"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "You can save the created data to csv files to analyse them later (e.g. by using [pandas](https://pandas.pydata.org/docs/index.html)):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from os import getcwd\n",
+    "\n",
+    "ensemble_gen.ensemble_items_to_csv(\n",
+    "                              output_file_name = 'data_output.csv',\n",
+    "                              output_dir_name = getcwd(),\n",
+    "                              archive = True, # save the csv as archived tar.gz\n",
+    "                              save_preliminary_results = True, # will create preliminary csv-data sets \n",
+    "                              preliminary_results_interval = 50)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Complex scenarios of creating new data items"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The ensemble generator provides additional functionalities for defining data items. In particular, you can store objects in the generator that can be reused in the definition of your data items. If you have resource-intensive operations you might prefer to reuse calculated data. \n",
+    "\n",
+    "*Consider the following example:* The algorithm will loop through all provided dialectical structures, initial conditions and model-parameter sets. If you define a data item that will calculate data on the dialectical structure alone, this data will be re-calculated for a particular dialectical structure for every model run that is based on that dialectical structure. In the case that you have 50 initial commitments and 50 different model-parameter sets, the same data is being calculated 2500 times. \n",
+    "\n",
+    "Instead, you can calculate this data once for every dialectical structure, store it in the ensemble generator object and use this data in the definition of the data item. You can do this by simply overwriting a function of `EnsembleGenerator`: "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The model run produced the following data items:  {'ds_number_of_args': 8}.\n",
+      "The model run produced the following data items:  {'ds_number_of_args': 8}.\n"
+     ]
+    }
+   ],
+   "source": [
+    "from rethon import EnsembleGenerator \n",
+    "\n",
+    "class StoreNArgsEnsembleGenerator(EnsembleGenerator):\n",
+    "\n",
+    "    # overwriting the method that initializes storing objects based on dialectical structures\n",
+    "    def init_tau_fields(self, dialectical_structure):\n",
+    "        super().init_tau_fields(dialectical_structure)\n",
+    "        # add the number of arguments as an object to the ensemble generator\n",
+    "        self.add_obj('ds_number_of_args', len(dialectical_structure.get_arguments()))\n",
+    "        \n",
+    "# the standard example with a sentence pool n=7\n",
+    "n = 7\n",
+    "arguments = [[1, 3],[1, 4],[1, 5],[1, -6], [2, -4],[2, 5],[2, 6],[2, 7]]\n",
+    "dia_structure_list = [arguments]\n",
+    "init_coms_1 = {3, 4, 5}\n",
+    "init_coms_2 = {3, 4, 5, 6, 7}\n",
+    "coms_list = [init_coms_1, init_coms_2]\n",
+    "\n",
+    "# using the new class\n",
+    "ensemble_gen = StoreNArgsEnsembleGenerator(arguments_list = dia_structure_list, \n",
+    "                                           n_sentence_pool = n,\n",
+    "                                           initial_commitments_list = coms_list)\n",
+    "\n",
+    "# adding the number of arguments as data item by accessing the stored object\n",
+    "ensemble_gen.add_item('ds_number_of_args', lambda x: x.get_obj('ds_number_of_args'))\n",
+    "\n",
+    "# looping through the ensemble using the item_iter\n",
+    "for model_run_data_items in ensemble_gen.ensemble_items_iter():\n",
+    "    print(f\"The model run produced the following data items:  {model_run_data_items}.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In a similar way you can overwrite the following methods:\n",
+    "\n",
+    "+ `init_re_start_fields`: Data items that are calculated based on the dialectical structure and the initial commitments alone.\n",
+    "+ `init_re_final_fields`: Data items that are calculated based on the dialectical structure and the resulting re process (including the evolution of the process).\n",
+    "+ `init_ensemble_fields`: Data items that are calculated based on the dialectical structure and the resulting re process with all its branches (works only if branching is switched on)."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "py39",
+   "language": "python",
+   "name": "py39"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.16"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

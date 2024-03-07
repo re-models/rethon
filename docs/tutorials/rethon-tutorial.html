@@ -1,0 +1,1131 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction of using the package rethon &#8212; Rethon  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/rethon-tutorial';</script>
+    <script src="../_static/custom-icon.js?v=40bda21d"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ensemble generation" href="ensemble-generation-tutorial.html" />
+    <link rel="prev" title="Rethon Tutorials" href="rethon-tutorials.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Rethon  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="rethon-tutorials.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api-docs/api.html">
+                        API documentation
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/re-models/rethon" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/rethon/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-custom fa-pypi fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="rethon-tutorials.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api-docs/api.html">
+                        API documentation
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/re-models/rethon" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/rethon/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-custom fa-pypi fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">PyPI</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Rethon Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ensemble-generation-tutorial.html">Ensemble Generation</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="rethon-tutorials.html" class="nav-link">Rethon Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Introduction...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Introduction-of-using-the-package-rethon">
+<h1>Introduction of using the package <code class="docutils literal notranslate"><span class="pre">rethon</span></code><a class="headerlink" href="#Introduction-of-using-the-package-rethon" title="Link to this heading">#</a></h1>
+<section id="How-to-run-this-notebook">
+<h2>How to run this notebook<a class="headerlink" href="#How-to-run-this-notebook" title="Link to this heading">#</a></h2>
+<p>There are several possibilities to execute this notebook. You can, for instance,</p>
+<ol class="arabic simple">
+<li><p>execute this notebook on Colab: <a class="reference external" href="https://colab.research.google.com/github/re-models/rethon/blob/master/docs-source/tutorials/rethon-tutorial.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>, or</p></li>
+<li><p>execute this notebook locally in, for instance, <a class="reference external" href="https://jupyter.org/">JupyterLab</a>. You can download this notebook from <a class="reference external" href="https://github.com/re-models/rethon/blob/master/docs-source/tutorials/rethon-tutorial.ipynb">here</a>.</p></li>
+</ol>
+</section>
+<section id="Installing-libraries">
+<h2>Installing libraries<a class="headerlink" href="#Installing-libraries" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install rethon
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Using-the-model">
+<h2>Using the model<a class="headerlink" href="#Using-the-model" title="Link to this heading">#</a></h2>
+<p>We distinguish between two different types of RE processes:</p>
+<ol class="arabic simple">
+<li><p><strong>Globally searching RE processes:</strong> In each step the process optimizes the achievement function by considering <strong>all</strong> positions (either as theory candidates or commitments candidates).</p></li>
+<li><p><strong>Locally searching RE processes:</strong> In each step the process optimizes the achievement function by considering positions that are in the neighbourhood of the current state.</p></li>
+</ol>
+<p>Accordingly, there are different RE classes to be used.</p>
+<p>Remark:</p>
+<ul class="simple">
+<li><p>The optimization w.r.t. a global search is computationally complex. At the moment, these processes converge in a reasonable time if the sentence pool is rather small (<span class="math notranslate nohighlight">\(n&lt; 10\)</span>).</p></li>
+</ul>
+<p>Additionally, there are two types of dialectical structures:</p>
+<ul class="simple">
+<li><p><em>DAG (directed acyclic graphs) based dialectical structures:</em> All important properties of the stuctrue are calculated once and then stored. This representation is fast for smaller sentence pools and should be used in combination with globally searching RE processes.</p></li>
+<li><p><em>BDD (binary decision diagramm) based dialectical structures:</em> Important properties of the structure are calculated by using binary decision trees. This representation is comparably fast for most properties of the graph even if the sentence pool is larger (<span class="math notranslate nohighlight">\(n&gt;10\)</span>). However, for larger sentence it will become difficult to calculate all dialectically consistent positions, axiomatic bases (without a confining source) and minimal positions.</p></li>
+</ul>
+<p>Accordingly, we advise to use DAG based dialectical structures for globally searching RE processes and BDD based dialectical structures for locally searching RE processes.</p>
+<p><em>Source:</em> You can download this notebook from <a class="reference external" href="https://github.com/debatelab/re-docs/blob/master/source/rethon-docs/tutorials/rethon-tutorial.ipynb">here</a>.</p>
+<section id="Globally-searching-RE-processes">
+<h3>Globally searching RE processes<a class="headerlink" href="#Globally-searching-RE-processes" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theodias</span> <span class="kn">import</span> <span class="n">StandardPosition</span><span class="p">,</span> <span class="n">DAGDialecticalStructure</span>
+<span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">StandardGlobalReflectiveEquilibrium</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</pre></div>
+</div>
+</div>
+<p>Instantiating the example in <a class="reference external" href="https://journals.publishing.umich.edu/ergo/article/id/1152/">BBB (2021)</a> with a sentence pool <span class="math notranslate nohighlight">\(n=7\)</span> as a DAG based dialectical structure:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the standard example with a sentence pool n=7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="n">dag_ds</span> <span class="o">=</span> <span class="n">DAGDialecticalStructure</span><span class="o">.</span><span class="n">from_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">global_re</span> <span class="o">=</span> <span class="n">StandardGlobalReflectiveEquilibrium</span><span class="p">(</span><span class="n">dag_ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Initializing a globally searching RE process with initial commitments <span class="math notranslate nohighlight">\(\mathcal{C}_0=\{3,4,5\}\)</span> and running the model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">global_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="n">global_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Showing the results. Here, <code class="docutils literal notranslate"><span class="pre">evolution</span></code> represents the sucession of RE states <span class="math notranslate nohighlight">\(C_0, T_0, C_1, T_2, \dots , C_{final}, T_{final}\)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">global_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;alternatives&#39;: [set(), set(), set(), set(), set(), set()],
+ &#39;evolution&#39;: [{3, 4, 5},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1}],
+ &#39;finished&#39;: True,
+ &#39;time_line&#39;: [0, 1, 2, 3, 4, 5]}
+</pre></div></div>
+</div>
+<p>There are some convenience methods to show different aspects of the result:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Initial commitments: </span><span class="si">{</span><span class="n">global_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">initial_commitments</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Theory evolution: </span><span class="si">{</span><span class="n">global_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">theory_evolution</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Commitments evolution: </span><span class="si">{</span><span class="n">global_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">commitments_evolution</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial commitments: {3, 4, 5}
+Theory evolution: [{1}, {1}, {1}]
+Commitments evolution: [{3, 4, 5}, {1, 3, 4, 5, -6, -2}, {1, 3, 4, 5, -6, -2}]
+</pre></div></div>
+</div>
+</section>
+<section id="Branching">
+<h3>Branching<a class="headerlink" href="#Branching" title="Link to this heading">#</a></h3>
+<p>The standard model searches for each step commitments or theories respectively, which optimize an achievement function of the epistemic state. If different positions compare equally well with regard to this functin, the standard model choses the next position randomly among these positions. The different possibilities for a specific model run are stored in the <code class="docutils literal notranslate"><span class="pre">alternatives</span></code> field of the RE state.</p>
+<p>However, you can also calculate all different path such a process can take given this kind of underdetermination by using a process container in the following way:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">FullBranchREContainer</span>
+
+<span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">global_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="c1"># A process container that will run all possible paths the re process can take</span>
+<span class="n">re_container</span> <span class="o">=</span> <span class="n">FullBranchREContainer</span><span class="p">()</span>
+<span class="n">branches</span> <span class="o">=</span> <span class="n">re_container</span><span class="o">.</span><span class="n">result_states</span><span class="p">(</span><span class="n">global_re</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>which will return all branches as RE states:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">([</span><span class="n">state</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">branches</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[{&#39;alternatives&#39;: [set(), {{2, 3}}, set(), set(), set(), set(), set(), set()],
+  &#39;evolution&#39;: [{3, 4, 5, 6, 7},
+                {1, 7},
+                {1, 3, 4, 5, 7, -6, -2},
+                {1},
+                {1, 3, 4, 5, -6, -2},
+                {1},
+                {1, 3, 4, 5, -6, -2},
+                {1}],
+  &#39;finished&#39;: True,
+  &#39;time_line&#39;: [0, 1, 2, 3, 4, 5, 6, 7]},
+ {&#39;alternatives&#39;: [set(), {{1, 7}}, set(), set(), set(), set(), set(), set()],
+  &#39;evolution&#39;: [{3, 4, 5, 6, 7},
+                {2, 3},
+                {2, 3, 5, 6, 7, -4, -1},
+                {2},
+                {2, 5, 6, 7, -4, -1},
+                {2},
+                {2, 5, 6, 7, -4, -1},
+                {2}],
+  &#39;finished&#39;: True,
+  &#39;time_line&#39;: [0, 1, 2, 3, 4, 5, 6, 7]}]
+</pre></div></div>
+</div>
+</section>
+<section id="Locally-searching-RE-processes">
+<h3>Locally searching RE processes<a class="headerlink" href="#Locally-searching-RE-processes" title="Link to this heading">#</a></h3>
+<p>If you want to use locally searching RE processes, simply use <code class="docutils literal notranslate"><span class="pre">BDDDialecticalStructures</span></code> and <code class="docutils literal notranslate"><span class="pre">StandardLocalReflectiveEquilibrium</span></code> in the same way as above:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theodias</span> <span class="kn">import</span> <span class="n">StandardPosition</span><span class="p">,</span> <span class="n">BDDDialecticalStructure</span>
+<span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">StandardLocalReflectiveEquilibrium</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># our standard example with a sentence pool n=7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="n">bdd_ds</span> <span class="o">=</span> <span class="n">BDDDialecticalStructure</span><span class="o">.</span><span class="n">from_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">local_re</span> <span class="o">=</span> <span class="n">StandardLocalReflectiveEquilibrium</span><span class="p">(</span><span class="n">bdd_ds</span><span class="p">,</span> <span class="n">init_coms</span><span class="p">)</span>
+<span class="n">local_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="n">local_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">local_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;alternatives&#39;: [set(),
+                  set(),
+                  {{-6, 3, 4, 5}, {1, 3, 4, 5}},
+                  set(),
+                  {{3, 4, 5, -6, -2}},
+                  set(),
+                  set(),
+                  set(),
+                  set(),
+                  set()],
+ &#39;evolution&#39;: [{3, 4, 5},
+               {1},
+               {3, 4, 5, -2},
+               {1},
+               {1, 3, 4, 5, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1}],
+ &#39;finished&#39;: True,
+ &#39;time_line&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+</pre></div></div>
+</div>
+</section>
+<section id="Model-Parameters">
+<h3>Model Parameters<a class="headerlink" href="#Model-Parameters" title="Link to this heading">#</a></h3>
+<p>The standard model has different model parameters, which are initiated by default values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="s1">&#39;Model parameters of globally searching REs:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">global_re</span><span class="o">.</span><span class="n">model_parameters</span><span class="p">())</span>
+<span class="n">pprint</span><span class="p">(</span><span class="s1">&#39;Model parameters of locally searching REs:&#39;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">local_re</span><span class="o">.</span><span class="n">model_parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;Model parameters of globally searching REs:&#39;
+{&#39;account_penalties&#39;: [0.0, 0.3, 1.0, 1.0],
+ &#39;faithfulness_penalties&#39;: [0.0, 0.0, 1.0, 1.0],
+ &#39;weights&#39;: {&#39;account&#39;: 0.35, &#39;faithfulness&#39;: 0.1, &#39;systematicity&#39;: 0.55}}
+&#39;Model parameters of locally searching REs:&#39;
+{&#39;account_penalties&#39;: [0.0, 0.3, 1.0, 1.0],
+ &#39;faithfulness_penalties&#39;: [0.0, 0.0, 1.0, 1.0],
+ &#39;neighbourhood_depth&#39;: 1,
+ &#39;weights&#39;: {&#39;account&#39;: 0.35, &#39;faithfulness&#39;: 0.1, &#39;systematicity&#39;: 0.55}}
+</pre></div></div>
+</div>
+<p>and which can be set to different values:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">local_re</span><span class="o">.</span><span class="n">set_model_parameters</span><span class="p">(</span><span class="n">neighbourhood_depth</span> <span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+<span class="c1"># rerunning the model</span>
+<span class="n">local_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">local_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;alternatives&#39;: [set(), set(), set(), set(), set(), set()],
+ &#39;evolution&#39;: [{3, 4, 5},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1}],
+ &#39;finished&#39;: True,
+ &#39;time_line&#39;: [0, 1, 2, 3, 4, 5]}
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Export-to-JSON">
+<h2>Export to JSON<a class="headerlink" href="#Export-to-JSON" title="Link to this heading">#</a></h2>
+<section id="De-/serializing-rethon-objects">
+<h3>De-/serializing <code class="docutils literal notranslate"><span class="pre">rethon</span></code> objects<a class="headerlink" href="#De-/serializing-rethon-objects" title="Link to this heading">#</a></h3>
+<p>You can serialize and deserialize <code class="docutils literal notranslate"><span class="pre">tau</span></code> positions, dialectical structure, <code class="docutils literal notranslate"><span class="pre">rethon</span></code> re states and whole model runs as well as any compounds thereof as long as the <code class="docutils literal notranslate"><span class="pre">json</span></code> python module can handle them (e.g., lists, dictionaries). For more details, consult the <code class="docutils literal notranslate"><span class="pre">tau</span></code> tutorial (LINK NEEDED).</p>
+<p>For instance, the following code will serialize a model run:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theodias</span> <span class="kn">import</span> <span class="n">StandardPosition</span><span class="p">,</span> <span class="n">DAGDialecticalStructure</span>
+<span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">StandardGlobalReflectiveEquilibrium</span>
+<span class="kn">from</span> <span class="nn">rethon.util</span> <span class="kn">import</span> <span class="n">rethon_dumps</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="c1"># our standard example with a sentence pool n=7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="n">dag_ds</span> <span class="o">=</span> <span class="n">DAGDialecticalStructure</span><span class="o">.</span><span class="n">from_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">global_re</span> <span class="o">=</span> <span class="n">StandardGlobalReflectiveEquilibrium</span><span class="p">(</span><span class="n">dag_ds</span><span class="p">)</span>
+<span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">global_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="n">global_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+
+<span class="c1"># serializing a model run as JSON String</span>
+<span class="n">re_run_json_str</span> <span class="o">=</span> <span class="n">rethon_dumps</span><span class="p">(</span><span class="n">global_re</span><span class="p">,</span>
+                               <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">re_run_json_str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+    &#34;model_name&#34;: &#34;StandardGlobalReflectiveEquilibrium&#34;,
+    &#34;dialectical_structure&#34;: {
+        &#34;arguments&#34;: [
+            [
+                1,
+                3
+            ],
+            [
+                1,
+                4
+            ],
+            [
+                1,
+                5
+            ],
+            [
+                1,
+                -6
+            ],
+            [
+                2,
+                -4
+            ],
+            [
+                2,
+                5
+            ],
+            [
+                2,
+                6
+            ],
+            [
+                2,
+                7
+            ]
+        ],
+        &#34;tau_name&#34;: null,
+        &#34;n_unnegated_sentence_pool&#34;: 7
+    },
+    &#34;model_parameters&#34;: {
+        &#34;weights&#34;: {
+            &#34;account&#34;: 0.35,
+            &#34;systematicity&#34;: 0.55,
+            &#34;faithfulness&#34;: 0.1
+        },
+        &#34;account_penalties&#34;: [
+            0.0,
+            0.30000001192092896,
+            1.0,
+            1.0
+        ],
+        &#34;faithfulness_penalties&#34;: [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+        ]
+    },
+    &#34;state&#34;: {
+        &#34;finished&#34;: true,
+        &#34;evolution&#34;: [
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    1
+                ]
+            },
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    1,
+                    3,
+                    4,
+                    5,
+                    -6,
+                    -2
+                ]
+            },
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    1
+                ]
+            },
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    1,
+                    3,
+                    4,
+                    5,
+                    -6,
+                    -2
+                ]
+            },
+            {
+                &#34;n_unnegated_sentence_pool&#34;: 7,
+                &#34;position&#34;: [
+                    1
+                ]
+            }
+        ],
+        &#34;alternatives&#34;: [
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ],
+        &#34;time_line&#34;: [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+        ]
+    }
+}
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Extending-the-model">
+<h2>Extending the model<a class="headerlink" href="#Extending-the-model" title="Link to this heading">#</a></h2>
+<p>If you want to do more than just adjust model parameters, you can alter and expand the model in different ways. The basic idea is always the same: Write an own reflective equilibrium class and overwrite methods to you own needs.</p>
+<p>An RE process is a succession of positions, starting with an initial position <span class="math notranslate nohighlight">\(\mathcal{C_0}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{C_0} \rightarrow \mathcal{T_0} \rightarrow \mathcal{C_1} \rightarrow \mathcal{T_1} \rightarrow \dots \rightarrow \mathcal{T_{final}} \rightarrow \mathcal{C_{final}}\]</div>
+<p>Accordingly, there are two different sorts of revisions: (i) adopting a new theory and (ii) adopting new commitments. The adoption of new theories and commitments is determined by two criteria for theories and two criteria for commitments:</p>
+<ol class="arabic simple">
+<li><p>A <em>theory-candidates criterion</em> <span class="math notranslate nohighlight">\(TC\)</span> determines theory candidates <span class="math notranslate nohighlight">\(TC_{i+1}=\{\mathcal{T}^{i+1}_1, \dots \mathcal{T}^{i+1}_n\}\)</span>. This criterion can in principle take all past steps <span class="math notranslate nohighlight">\(\mathcal{C_0}, \mathcal{T_0}, \mathcal{C_1}, \mathcal{T_1}, \dots, \mathcal{T_{i}}, \mathcal{C_{i}}\)</span> into account.</p></li>
+<li><p>An additional criterion chooses among those candidates the next theory: <span class="math notranslate nohighlight">\(\{\mathcal{T}^{i+1}_1, \dots \mathcal{T}^{i+1}_n\} \rightarrow \mathcal{T_{i+1}}\)</span>.</p></li>
+<li><p>A <em>commitments-candidates criterion</em> <span class="math notranslate nohighlight">\(CC\)</span> determines commitments candidates <span class="math notranslate nohighlight">\(CC_{i+1}=\{\mathcal{C}^{i+1}_1, \dots \mathcal{C}^{i+1}_n\}\)</span>. This criterion can in principle take all past steps <span class="math notranslate nohighlight">\(\mathcal{C_0}, \mathcal{T_0}, \mathcal{C_1}, \mathcal{T_1}, \dots, \mathcal{T_{i}}, \mathcal{C_{i},\mathcal{T_{i+1}} }\)</span> into account.</p></li>
+<li><p>An additional criterion chooses among those candidates the commitment: <span class="math notranslate nohighlight">\(\{\mathcal{C}^{i+1}_1, \dots \mathcal{C}^{i+1}_n\} \rightarrow \mathcal{C_{i+1}}\)</span>.</p></li>
+</ol>
+<p>Finally, there is a <em>stop criterion</em> that specifies under which conditions a re process is considered as finished.</p>
+<section id="Extending-the-standard-model-by-adjusting-the-achievment-function">
+<h3>Extending the standard model by adjusting the achievment function<a class="headerlink" href="#Extending-the-standard-model-by-adjusting-the-achievment-function" title="Link to this heading">#</a></h3>
+<p>The standard model choses the next theory <span class="math notranslate nohighlight">\(\mathcal{T_i}\)</span> and the next commitments <span class="math notranslate nohighlight">\(\mathcal{C_i}\)</span> respectively by optimizing an achievement function</p>
+<div class="math notranslate nohighlight">
+\[Z(\mathcal{C},\mathcal{T} | \mathcal{C}_0):= \alpha_A A(\mathcal{C}, \mathcal{T})+ \alpha_S S(\mathcal{T}) + \alpha_F F(\mathcal{C}| \mathcal{C}_0)\]</div>
+<ol class="arabic simple">
+<li><p><em>Adopting a new theory:</em> Choose a theory <span class="math notranslate nohighlight">\(\mathcal{T_{i+1}}\)</span> that maximizes <span class="math notranslate nohighlight">\(Z(\mathcal{C_i},\mathcal{T_{i+1}} | \mathcal{C}_0)\)</span>. If there are different maximizing new theories choose randomly among them, except the last theory is among them. In that case choose <span class="math notranslate nohighlight">\(\mathcal{T_{i+1}} = \mathcal{T_{i}}\)</span>.</p></li>
+<li><p><em>Adopting new commitments:</em> Choose new commitments <span class="math notranslate nohighlight">\(\mathcal{T_{i+1}}\)</span> that maximize <span class="math notranslate nohighlight">\(Z(\mathcal{C_{i+1}},\mathcal{T_{i+1}} | \mathcal{C}_0)\)</span>. If there are different maximizing new theories choose randomly among them, except the last theory is among them. In that case choose <span class="math notranslate nohighlight">\(\mathcal{T_{i+1}} = \mathcal{T_{i}}\)</span>.</p></li>
+</ol>
+<p>A simple way, to adapt the model is to change the functions <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(F\)</span>, <span class="math notranslate nohighlight">\(S\)</span> or the achievement function as a whole.</p>
+<p>For instance, the standard model uses a quadratic term for calculating account:</p>
+<div class="math notranslate nohighlight">
+\[A(\mathcal{C}, \mathcal{T}):=\left( 1-\left(\frac{D_{0,0.3,1,1}(\mathcal{C}, \overline{\mathcal{T}})}{N}\right)^2 \right)\]</div>
+<p>If you want to get rid of the quadratic form and use instead:</p>
+<div class="math notranslate nohighlight">
+\[A(\mathcal{C}, \mathcal{T}):=\left( 1-\frac{D_{0,0.3,1,1}(\mathcal{C}, \overline{\mathcal{T}})}{N} \right)\]</div>
+<p>you can simply overwrite the account function of the standard model in the following way:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theodias</span> <span class="kn">import</span> <span class="n">StandardPosition</span><span class="p">,</span> <span class="n">DAGDialecticalStructure</span>
+<span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">StandardGlobalReflectiveEquilibrium</span>
+
+<span class="k">class</span> <span class="nc">NewAccountReflectiveEquilibrium</span><span class="p">(</span><span class="n">StandardGlobalReflectiveEquilibrium</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">account</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commitments</span><span class="p">,</span> <span class="n">theory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hamming_distance</span><span class="p">(</span><span class="n">commitments</span><span class="p">,</span>
+                                          <span class="bp">self</span><span class="o">.</span><span class="n">dialectical_structure</span><span class="p">()</span><span class="o">.</span><span class="n">closure</span><span class="p">(</span><span class="n">theory</span><span class="p">),</span>
+                                          <span class="bp">self</span><span class="o">.</span><span class="n">model_parameter</span><span class="p">(</span><span class="s2">&quot;account_penalties&quot;</span><span class="p">))</span>
+                    <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dialectical_structure</span><span class="p">()</span><span class="o">.</span><span class="n">sentence_pool</span><span class="p">()</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<p>And use this class as reflective equilibrium class:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># our standard example with a sentence pool n=7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="n">bdd_ds</span> <span class="o">=</span> <span class="n">DAGDialecticalStructure</span><span class="o">.</span><span class="n">from_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">new_re</span> <span class="o">=</span> <span class="n">NewAccountReflectiveEquilibrium</span><span class="p">(</span><span class="n">bdd_ds</span><span class="p">)</span>
+
+<span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">new_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="n">new_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;alternatives&#39;: [set(), set(), set(), set(), set(), set()],
+ &#39;evolution&#39;: [{3, 4, 5},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1}],
+ &#39;finished&#39;: True,
+ &#39;time_line&#39;: [0, 1, 2, 3, 4, 5]}
+</pre></div></div>
+</div>
+</section>
+<section id="Extending-the-standard-model-by-redefining-the-candidates-criteria">
+<h3>Extending the standard model by redefining the candidates criteria<a class="headerlink" href="#Extending-the-standard-model-by-redefining-the-candidates-criteria" title="Link to this heading">#</a></h3>
+<p>The standard model uses the achievement function to determine the next commitments and theory candiates. In particular, the candidates for the next theory <span class="math notranslate nohighlight">\(\mathcal{T}_{i+1}\)</span> depend only on <span class="math notranslate nohighlight">\(\mathcal{C}_{i}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{C}_{0}\)</span> and the candidates for the next commitments <span class="math notranslate nohighlight">\(\mathcal{C}_{i+1}\)</span> depend only on <span class="math notranslate nohighlight">\(\mathcal{T}_{i+1}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{C}_{0}\)</span>.</p>
+<p>Suppose, you want to change this behaviour. For instance, you might prefer to take other preliminary states into account. Just overwriting the achievement function (or its constituents) won’t do that because you can not change which commitments and which theory will be used to calculate the achievement. However, you can overwrite the criteria that determine commitments and theory condidates directly.</p>
+<p>Suppose now, that you want to choose next commitment candidates by maximising the achievement function with respect the last commitments insteads of the initial commitments: That is, instead of maximising <span class="math notranslate nohighlight">\(Z(\mathcal{C_{i+1}},\mathcal{T_{i+1}} | \mathcal{C}_0)\)</span> you want to maximise <span class="math notranslate nohighlight">\(Z(\mathcal{C_{i+1}},\mathcal{T_{i+1}} | \mathcal{C}_{i+1})\)</span>.</p>
+<p>To do that, you can simply overwrite the functions that determines the commitments candidates in the following way:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">theodias</span> <span class="kn">import</span> <span class="n">StandardPosition</span><span class="p">,</span> <span class="n">DAGDialecticalStructure</span>
+<span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">StandardGlobalReflectiveEquilibrium</span>
+
+
+<span class="k">class</span> <span class="nc">MarkovianGlobalReflectiveEquilibrium</span><span class="p">(</span><span class="n">StandardGlobalReflectiveEquilibrium</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">commitment_candidates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">candidate_commitments</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">max_achievement</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">candidate_commitment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialectical_structure</span><span class="p">()</span><span class="o">.</span><span class="n">minimally_consistent_positions</span><span class="p">():</span>
+            <span class="n">current_achievement</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">achievement</span><span class="p">(</span><span class="n">candidate_commitment</span><span class="p">,</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">last_theory</span><span class="p">(),</span>
+                                                   <span class="c1"># instead of the initial commitments we calculate achievement</span>
+                                                   <span class="c1"># w.r.t. the last commitments</span>
+                                                   <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">last_commitments</span><span class="p">())</span>
+
+            <span class="c1"># update achievement and candidates</span>
+            <span class="k">if</span> <span class="n">current_achievement</span> <span class="o">&gt;</span> <span class="n">max_achievement</span><span class="p">:</span>
+                <span class="n">candidate_commitments</span> <span class="o">=</span> <span class="p">{</span><span class="n">candidate_commitment</span><span class="p">}</span>
+                <span class="n">max_achievement</span> <span class="o">=</span> <span class="n">current_achievement</span>
+
+            <span class="k">elif</span> <span class="n">current_achievement</span> <span class="o">==</span> <span class="n">max_achievement</span><span class="p">:</span>
+                <span class="n">candidate_commitments</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">candidate_commitment</span><span class="p">)</span>
+        <span class="c1"># in case the last state is already optimal, we just return it</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">last_commitments</span><span class="p">()</span> <span class="ow">in</span> <span class="n">candidate_commitments</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">last_commitments</span><span class="p">()}</span>
+
+        <span class="k">return</span> <span class="n">candidate_commitments</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="c1"># our standard example with a sentence pool n=7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">arguments</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="n">bdd_ds</span> <span class="o">=</span> <span class="n">DAGDialecticalStructure</span><span class="o">.</span><span class="n">from_arguments</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">new_re</span> <span class="o">=</span> <span class="n">MarkovianGlobalReflectiveEquilibrium</span><span class="p">(</span><span class="n">bdd_ds</span><span class="p">)</span>
+
+<span class="n">init_coms</span> <span class="o">=</span> <span class="n">StandardPosition</span><span class="o">.</span><span class="n">from_set</span><span class="p">({</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">new_re</span><span class="o">.</span><span class="n">set_initial_state</span><span class="p">(</span><span class="n">init_coms</span><span class="p">)</span>
+<span class="n">new_re</span><span class="o">.</span><span class="n">re_process</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_re</span><span class="o">.</span><span class="n">state</span><span class="p">()</span><span class="o">.</span><span class="n">as_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;alternatives&#39;: [set(), set(), set(), set(), set(), set()],
+ &#39;evolution&#39;: [{3, 4, 5},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1},
+               {1, 3, 4, 5, -6, -2},
+               {1}],
+ &#39;finished&#39;: True,
+ &#39;time_line&#39;: [0, 1, 2, 3, 4, 5]}
+</pre></div></div>
+</div>
+<p>In the same way you could adapt one of the following methods by overwriting <code class="docutils literal notranslate"><span class="pre">ReflectiveEquilibrium</span></code> or classes that implement it:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pick_commitment_candidate</span></code>: The condition that chooses one of the commitments candidates that is determined by the commitments-candidates criterion <span class="math notranslate nohighlight">\(CC\)</span> (<code class="docutils literal notranslate"><span class="pre">commitment_candidates</span></code>) as the next commitments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theory_candidates</span></code> The theory-candidates criterion <span class="math notranslate nohighlight">\(CT\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pick_theory_candidate</span></code>: The condition that chooses one of the theory candidates that is determined by the theory-candidates criterion <span class="math notranslate nohighlight">\(TC\)</span> as the next theory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finished</span></code>: The criterion that determines when the the process ends.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#How-to-run-this-notebook">How to run this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Installing-libraries">Installing libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Using-the-model">Using the model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Globally-searching-RE-processes">Globally searching RE processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Branching">Branching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Locally-searching-RE-processes">Locally searching RE processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-Parameters">Model Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Export-to-JSON">Export to JSON</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#De-/serializing-rethon-objects">De-/serializing <code class="docutils literal notranslate"><span class="pre">rethon</span></code> objects</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Extending-the-model">Extending the model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Extending-the-standard-model-by-adjusting-the-achievment-function">Extending the standard model by adjusting the achievment function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Extending-the-standard-model-by-redefining-the-candidates-criteria">Extending the standard model by redefining the candidates criteria</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutorials/rethon-tutorial.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Claus Beisbart, Gregor Betz, Georg Brun, Sebastian Cacean, Andreas Freivogel, Richard Lohse.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
