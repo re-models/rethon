@@ -19,7 +19,7 @@ print('Using the python:', sys.executable)
 print ('Using path:', sys.path)
 # -- Project information -----------------------------------------------------
 
-project = 'Rethon Docs'
+project = 'Rethon'
 copyright = '2024, Claus Beisbart, Gregor Betz, Georg Brun, Sebastian Cacean, Andreas Freivogel, Richard Lohse'
 author = 'Claus Beisbart, Gregor Betz, Georg Brun, Sebastian Cacean, Andreas Freivogel, Richard Lohse'
 
