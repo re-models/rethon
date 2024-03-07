@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="rethon",
-    version="0.0.1a1",
+    version="0.0.3a1",
     author="Claus Beisbart, Gregor Betz, Georg Brun, Sebastian Cacean, Andreas Freivogel, Richard Lohse",
     author_email="claus.beisbart@philo.unibe.ch, gregor.betz@kit.edu, georg.brun@philo.unibe.ch, "
                  "sebastian.cacean@kit.edu, andreas.freivogel@philo.unibe.ch, richard.lohse@kit.edu",
@@ -21,7 +21,5 @@ setup(
                  "License :: OSI Approved :: MIT License",
                  "Operating System :: OS Independent"],
     python_requires='>=3.8',
-    install_requires=['Deprecated',
-                      'pandas',
-                      'theodias'],
+    install_requires=['theodias'],
 )
