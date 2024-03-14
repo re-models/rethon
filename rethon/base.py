@@ -785,9 +785,15 @@ class GlobalReflectiveEquilibrium(StandardReflectiveEquilibrium):
         return optimal_pairs
 
 
-# ToDo (@basti): Add class docstring
 class REContainer:
+    """An REContainer responsible for managing the execution of RE processes.
 
+        Implementations of this class manage the execution and coordination of RE processes specified by the given
+        list of :code:`re_models`.
+
+        Attributes:
+            re_models: A list of RE models (:class:`ReflectiveEquilibrium`).
+       """
     def __init__(self, re_models: List[ReflectiveEquilibrium] = None):
         self.re_models = re_models
         self._objects = dict()
@@ -796,12 +802,12 @@ class REContainer:
     def re_processes(self, re_models: List[ReflectiveEquilibrium] = None) -> Iterator[ReflectiveEquilibrium]:
         pass
 
-    # ToDo (@Basti): add docstring
     def add_object(self, key: Any, object: Any):
+        """ Helper function to store objects within the container."""
         self._objects[key] = object
 
-    # ToDo (@Basti): Add docstring
     def get_object(self, key: Any) -> [Any, None]:
+        """ Helper function to retrieve stores objects (see :py:func:`add_object`) from the container."""
         if key in self._objects.keys():
             return self._objects[key]
         else:
@@ -810,7 +816,7 @@ class REContainer:
     def get_objects(self):
         return self._objects
 
-# ToDo (@Basti): Add for all methods more information and examples (see the defined test cases).
+# ToDo: Add for all methods more information and examples (see the defined test cases) in docstrings.
 class REState:
     """Class that represent the internal state of an RE process.
 
