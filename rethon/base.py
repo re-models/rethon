@@ -187,7 +187,7 @@ class ReflectiveEquilibrium(ABC):
                                f"candidates for the RE process.")
         canditates.remove(next_position)
         self.state().add_step(next_position, canditates, time)
-        # ToDo (@Basti): That should be redundant
+        # ToDo/to check: That should be redundant
         self.state().finished = self.finished(**kwargs)
 
     def model_name(self) -> str:
@@ -835,10 +835,10 @@ class REState:
             timeline.
         error_code: An integer that represents an error code and which can be set if the process throws an error.
     """
-    # ToDo (@Basti): Setting an error code should some how invalidate other state attributes (by setting them to none and
+    # ToDo: Setting an error code should some how invalidate other state attributes (by setting them to none and
     #  finished to False. (Otherwise, data produced by EnsembleGenerators might be interpreted as there being fps
     #  even thought the process did not finish (for instance).
-    # ToDo (@Basti): Unify error code handling (I also use class variables in the defined Warning Classes.
+    # ToDo: Unify error code handling (I also use class variables in the defined Warning Classes.
     error_codes = {# Should be used if there is no more specific error code available.
                    0: 'The process could not finish due to an unexpected error.',
                    # Should be used if some max_loop value was exceeded.
