@@ -439,6 +439,7 @@ class EnsembleGenerator(AbstractEnsembleGenerator):
 
 class SimpleEnsembleGenerator(EnsembleGenerator):
     """
+
     This class extends :py:class:`EnsembleGenerator` by adding the following data items that are produced by
     :py:func:`AbstractEnsembleGenerator.ensemble_items_iter`:
 
@@ -944,9 +945,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
             if self.model_parameters_list:
                 # for j in range(len(self.model_parameters_list)):
                 #     res[j].reset_model_parameters(self.model_parameters_list[j])
-                # ToDo (@Basti): rather set_model_parameters (?), compare line 367
                 for j in range(len(res)):
-                    res[j].reset_model_parameters(self.model_parameters_list[i])
+                    res[j].set_model_parameters(self.model_parameters_list[i])
 
             # instantiating initial coms (=agents) for the ensemble
             agents = []
@@ -956,8 +956,8 @@ class MultiAgentEnsemblesGenerator(AbstractEnsembleGenerator):
                 pos = pos_class_.from_set(pos_as_set, self.n_sentence_pools[i])
                 agents.append(pos)
 
-            # ToDo (@Basti): It should be possible for the user to dynamically provide an REContainer
-            # But what happens if it is a Fullbranchcontainer?
+            # What happens if it is a Fullbranchcontainer?
+            # ToDo (Feature request): It should be possible for the user to dynamically provide an REContainer
             multi_agent_container = SimpleMultiAgentREContainer(res, agents)
             try:
                 multi_agent_container.re_processes()
