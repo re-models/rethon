@@ -10,12 +10,13 @@ import tarfile
 from theodias import DAGSetBasedDialecticalStructure, SetBasedPosition
 from theodias.util import create_random_arguments, random_positions
 from rethon.util import rethon_loads, rethon_dumps
+import importlib.resources as pkg_resources
 
-from .core import FullBranchREContainer
-from rethon import REState
+from .core import FullBranchREContainer, REState
 from .numpy_implementation import LocalNumpyReflectiveEquilibrium
 from .set_implementation import GlobalSetBasedReflectiveEquilibrium
 
+from . import test_data
 
 # simply call `pytest -vv` on the console from directory of this file to execute the test
 # or **`pytest -vv --log-cli-level INFO`** to show life logs (you simply use pytest logging mechanism, no need to
@@ -30,12 +31,12 @@ model_implementations = [{'tau_module_name': 'theodias',
                           're_module_name': 'rethon',
                           're_class_name': 'StandardGlobalReflectiveEquilibrium'
                           },
-                         # {'tau_module_name': 'theodias',
-                         #  'position_class_name':'StandardPosition',
-                         #  'dialectical_structure_class_name': 'BDDDialecticalStructure',
-                         #  're_module_name': 'rethon',
-                         #   're_class_name': 'StandardLocalReflectiveEquilibrium'
-                         #  },
+                          {'tau_module_name': 'theodias',
+                           'position_class_name':'StandardPosition',
+                           'dialectical_structure_class_name': 'BDDDialecticalStructure',
+                           're_module_name': 'rethon',
+                            're_class_name': 'StandardLocalReflectiveEquilibrium'
+                           },
                          {'tau_module_name': 'theodias',
                           'position_class_name': 'SetBasedPosition',
                           'dialectical_structure_class_name': 'DAGSetBasedDialecticalStructure',
@@ -48,12 +49,12 @@ model_implementations = [{'tau_module_name': 'theodias',
                           're_module_name': 'rethon',
                           're_class_name': 'GlobalNumpyReflectiveEquilibrium'
                           },
-                         # {'tau_module_name': 'theodias',
-                         #  'position_class_name': 'NumpyPosition',
-                         #  'dialectical_structure_class_name': 'BDDNumpyDialecticalStructure',
-                         #  're_module_name': 'rethon',
-                         #  're_class_name': 'LocalNumpyReflectiveEquilibrium'
-                         #  },
+                          {'tau_module_name': 'theodias',
+                           'position_class_name': 'NumpyPosition',
+                           'dialectical_structure_class_name': 'BDDNumpyDialecticalStructure',
+                           're_module_name': 'rethon',
+                           're_class_name': 'LocalNumpyReflectiveEquilibrium'
+                           },
                         {'tau_module_name': 'theodias',
                          'position_class_name': 'BitarrayPosition',
                          'dialectical_structure_class_name': 'DAGBitarrayDialecticalStructure',
@@ -100,7 +101,7 @@ class TestRemodel:
     log = logging.getLogger("RE unit testing ")
 
     def test_basic_re_model_parameters(self):
-        # ToDo: check whether updating and setting dirty works as expected
+        # ToDo: Check whether updating and setting dirty works as expected.
         re = GlobalSetBasedReflectiveEquilibrium(DAGSetBasedDialecticalStructure.from_arguments([], 2))
         #print(re.default_model_parameters())
         assert GlobalSetBasedReflectiveEquilibrium.default_model_parameters() == re.model_parameters()
@@ -473,7 +474,7 @@ class TestRemodel:
                                                      [1, 2, 3, 4]) == 12)
 
 
-    # todo: re-state give None until re_process was called
+    # Todo: Add test for: REState gives None until re_process was called
 
     def test_basic_re_process_standard_example(self):
         for re_impl in model_implementations:
@@ -535,8 +536,6 @@ class TestRemodel:
         # (ii) Model runs in one full branch represent all posible re-processes of one specific model, with a specific set of
         #      model parameter and one specific set of initial commitments.
         # working dir of notebook
-        # ToDo: That does only work if we start pytest from the package dir.
-        #  We should, rather, declare the data files as package resources!
         current_dir = getcwd()
         data_dir = path.join(current_dir, 'test_data')
         data_dir = path.abspath(data_dir)
@@ -560,7 +559,8 @@ class TestRemodel:
                      #    - sentence pool of 6,
                      #    - number of arguments between 3 and 8
                      #    - number of premises between 1 and 2
-                     path.join(data_dir, 'test_data_re_02.json.tar.gz'),
+                     'test_data_re_02.json',
+                     #path.join(data_dir, 'test_data_re_02.json.tar.gz'),
                      # **********************************************
                      # 4 full-branch runs with 2 randomly generated initial positions and
                      # using standard parameters and
@@ -568,7 +568,8 @@ class TestRemodel:
                      #    - sentence pool of 6,
                      #    - number of arguments between 3 and 8
                      #    - number of premises between 1 and 2
-                     path.join(data_dir, 'test_data_re_03.json.tar.gz'),
+                     'test_data_re_03.json',
+                     ##path.join(data_dir, 'test_data_re_03.json.tar.gz'),
                      # **********************************************
                      # 24 full-branch runs with 2 randomly generated initial positions and
                      # 2 randomly generated dialectical structures with the following parameters:
@@ -592,9 +593,10 @@ class TestRemodel:
                      #    - number of premises between 1 and 2
                      # and with a variation of alpha values without extreme values:
                      # [[0.25, 0.25, 0.5], [0.25, 0.5, 0.25], [0.5, 0.25, 0.25]]
-                     path.join(data_dir, 'test_data_re_05.json.tar.gz'),
+                     'test_data_re_05.json',
+                     ##path.join(data_dir, 'test_data_re_05.json.tar.gz'),
                      # **********************************************
-                     # ToDo: (to discuss with @Andreas)
+                     # ToDo: Check what's wrong with the flw. test data set.
                      # We have with this data set a consistency problem. [BC]: Do not know so far
                      # whether this is a problem or due to rounding errors (see remark above). The problem is
                      # that the extreme values cause major underdetermination of states (=lots of branches).
@@ -616,18 +618,22 @@ class TestRemodel:
                     ]
 
         for tar_file in tar_files:
+            #### Based on local tars and loading them
             # load all test data as python dict
-            with tarfile.open(tar_file) as tar:
-                for tarinfo in tar:
-                    json_name = tarinfo.name
-                tar.extractall(data_dir)
-            with open(path.join(data_dir, json_name), "r") as json_file:
-                ensemble_list_dict = json.load(json_file)
-            remove(path.join(data_dir, json_name))
-            #with open(data_file, "r") as json_file:
-            #    ensemble_list_dict = json.load(json_file)
+            # with tarfile.open(tar_file) as tar:
+            #     for tarinfo in tar:
+            #         json_name = tarinfo.name
+            #     tar.extractall(data_dir)
+            # with open(path.join(data_dir, json_name), "r") as json_file:
+            #     ensemble_list_dict = json.load(json_file)
+            # remove(path.join(data_dir, json_name))
+            ##### Based on jsons and loading them via package resources
+            with pkg_resources.path(test_data, tar_file) as file_path:
+                with open(file_path) as json_file:
+                    ensemble_list_dict = json.load(json_file)
+
             self.log.info(f"Testing re-process consistency with {len(ensemble_list_dict)} full-branch "
-                          f"model runs from {json_name}.")
+                          f"model runs from {tar_file}.")
             self.log.info(f"Testing the following implementations: "
                           f"{[impl['re_class_name'] for impl in model_implementations]}")
             re_container = FullBranchREContainer()
@@ -653,8 +659,7 @@ class TestRemodel:
                                                                 impl['re_class_name'])
                         re = reflective_equilibrium_class_(ds)
                         re.set_model_parameters(branches[0]['model_parameters'])
-                        # ToDo (@Basti): will be later set by `set_model_parameters`
-                        # LocalNumpyRE should have the same results if we set neighbourdepth to sentencepool
+
 
                         # initial position
                         position_class_ = getattr(importlib.import_module(impl['tau_module_name']),
@@ -663,7 +668,7 @@ class TestRemodel:
                                                             branches[0]['state']['evolution'][0][
                                                                 'n_unnegated_sentence_pool'])
                         # running the model
-
+                        # LocalNumpyRE should have the same results if we set neighbourdepth to sentencepool
                         if impl['re_class_name'] == 'LocalNumpyReflectiveEquilibrium' or \
                            impl['re_class_name'] == 'StandardLocalReflectiveEquilibrium':
                             #re.set_neighbourhood_depth(ds.sentence_pool().sentence_pool())

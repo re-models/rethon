@@ -4,8 +4,6 @@ import importlib.resources as pkg_resources
 from . import config
 
 
-# Todo: Add and test checking dependencies
-
 from .base import (
     ReflectiveEquilibrium,
     StandardReflectiveEquilibrium,
