@@ -726,7 +726,7 @@ class GlobalREEnsembleGenerator(SimpleEnsembleGenerator):
 
         # RE-states
         re_states = {(theory, commitments) for (theory, commitments) in global_optima
-                     if dialectical_structure.is_consistent(BitarrayPosition.union({commitments, theory}))}
+                     if dialectical_structure.is_consistent(commitments.union(theory))}
         self.add_obj('re_states', re_states)
 
         # full RE-states
@@ -1198,13 +1198,12 @@ def _add_simple_data_items(ensemble_generator: AbstractEnsembleGenerator):
     # whether the union of final theory & commitments is dialectically consistent
     ensemble_generator.add_item('fixed_point_dia_consistent',
                                 lambda x: x.dialectical_structure().is_consistent(x.state().last_commitments().union(x.state().last_theory())))
-              #                      BitarrayPosition.union({x.state().last_commitments(), x.state().last_theory()})))
+
+    def simpleHamming(pos1, pos2):
+        return pos1.union(pos2).difference(pos1.intersection(pos2))
+
     ensemble_generator.add_item('init_final_coms_simple_hamming',
-                                lambda x: len(BitarrayPosition.union({x.state().last_commitments(), x
-                                                                     .state().initial_commitments()}).as_set().
-                                              difference(BitarrayPosition.intersection({x.state().last_commitments(),
-                                                                                        x.initial_commitments()}).as_set())))
-    # SetBasedPosition.union({pos1, pos2}).difference(SetBasedPosition.intersection({pos1, pos2})).size()
+                                lambda x: simpleHamming(x.state().last_commitments(), x.state().initial_commitments()).size())
     # hamming distance as defined in BBB with d_3 = 1, d_2 = 1, d_1 = 1, d_0 = 0
     ensemble_generator.add_item('init_final_coms_hamming',
                                 lambda x: x.reflective_equilibrium().hamming_distance(x.initial_commitments(),
@@ -1267,8 +1266,7 @@ def _add_full_branch_data_items(ensemble_generator: AbstractEnsembleGenerator):
                                 lambda x: [x.dialectical_structure().is_consistent(commitments)
                                            for (theory, commitments) in x.get_obj('fixed_points')])
     ensemble_generator.add_item('fp_union_consistent',
-                                lambda x: [x.dialectical_structure().is_consistent(
-                                    BitarrayPosition.union({commitments, theory}))
+                                lambda x: [x.dialectical_structure().is_consistent(theory.union(commitments))
                                            for (theory, commitments) in x.get_obj('fixed_points')])
     ensemble_generator.add_item('fp_account',
                                 lambda x: [x.reflective_equilibrium().account(commitments, theory)
@@ -1303,7 +1301,7 @@ def _add_global_data_items(ensemble_generator: AbstractEnsembleGenerator):
                   lambda x: [x.dialectical_structure().is_consistent(commitments)
                              for (theory, commitments) in x.get_obj('global_optima')])
     ensemble_generator.add_item('go_union_consistent',
-                  lambda x: [x.dialectical_structure().is_consistent(BitarrayPosition.union({commitments, theory}))
+                  lambda x: [x.dialectical_structure().is_consistent(theory.union(commitments))
                              for (theory, commitments) in x.get_obj('global_optima')])
     ensemble_generator.add_item('go_full_re_state',
                   lambda x: [global_optimum in x.get_obj('full_re_states')
@@ -1375,8 +1373,7 @@ def _fp_comms_min_ax_bases(dia_structure, final_commitments):
 
 
 def _fp_comms_min_ax_bases_given_theory(dia_structure, final_commitments, final_theory):
-    # ToDo (@Basti): rewrite "casting" if we have difference function of positions (axioms.as_set())
-    if dia_structure.is_consistent(BitarrayPosition.union({final_commitments, final_theory})):
+    if dia_structure.is_consistent(final_theory.union(final_commitments)):
         return [axioms for axioms in _min_ax_bases_com_given_theory(dia_structure,
                                                                        final_commitments,
                                                                        final_theory)]
@@ -1412,8 +1409,7 @@ def _min_ax_bases_com_given_theory(diastructure, commitments, theory):
     elif not diastructure.is_consistent(theory):
         raise ValueError("The theory is required to be dialectically consistent.")
 
-    axioms_sets_coms_given_theory = diastructure.axioms(commitments,
-                                                        BitarrayPosition.union({commitments, theory}).subpositions())
+    axioms_sets_coms_given_theory = diastructure.axioms(commitments, commitments.union(theory).subpositions())
     res = []
     for axioms in axioms_sets_coms_given_theory:
         if len(res) > 0:
