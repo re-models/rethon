@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="rethon",
-    version="0.0.3a1",
+    version="0.0.4a1",
     author="Claus Beisbart, Gregor Betz, Georg Brun, Sebastian Cacean, Andreas Freivogel, Richard Lohse",
     author_email="claus.beisbart@philo.unibe.ch, gregor.betz@kit.edu, georg.brun@philo.unibe.ch, "
                  "sebastian.cacean@kit.edu, andreas.freivogel@philo.unibe.ch, richard.lohse@kit.edu",
@@ -15,8 +15,7 @@ setup(
     url="https://github.com/re-models/rethon",
     packages=find_packages(),
     package_dir={'rethon': 'rethon'},
-    # Todo: add testdata similarly as config files (such that we can load it via `importlib.resources.path`)
-    package_data={'rethon': ['config/*.json']},
+    package_data={'rethon': ['config/*.json', 'test_data/*.tar.gz','test_data/*.json' ]},
     classifiers=["Programming Language :: Python :: 3.8",
                  "License :: OSI Approved :: MIT License",
                  "Operating System :: OS Independent"],
