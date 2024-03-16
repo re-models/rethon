@@ -536,12 +536,14 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
     data items are added as well:
 
     * :code:`n_branches`: Number of branches of the process (i.e. paths to all fixed points w.r.t. the given initial
-      commitments.
+      commitments. Note that :code:`n_branches` will not necessarily coincide with the size of the set
+      :code:`fixed_points` (:code:`n_fixed_points`) since different branches may end up in the same fixed point.
+    * :code:`fixed_points`: The set of fixed points as theory-commitments-tuples (unique fixed points).
+    * :code:`n_fixed_points`: Number of fixed points (again, which is not necessarily identical
+      to the number of branches).
 
     *Fixed points*:
 
-    * :code:`fixed_points`: All fixed points as theory-commitments-tuples.
-    * :code:`n_fixed_points`: Number of fixed points
     * :code:`fp_coms_consistent`: A list of bools (:code:`List[bool]`) indicating whether commitments of the `fixed_points`
       are dialectically consistent. The order of the list represents the order in `fixed_points`.
     * :code:`fp_union_consistent`:  A list of bools (:code:`List[bool]`) indicating whether the unions of a
@@ -563,6 +565,26 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
                  create_branches: bool = False,
                  max_branches: int = 50,
                  implementations: List[Dict] = None):
+        """
+
+        :param arguments_list: A list of dialectical structures. Each dialectical structure is represented
+            as a list of arguments (:code:`List[List[int]]`).
+        :param n_sentence_pool: Size of the (unnegated) sentence pool.
+        :param initial_commitments_list: A list of initial commitments.
+        :param model_parameters_list: A list of model parameter.
+        :param max_re_length: A threshold for how long individual RE processes can maximally run. Processes that
+            exceed this value, will be interrupted. However, the ensemble generator itself will not be interrupted.
+            Interrupted model runs will appear in the result set with an error code (field :code:`error_code`).
+        :param create_branches: If :code:`True`, the ensemble generator will track every branch. Every branch will be
+            represented by an individual result in the resulting iterator (or an individual row in the resulting csv).
+            The results will contain multiple redundancies: The field :code:`fixed_points` is a set of all fixed points
+            which will be reproduced in every row that represents a branch of a model run. Similarly, the field
+            :code:`global_optima` will contain the same set of global optima for each branch.
+            Note that :code:`n_branches` will not necessarily coincide with the size of the set :code:`fixed_points`
+            (:code:`n_fixed_points`) since different branches may end up in the same fixed point.
+        :param max_branches:
+        :param implementations:
+        """
         super().__init__(arguments_list,
                          n_sentence_pool,
                          initial_commitments_list,
@@ -615,7 +637,7 @@ class SimpleEnsembleGenerator(EnsembleGenerator):
         """Overrides :py:class:`AbstractEnsembleGenerator.init_ensemble_fields`.
 
         Adds the following data object that can be accessed via :py:func:`AbstractEnsembleGenerator.get_obj`:
-        'n_branches' and fixed_points', if the ensemble generator is set up to run every branch.
+        'n_branches' and 'fixed_points', if the ensemble generator is set up to run every branch.
         """
         self.add_obj('n_branches', len(ensemble_states))
 
@@ -659,9 +681,9 @@ class GlobalREEnsembleGenerator(SimpleEnsembleGenerator):
 
     * :code:`fp_full_re_state`:  A list of bools (:code:`List[bool]`) indicating whether the `fixed_points` are full
       RE-states (i.e. whether the dialectical closure of the theory is identical to the commitments). The order of the list
-      represents the order in `fixed_points`.
+      represents the order in `fixed_points`. (This field is only available if :code:`create_branches` is set.)
     * :code:`fp_global_optimum`: A list of bools (:code:`List[bool]`) indicating whether the `fixed_points` are
-      `global_optima`.
+      `global_optima`. (This field is only available if :code:`create_branches` is set.)
 
     Additional items for global optima:
 
@@ -677,7 +699,7 @@ class GlobalREEnsembleGenerator(SimpleEnsembleGenerator):
       represents the order in `global_optima`.
     * :code:`go_fixed_point`: A list of bools (:code:`List[bool]`) indicating which global optima are fixed points
       (i.e. which global optima are reachable via a re-process). The order of the list
-      represents the order in `global_optima`.
+      represents the order in `global_optima`. (This field is only available if :code:`create_branches` is set.)
     * :code:`go_account`: The account of each global optimum as :code:`List[float]`. The order of the list represents the
       order in `global_optima`.
     * :code:`go_faithfulness`: The faithfulness of each global optimum as :code:`List[float]`. The order of the list
