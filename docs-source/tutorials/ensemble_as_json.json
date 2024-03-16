@@ -5,35 +5,36 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
+                        4,
+                        5,
+                        2
                     ],
                     [
-                        2,
-                        6
+                        1,
+                        6,
+                        -2
                     ],
                     [
                         -3,
                         1
                     ],
                     [
-                        -4,
-                        1
+                        -3,
+                        2
                     ],
                     [
-                        3,
-                        -1,
+                        -4,
                         -6
                     ],
                     [
-                        -5,
-                        2,
-                        4
+                        3,
+                        1,
+                        -2
                     ],
                     [
-                        1,
-                        3
+                        -5,
+                        -1,
+                        4
                     ]
                 ],
                 "tau_name": null,
@@ -64,182 +65,29 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
-                            4,
-                            5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                -6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -4
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            3,
+                            -6,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -4
                         ]
                     }
                 ],
@@ -262,35 +110,36 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
+                        4,
+                        5,
+                        2
                     ],
                     [
-                        2,
-                        6
+                        1,
+                        6,
+                        -2
                     ],
                     [
                         -3,
                         1
                     ],
                     [
-                        -4,
-                        1
+                        -3,
+                        2
                     ],
                     [
-                        3,
-                        -1,
+                        -4,
                         -6
                     ],
                     [
-                        -5,
-                        2,
-                        4
+                        3,
+                        1,
+                        -2
                     ],
                     [
-                        1,
-                        3
+                        -5,
+                        -1,
+                        4
                     ]
                 ],
                 "tau_name": null,
@@ -321,110 +170,277 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
+                            3,
                             4,
                             5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            5,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
                             4,
                             5,
                             -6,
-                            -3,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            5,
-                            -1
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3,
-                            -1
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            5,
+                            -4,
                             -1
                         ]
                     }
                 ],
                 "alternatives": [
                     [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
                     [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -5
-                            ]
-                        }
+                        4,
+                        5,
+                        2
                     ],
                     [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                4,
-                                5,
-                                -6,
-                                -3,
-                                -2
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                4,
-                                5,
-                                -1,
-                                -6,
-                                -3,
-                                -2
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                -6
-                            ]
-                        },
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            5,
+                            6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            5,
+                            6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
@@ -435,14 +451,802 @@
                                 -6,
                                 -1
                             ]
-                        },
+                        }
+                    ],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            5,
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            5,
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -5
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            -6,
+                            -5,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -5
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            -6,
+                            -5,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -5
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
-                                1,
+                                -5,
+                                -1
+                            ]
+                        }
+                    ],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -1,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -1,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            3,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            3,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [
+                        {
+                            "n_unnegated_sentence_pool": 6,
+                            "position": [
+                                -6,
+                                3,
+                                -1
+                            ]
+                        }
+                    ],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "StandardGlobalReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            1,
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            1,
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -2
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [
+                        {
+                            "n_unnegated_sentence_pool": 6,
+                            "position": [
                                 3,
                                 4,
                                 5,
+                                -1,
                                 -6,
                                 -2
                             ]
@@ -467,35 +1271,35 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
+                        -4,
+                        2
                     ],
                     [
                         -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
+                        -2
                     ],
                     [
                         1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
                         3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
                     ]
                 ],
                 "tau_name": null,
@@ -526,359 +1330,69 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            3,
+                            -6,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
+                            -6,
                             -4,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            6
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -4
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -1,
-                                6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
                             2,
-                            4,
+                            3,
                             5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                -6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
                             2,
                             3,
                             5,
-                            6,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
                             2,
                             3,
                             5,
-                            6,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
-                            -4
+                            -6,
+                            -1
                         ]
                     }
                 ],
@@ -909,166 +1423,35 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
                         -2
                     ],
                     [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
                         1,
+                        -5,
                         -4
                     ],
                     [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
                         -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -3
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                5
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        }
-                    ],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
+                        -6,
+                        1
                     ],
                     [
                         4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
+                        3
                     ],
                     [
                         2,
+                        4,
+                        5
+                    ],
+                    [
                         -1,
-                        6
+                        2
                     ]
                 ],
                 "tau_name": null,
@@ -1100,530 +1483,88 @@
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -3,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            6,
-                            -1,
-                            -5,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -3,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            6,
-                            -1,
-                            -5,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -3,
-                            -1,
-                            6
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                5,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                4,
-                                -1,
-                                6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
                             4,
                             5,
                             -6,
-                            -3
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            4,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             2,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
+                            3,
                             4,
                             5,
                             -6,
-                            -3
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            4,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             2,
-                            5
+                            3,
+                            4,
+                            5,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            4,
+                            -1
                         ]
                     }
                 ],
                 "alternatives": [
                     [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -3
-                            ]
-                        }
-                    ],
                     [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3
-                        ]
-                    }
-                ],
-                "alternatives": [
                     [],
                     [
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
-                                -4
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -1,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4,
-                                -1
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
+                                -6,
                                 -1
                             ]
                         }
                     ],
                     [],
                     [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            5,
-                            -6,
-                            -4,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            5,
-                            -6,
-                            -4,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -3
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
                     [],
                     []
                 ],
@@ -1633,167 +1574,9 @@
                     2,
                     3,
                     4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "StandardGlobalReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            5,
-                            6,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            5,
-                            6,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -3,
-                                -1,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                4,
-                                -1,
-                                6
-                            ]
-                        }
-                    ],
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                5,
-                                6
-                            ]
-                        }
-                    ],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
+                    5,
+                    6,
+                    7
                 ]
             }
         },
@@ -1802,35 +1585,36 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
+                        4,
+                        5,
+                        2
                     ],
                     [
-                        2,
-                        6
+                        1,
+                        6,
+                        -2
                     ],
                     [
                         -3,
                         1
                     ],
                     [
-                        -4,
-                        1
+                        -3,
+                        2
                     ],
                     [
-                        3,
-                        -1,
+                        -4,
                         -6
                     ],
                     [
-                        -5,
-                        2,
-                        4
+                        3,
+                        1,
+                        -2
                     ],
                     [
-                        1,
-                        3
+                        -5,
+                        -1,
+                        4
                     ]
                 ],
                 "tau_name": null,
@@ -1861,182 +1645,29 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
-                            4,
-                            5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5,
-                                -6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -4
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            3,
+                            -6,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -4
                         ]
                     }
                 ],
@@ -2059,35 +1690,36 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
+                        4,
+                        5,
+                        2
                     ],
                     [
-                        2,
-                        6
+                        1,
+                        6,
+                        -2
                     ],
                     [
                         -3,
                         1
                     ],
                     [
-                        -4,
-                        1
+                        -3,
+                        2
                     ],
                     [
-                        3,
-                        -1,
+                        -4,
                         -6
                     ],
                     [
-                        -5,
-                        2,
-                        4
+                        3,
+                        1,
+                        -2
                     ],
                     [
-                        1,
-                        3
+                        -5,
+                        -1,
+                        4
                     ]
                 ],
                 "tau_name": null,
@@ -2118,54 +1750,665 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
+                            3,
                             4,
                             5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            5,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            -6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            5,
+                            -4,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            2,
                             3,
                             4,
                             5,
-                            -6
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             5,
+                            6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            5,
+                            6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [
+                        {
+                            "n_unnegated_sentence_pool": 6,
+                            "position": [
+                                2,
+                                3,
+                                4,
+                                5,
+                                -6,
+                                -1
+                            ]
+                        }
+                    ],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        4,
+                        5,
+                        2
+                    ],
+                    [
+                        1,
+                        6,
+                        -2
+                    ],
+                    [
+                        -3,
+                        1
+                    ],
+                    [
+                        -3,
+                        2
+                    ],
+                    [
+                        -4,
+                        -6
+                    ],
+                    [
+                        3,
+                        1,
+                        -2
+                    ],
+                    [
+                        -5,
+                        -1,
+                        4
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            5,
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            5,
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -4,
+                            -1
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -5,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            -6,
+                            -5,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -5,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            2,
+                            3,
+                            -6,
+                            -5,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -5,
                             -1
                         ]
                     }
@@ -2176,71 +2419,415 @@
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
-                                2,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
+                                -6,
                                 -5
                             ]
                         }
                     ],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -1,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -1,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -4,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            3,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            3,
+                            -4
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
                     [
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
-                                2,
-                                4,
-                                5,
                                 -6,
-                                -3,
+                                3,
                                 -1
                             ]
-                        },
+                        }
+                    ],
+                    [],
+                    [],
+                    []
+                ],
+                "time_line": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            }
+        },
+        {
+            "model_name": "GlobalStandardReflectiveEquilibrium",
+            "dialectical_structure": {
+                "arguments": [
+                    [
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
+                        -2
+                    ],
+                    [
+                        1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
+                        3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
+                    ]
+                ],
+                "tau_name": null,
+                "n_unnegated_sentence_pool": 6
+            },
+            "model_parameters": {
+                "weights": {
+                    "account": 0.5,
+                    "faithfulness": 0.25,
+                    "systematicity": 0.25
+                },
+                "account_penalties": [
+                    0.0,
+                    0.30000001192092896,
+                    1.0,
+                    1.0
+                ],
+                "faithfulness_penalties": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "state": {
+                "finished": true,
+                "evolution": [
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            1,
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            1,
+                            3,
+                            4,
+                            5,
+                            -6,
+                            -2
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -2
+                        ]
+                    }
+                ],
+                "alternatives": [
+                    [],
+                    [],
+                    [
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
-                                1,
-                                4,
-                                5,
-                                -6,
-                                -3,
-                                -2
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
+                                3,
                                 4,
                                 5,
                                 -1,
                                 -6,
-                                -3,
-                                -2
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                3,
-                                4,
-                                5,
-                                -6,
-                                -1
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                3,
-                                4,
-                                5,
-                                -6,
                                 -2
                             ]
                         }
@@ -2264,35 +2851,35 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
+                        -4,
+                        2
                     ],
                     [
                         -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
+                        -2
                     ],
                     [
                         1,
+                        -5,
+                        -4
+                    ],
+                    [
+                        -5,
+                        -6,
+                        1
+                    ],
+                    [
+                        4,
                         3
+                    ],
+                    [
+                        2,
+                        4,
+                        5
+                    ],
+                    [
+                        -1,
+                        2
                     ]
                 ],
                 "tau_name": null,
@@ -2323,359 +2910,69 @@
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            3,
+                            -6,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
+                            -6,
                             -4,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -4
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                6
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4,
-                                -1
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
                             2,
-                            4,
+                            3,
                             5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            -6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            -6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            4,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                1,
-                                2,
-                                4,
-                                5,
-                                6,
-                                -3
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -1,
-                        5
-                    ],
-                    [
-                        2,
-                        6
-                    ],
-                    [
-                        -3,
-                        1
-                    ],
-                    [
-                        -4,
-                        1
-                    ],
-                    [
-                        3,
-                        -1,
-                        -6
-                    ],
-                    [
-                        -5,
-                        2,
-                        4
-                    ],
-                    [
-                        1,
-                        3
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
                             -4,
-                            -1,
-                            6
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4,
-                            6
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
-                            3,
-                            -4,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
                             2,
                             3,
                             5,
-                            6,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            1,
                             2,
                             3,
                             5,
-                            6,
-                            -4
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
-                            -4
+                            -6,
+                            -1
                         ]
                     }
                 ],
@@ -2706,166 +3003,35 @@
             "dialectical_structure": {
                 "arguments": [
                     [
-                        6,
+                        -4,
+                        2
+                    ],
+                    [
+                        -3,
                         -2
                     ],
                     [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
                         1,
+                        -5,
                         -4
                     ],
                     [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
                         -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -3
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                5
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        }
-                    ],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
+                        -6,
+                        1
                     ],
                     [
                         4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
+                        3
                     ],
                     [
                         2,
+                        4,
+                        5
+                    ],
+                    [
                         -1,
-                        6
+                        2
                     ]
                 ],
                 "tau_name": null,
@@ -2897,689 +3063,88 @@
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6,
-                            -1,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6,
-                            -1,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -3,
-                                6,
-                                -1
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                4,
-                                -1,
-                                6
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
                             4,
                             5,
                             -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
-                            4,
-                            5,
-                            -6,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            2,
-                            -4
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                5
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -3
-                            ]
-                        }
-                    ],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -4,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            -4,
+                            -6,
+                            4,
                             -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            -4
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3
-                            ]
-                        }
-                    ],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -4,
-                                6
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -4,
-                                6,
-                                -1
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                3,
-                                -4,
-                                -1
-                            ]
-                        }
-                    ],
-                    [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
-                    [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
                             2,
+                            3,
                             4,
                             5,
                             -6,
-                            -3
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             2,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
+                            3,
                             5,
                             -6,
-                            -4,
-                            -3
+                            -1
+                        ]
+                    },
+                    {
+                        "n_unnegated_sentence_pool": 6,
+                        "position": [
+                            -6,
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
                             2,
-                            -3
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            2,
+                            3,
                             5,
                             -6,
-                            -4,
-                            -3
+                            -1
                         ]
                     },
                     {
                         "n_unnegated_sentence_pool": 6,
                         "position": [
-                            2,
-                            -3
+                            -6,
+                            -1
                         ]
                     }
                 ],
                 "alternatives": [
                     [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                5
-                            ]
-                        },
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                2,
-                                -4
-                            ]
-                        }
-                    ],
                     [],
                     [],
-                    [],
-                    []
-                ],
-                "time_line": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ]
-            }
-        },
-        {
-            "model_name": "GlobalStandardReflectiveEquilibrium",
-            "dialectical_structure": {
-                "arguments": [
                     [
-                        6,
-                        -2
-                    ],
-                    [
-                        4,
-                        -3,
-                        -6
-                    ],
-                    [
-                        5,
-                        1,
-                        -4
-                    ],
-                    [
-                        5,
-                        1
-                    ],
-                    [
-                        -4,
-                        2,
-                        -3
-                    ],
-                    [
-                        -5,
-                        -3,
-                        -2
-                    ],
-                    [
-                        2,
-                        -1,
-                        6
-                    ]
-                ],
-                "tau_name": null,
-                "n_unnegated_sentence_pool": 6
-            },
-            "model_parameters": {
-                "weights": {
-                    "account": 0.5,
-                    "faithfulness": 0.25,
-                    "systematicity": 0.25
-                },
-                "account_penalties": [
-                    0.0,
-                    0.30000001192092896,
-                    1.0,
-                    1.0
-                ],
-                "faithfulness_penalties": [
-                    0.0,
-                    0.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "state": {
-                "finished": true,
-                "evolution": [
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            -4,
-                            -1,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5,
-                            6
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            5,
-                            6,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            1,
-                            3,
-                            5,
-                            6,
-                            -4,
-                            -2
-                        ]
-                    },
-                    {
-                        "n_unnegated_sentence_pool": 6,
-                        "position": [
-                            3,
-                            5
-                        ]
-                    }
-                ],
-                "alternatives": [
-                    [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                -3,
-                                6,
-                                -1
-                            ]
-                        },
                         {
                             "n_unnegated_sentence_pool": 6,
                             "position": [
                                 4,
-                                -1,
-                                6
+                                -1
                             ]
                         }
                     ],
                     [],
-                    [
-                        {
-                            "n_unnegated_sentence_pool": 6,
-                            "position": [
-                                5,
-                                6
-                            ]
-                        }
-                    ],
+                    [],
                     [],
                     []
                 ],
@@ -3589,7 +3154,9 @@
                     2,
                     3,
                     4,
-                    5
+                    5,
+                    6,
+                    7
                 ]
             }
         }
