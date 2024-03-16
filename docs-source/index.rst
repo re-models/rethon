@@ -1,6 +1,6 @@
 .. _rethon-docs-label:
 
-rethon
+Rethon
 ======
 
 A Python package for modeling the method of reflective equilibrium based on |bbb2021|.
@@ -14,10 +14,11 @@ With :code:`pip` (👉 |rethon_pypi|)
 
     pip install rethon
 
+
 From the source code:
 
 
-You can install the package locally, by
+You can install the package from the source code by
 
 * first git-cloning the repository:
 
@@ -25,8 +26,7 @@ You can install the package locally, by
 
 * and then installing the package by running ':code:`pip install -e .`' from the local directory of
   the package (e.g. :code:`local-path-to-repository/rethon`) that contains the setup file :code:`setup.py`.
-  (The :code:`-e`-option will install the package in the editable mode, allowing you to
-  change the source code.)
+  (The :code:`-e`-option will install the package in the editable mode.)
 
 .. note:: The package requires a python version >= 3.8 and depends on the
     |theodias| package, which will be installed automatically by pip.
