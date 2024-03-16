@@ -951,12 +951,14 @@ the achievement of initial commitments and the first chosen theory cannot be fur
 data items are added as well:</p>
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">n_branches</span></code>: Number of branches of the process (i.e. paths to all fixed points w.r.t. the given initial
-commitments.</p></li>
+commitments. Note that <code class="code docutils literal notranslate"><span class="pre">n_branches</span></code> will not necessarily coincide with the size of the set
+<code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code> (<code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>) since different branches may end up in the same fixed point.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code>: The set of fixed points as theory-commitments-tuples (unique fixed points).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>: Number of fixed points (again, which is not necessarily identical
+to the number of branches).</p></li>
 </ul>
 <p><em>Fixed points</em>:</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code>: All fixed points as theory-commitments-tuples.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>: Number of fixed points</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">fp_coms_consistent</span></code>: A list of bools (<code class="code docutils literal notranslate"><span class="pre">List[bool]</span></code>) indicating whether commitments of the <cite>fixed_points</cite>
 are dialectically consistent. The order of the list represents the order in <cite>fixed_points</cite>.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">fp_union_consistent</span></code>:  A list of bools (<code class="code docutils literal notranslate"><span class="pre">List[bool]</span></code>) indicating whether the unions of a
@@ -1029,14 +1031,23 @@ the order in <cite>fixed_points</cite>.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arguments_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>n_sentence_pool</strong> (<em>int</em>) – </p></li>
-<li><p><strong>initial_commitments_list</strong> (<em>List</em><em>[</em><em>Set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>model_parameters_list</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
-<li><p><strong>max_re_length</strong> (<em>int</em>) – </p></li>
-<li><p><strong>create_branches</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>max_branches</strong> (<em>int</em>) – </p></li>
-<li><p><strong>implementations</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
+<li><p><strong>arguments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]</span>) – A list of dialectical structures. Each dialectical structure is represented
+as a list of arguments (<code class="code docutils literal notranslate"><span class="pre">List[List[int]]</span></code>).</p></li>
+<li><p><strong>n_sentence_pool</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Size of the (unnegated) sentence pool.</p></li>
+<li><p><strong>initial_commitments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]</span>) – A list of initial commitments.</p></li>
+<li><p><strong>model_parameters_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – A list of model parameter.</p></li>
+<li><p><strong>max_re_length</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – A threshold for how long individual RE processes can maximally run. Processes that
+exceed this value, will be interrupted. However, the ensemble generator itself will not be interrupted.
+Interrupted model runs will appear in the result set with an error code (field <code class="code docutils literal notranslate"><span class="pre">error_code</span></code>).</p></li>
+<li><p><strong>create_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, the ensemble generator will track every branch. Every branch will be
+represented by an individual result in the resulting iterator (or an individual row in the resulting csv).
+The results will contain multiple redundancies: The field <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code> is a set of all fixed points
+which will be reproduced in every row that represents a branch of a model run. Similarly, the field
+<code class="code docutils literal notranslate"><span class="pre">global_optima</span></code> will contain the same set of global optima for each branch.
+Note that <code class="code docutils literal notranslate"><span class="pre">n_branches</span></code> will not necessarily coincide with the size of the set <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code>
+(<code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>) since different branches may end up in the same fixed point.</p></li>
+<li><p><strong>max_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – </p></li>
+<li><p><strong>implementations</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -1047,7 +1058,7 @@ the order in <cite>fixed_points</cite>.</p></li>
 <span class="sig-name descname"><span class="pre">init_ensemble_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ensemble_states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialectical_structure</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rethon.SimpleEnsembleGenerator.init_ensemble_fields" title="Link to this definition">#</a></dt>
 <dd><p>Overrides <a class="reference internal" href="#rethon.AbstractEnsembleGenerator.init_ensemble_fields" title="rethon.AbstractEnsembleGenerator.init_ensemble_fields"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractEnsembleGenerator.init_ensemble_fields</span></code></a>.</p>
 <p>Adds the following data object that can be accessed via <a class="reference internal" href="#rethon.AbstractEnsembleGenerator.get_obj" title="rethon.AbstractEnsembleGenerator.get_obj"><code class="xref py py-func docutils literal notranslate"><span class="pre">AbstractEnsembleGenerator.get_obj()</span></code></a>:
-‘n_branches’ and fixed_points’, if the ensemble generator is set up to run every branch.</p>
+‘n_branches’ and ‘fixed_points’, if the ensemble generator is set up to run every branch.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1125,9 +1136,9 @@ in <code class="code docutils literal notranslate"><span class="pre">fixed_point
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">fp_full_re_state</span></code>:  A list of bools (<code class="code docutils literal notranslate"><span class="pre">List[bool]</span></code>) indicating whether the <cite>fixed_points</cite> are full
 RE-states (i.e. whether the dialectical closure of the theory is identical to the commitments). The order of the list
-represents the order in <cite>fixed_points</cite>.</p></li>
+represents the order in <cite>fixed_points</cite>. (This field is only available if <code class="code docutils literal notranslate"><span class="pre">create_branches</span></code> is set.)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">fp_global_optimum</span></code>: A list of bools (<code class="code docutils literal notranslate"><span class="pre">List[bool]</span></code>) indicating whether the <cite>fixed_points</cite> are
-<cite>global_optima</cite>.</p></li>
+<cite>global_optima</cite>. (This field is only available if <code class="code docutils literal notranslate"><span class="pre">create_branches</span></code> is set.)</p></li>
 </ul>
 <p>Additional items for global optima:</p>
 <ul class="simple">
@@ -1146,7 +1157,7 @@ RE-states (i.e. whether the dialectical closure of the theory is identical to th
 represents the order in <cite>global_optima</cite>.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">go_fixed_point</span></code>: A list of bools (<code class="code docutils literal notranslate"><span class="pre">List[bool]</span></code>) indicating which global optima are fixed points
 (i.e. which global optima are reachable via a re-process). The order of the list
-represents the order in <cite>global_optima</cite>.</p></li>
+represents the order in <cite>global_optima</cite>. (This field is only available if <code class="code docutils literal notranslate"><span class="pre">create_branches</span></code> is set.)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">go_account</span></code>: The account of each global optimum as <code class="code docutils literal notranslate"><span class="pre">List[float]</span></code>. The order of the list represents the
 order in <cite>global_optima</cite>.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">go_faithfulness</span></code>: The faithfulness of each global optimum as <code class="code docutils literal notranslate"><span class="pre">List[float]</span></code>. The order of the list
@@ -1221,14 +1232,23 @@ represents the order in <cite>global_optima</cite>.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arguments_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>n_sentence_pool</strong> (<em>int</em>) – </p></li>
-<li><p><strong>initial_commitments_list</strong> (<em>List</em><em>[</em><em>Set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>model_parameters_list</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
-<li><p><strong>max_re_length</strong> (<em>int</em>) – </p></li>
-<li><p><strong>create_branches</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>max_branches</strong> (<em>int</em>) – </p></li>
-<li><p><strong>implementations</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
+<li><p><strong>arguments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]</span>) – A list of dialectical structures. Each dialectical structure is represented
+as a list of arguments (<code class="code docutils literal notranslate"><span class="pre">List[List[int]]</span></code>).</p></li>
+<li><p><strong>n_sentence_pool</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Size of the (unnegated) sentence pool.</p></li>
+<li><p><strong>initial_commitments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]</span>) – A list of initial commitments.</p></li>
+<li><p><strong>model_parameters_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – A list of model parameter.</p></li>
+<li><p><strong>max_re_length</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – A threshold for how long individual RE processes can maximally run. Processes that
+exceed this value, will be interrupted. However, the ensemble generator itself will not be interrupted.
+Interrupted model runs will appear in the result set with an error code (field <code class="code docutils literal notranslate"><span class="pre">error_code</span></code>).</p></li>
+<li><p><strong>create_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, the ensemble generator will track every branch. Every branch will be
+represented by an individual result in the resulting iterator (or an individual row in the resulting csv).
+The results will contain multiple redundancies: The field <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code> is a set of all fixed points
+which will be reproduced in every row that represents a branch of a model run. Similarly, the field
+<code class="code docutils literal notranslate"><span class="pre">global_optima</span></code> will contain the same set of global optima for each branch.
+Note that <code class="code docutils literal notranslate"><span class="pre">n_branches</span></code> will not necessarily coincide with the size of the set <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code>
+(<code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>) since different branches may end up in the same fixed point.</p></li>
+<li><p><strong>max_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – </p></li>
+<li><p><strong>implementations</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -1346,14 +1366,23 @@ represents the order in <cite>global_optima</cite>.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arguments_list</strong> (<em>List</em><em>[</em><em>List</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>n_sentence_pool</strong> (<em>int</em>) – </p></li>
-<li><p><strong>initial_commitments_list</strong> (<em>List</em><em>[</em><em>Set</em><em>[</em><em>int</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>model_parameters_list</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
-<li><p><strong>max_re_length</strong> (<em>int</em>) – </p></li>
-<li><p><strong>create_branches</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>max_branches</strong> (<em>int</em>) – </p></li>
-<li><p><strong>implementations</strong> (<em>List</em><em>[</em><em>Dict</em><em>] </em><em>| </em><em>None</em>) – </p></li>
+<li><p><strong>arguments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]]</span>) – A list of dialectical structures. Each dialectical structure is represented
+as a list of arguments (<code class="code docutils literal notranslate"><span class="pre">List[List[int]]</span></code>).</p></li>
+<li><p><strong>n_sentence_pool</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Size of the (unnegated) sentence pool.</p></li>
+<li><p><strong>initial_commitments_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]</span>) – A list of initial commitments.</p></li>
+<li><p><strong>model_parameters_list</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – A list of model parameter.</p></li>
+<li><p><strong>max_re_length</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – A threshold for how long individual RE processes can maximally run. Processes that
+exceed this value, will be interrupted. However, the ensemble generator itself will not be interrupted.
+Interrupted model runs will appear in the result set with an error code (field <code class="code docutils literal notranslate"><span class="pre">error_code</span></code>).</p></li>
+<li><p><strong>create_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, the ensemble generator will track every branch. Every branch will be
+represented by an individual result in the resulting iterator (or an individual row in the resulting csv).
+The results will contain multiple redundancies: The field <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code> is a set of all fixed points
+which will be reproduced in every row that represents a branch of a model run. Similarly, the field
+<code class="code docutils literal notranslate"><span class="pre">global_optima</span></code> will contain the same set of global optima for each branch.
+Note that <code class="code docutils literal notranslate"><span class="pre">n_branches</span></code> will not necessarily coincide with the size of the set <code class="code docutils literal notranslate"><span class="pre">fixed_points</span></code>
+(<code class="code docutils literal notranslate"><span class="pre">n_fixed_points</span></code>) since different branches may end up in the same fixed point.</p></li>
+<li><p><strong>max_branches</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – </p></li>
+<li><p><strong>implementations</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>]]</span>) – </p></li>
 </ul>
 </dd>
 </dl>
@@ -1385,10 +1414,10 @@ extending the following methods in each model:</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_object</span></code>(key, object)</p></td>
-<td><p></p></td>
+<td><p>Helper function to store objects within the container.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_object</span></code>(key)</p></td>
-<td><p></p></td>
+<td><p>Helper function to retrieve stores objects (see <code class="xref py py-func docutils literal notranslate"><span class="pre">add_object()</span></code>) from the container.</p></td>
 </tr>
 </tbody>
 </table>

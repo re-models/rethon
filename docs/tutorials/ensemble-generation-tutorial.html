@@ -401,7 +401,6 @@ document.write(`
 </ul>
 </li>
 </ul>
-<p><em>Source:</em> You can download this notebook from <a class="reference external" href="https://github.com/debatelab/re-docs/blob/master/source/rethon-docs/tutorials/ensemble-generation-tutorial.ipynb">here</a>.</p>
 <section id="How-to-run-this-notebook">
 <h2>How to run this notebook<a class="headerlink" href="#How-to-run-this-notebook" title="Link to this heading">#</a></h2>
 <p>There are several possibilities to execute this notebook. You can, for instance,</p>
@@ -453,7 +452,7 @@ Are we on Colab? No!
 <p>The iterator will loop through the cartesian product of the given model implementations, dialectical structures, different model parameters, initial commitments and, if desired, through all branches.</p>
 <p>Let’s take a look at a simple example. The algorithm will take standard model parameters if we do not specify model parameters and it will take a standard implementation if we do not specify implementations. The simple example will use one dialectical structure and two initial commitments:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">EnsembleGenerator</span>
@@ -490,11 +489,11 @@ Are we on Colab? No!
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-03-07 10:36:07,182 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+2024-03-14 09:37:38,858 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.
-The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.
+The model run ended with {2, 5, 6, 7, -4, -1} as its final commitments.
 New ensemble with all branches:
-2024-03-07 10:36:11,903 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+2024-03-14 09:37:39,420 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.
 The model run ended with {1, 3, 4, 5, -6, -2} as its final commitments.
 The model run ended with {2, 5, 6, 7, -4, -1} as its final commitments.
@@ -502,7 +501,7 @@ The model run ended with {2, 5, 6, 7, -4, -1} as its final commitments.
 </div>
 <p>The module provides several helper methods to produce random arguments, initial commitments and a variation of model parameters that can be used to generate more complex ensembles:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">EnsembleGenerator</span>
@@ -557,39 +556,39 @@ The model run ended with {2, 5, 6, 7, -4, -1} as its final commitments.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-03-07 10:25:56,133 [INFO] rethon: Starting ensemble generation with 24 models runs (not counting branches)
+2024-03-14 09:37:15,678 [INFO] rethon: Starting ensemble generation with 24 models runs (not counting branches)
 Generated 24 ensembles.
-The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.
-The model run ended with {3, -4, -1, 6} as its final commitments.
-The model run ended with {2, 4, 5, -6, -3, -1} as its final commitments.
-The model run ended with {1, 3, -4, 6} as its final commitments.
-The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.
-The model run ended with {1, 2, 3, 5, 6, -4} as its final commitments.
-The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.
-The model run ended with {3, 6, -1, -5, -4, -2} as its final commitments.
-The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.
-The model run ended with {3, -4, 6} as its final commitments.
-The model run ended with {1, 2, 5, -6, -4, -3} as its final commitments.
-The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.
-The model run ended with {1, 2, 4, 5, 6, -3} as its final commitments.
-The model run ended with {3, -4, -1, 6} as its final commitments.
-The model run ended with {1, 2, 3, 4, 5, -6} as its final commitments.
-The model run ended with {1, 3, -4, 6} as its final commitments.
-The model run ended with {1, 2, 3, 4, 5, -6} as its final commitments.
-The model run ended with {1, 2, 3, 5, 6, -4} as its final commitments.
-The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.
-The model run ended with {3, 5, 6, -1, -4, -2} as its final commitments.
-The model run ended with {1, 2, 4, 5, -6, -3} as its final commitments.
-The model run ended with {-4, -1} as its final commitments.
-The model run ended with {1, 2, 5, -6, -4, -3} as its final commitments.
-The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.
+The model run ended with {2, 4, 5, -3, -1} as its final commitments.
+The model run ended with {1, 2, 5, 6, -4, -3} as its final commitments.
+The model run ended with {2, 4, 5, -3, -1} as its final commitments.
+The model run ended with {1, 6, -5, -4, -3, -2} as its final commitments.
+The model run ended with {1, 2, 4, 5, -3} as its final commitments.
+The model run ended with {1, 2, 5, 6, -4, -3} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, 3, 6, -5, -4} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, -5, -4} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, 3, -6, -5, -4} as its final commitments.
+The model run ended with {2, 4, 5, -3, -1} as its final commitments.
+The model run ended with {1, 6, -5, -4, -3, -2} as its final commitments.
+The model run ended with {2, 4, 5, -3, -1} as its final commitments.
+The model run ended with {1, 2, 5, 6, -4, -3} as its final commitments.
+The model run ended with {1, 2, 4, 5, -3} as its final commitments.
+The model run ended with {1, 2, 5, 6, -4, -3} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, 6, -5, -4, -1} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, -5, -4} as its final commitments.
+The model run ended with {2, 4, 6, -5, -3, -1} as its final commitments.
+The model run ended with {2, 3, -6, -5, -4} as its final commitments.
 </pre></div></div>
 </div>
 <section id="Using-json-serialization-to-serialize-the-model-runs">
 <h3>Using json serialization to serialize the model runs<a class="headerlink" href="#Using-json-serialization-to-serialize-the-model-runs" title="Link to this heading">#</a></h3>
 <p>By using the module <code class="docutils literal notranslate"><span class="pre">rethon.util</span></code> you can serialize the resulting model runs in the json format—for instance, in the following way:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon.util</span> <span class="kn">import</span> <span class="n">rethon_dump</span>
@@ -610,7 +609,7 @@ The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.
 <p>Data items can be defined by using the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method of <code class="docutils literal notranslate"><span class="pre">EnsembleGenerator</span></code>. The function expects a key for the data item and a function with <code class="docutils literal notranslate"><span class="pre">EnsembleGenerator</span></code> as one argument. The idea: The ensemble generator will call this function to generate the data item for each model run. The ensemble generator provides several methods that you can use to define a particular data item.</p>
 <p>Let’s have a look at a simple example: We want to define a data item that stores the last commitments:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">EnsembleGenerator</span>
@@ -644,14 +643,14 @@ The model run ended with {1, 3, 5, 6, -4, -2} as its final commitments.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-03-07 10:27:38,389 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+2024-03-14 09:21:05,209 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 The model run produced the following data items:  {&#39;last_coms&#39;: {1, 3, 4, 5, -6, -2}}.
-The model run produced the following data items:  {&#39;last_coms&#39;: {2, 5, 6, 7, -4, -1}}.
+The model run produced the following data items:  {&#39;last_coms&#39;: {1, 3, 4, 5, -6, -2}}.
 </pre></div></div>
 </div>
 <p>You can use ananymous functions to add data fields in a compact way:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding the data item</span>
@@ -668,22 +667,22 @@ The model run produced the following data items:  {&#39;last_coms&#39;: {2, 5, 6
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-03-07 10:27:42,049 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+2024-03-14 09:21:08,943 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 The model run produced the following data items:  {&#39;last_coms&#39;: {1, 3, 4, 5, -6, -2}, &#39;last_theory&#39;: {1}}.
-The model run produced the following data items:  {&#39;last_coms&#39;: {1, 3, 4, 5, -6, -2}, &#39;last_theory&#39;: {1}}.
+The model run produced the following data items:  {&#39;last_coms&#39;: {2, 5, 6, 7, -4, -1}, &#39;last_theory&#39;: {2}}.
 </pre></div></div>
 </div>
 <p>In a similar way, you have access to the RE instance itself and the dialectical structure of each model run. Refer to the <a class="reference external" href="https://debatelab.github.io/re-docs/api-docs/api-ensemble-generation.html#ensemblegenerator">api docs</a> for more information.</p>
 <section id="Generating-ensemble-data-with-standard-data-items">
 <h3>Generating ensemble data with standard data items<a class="headerlink" href="#Generating-ensemble-data-with-standard-data-items" title="Link to this heading">#</a></h3>
-<p>The classes <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code>, <code class="docutils literal notranslate"><span class="pre">GlobalREEnsembleGenerator</span></code>, <code class="docutils literal notranslate"><span class="pre">LocalREEnsembleGenerator</span></code> have already a bunch of predefined data fields that can be extended by additional data items if you need them. (For details refer to the <a class="reference external" href="https://debatelab.github.io/re-docs/api-docs/api-ensemble-generation.html">api-docs</a>. [LINK NEEDS UPDATE])</p>
+<p>The classes <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code>, <code class="docutils literal notranslate"><span class="pre">GlobalREEnsembleGenerator</span></code>, <code class="docutils literal notranslate"><span class="pre">LocalREEnsembleGenerator</span></code> have already a bunch of predefined data fields that can be extended by additional data items if you need them.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code>: Defines data fields that should work well with every implementation. Depending on whether branches are created, the generator will add fields for all fixed points for each model run.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GlobalREEnsembleGenerator</span></code>: Extends <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code> with additional data items that are available for globally searching RE processes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">LocalREEnsembleGenerator</span></code>: Extends <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code> with additional data items that are available for locally searching RE processes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code>: Defines data fields that should work well with every implementation. Depending on whether branches are created, the generator will add fields for all fixed points for each model run (👉 <a class="reference external" href="https://re-models.github.io/rethon/api-docs/api-ensemble-generation.html#simpleensemblegenerator">details</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GlobalREEnsembleGenerator</span></code>: Extends <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code> with additional data items that are available for globally searching RE processes (👉 <a class="reference external" href="https://re-models.github.io/rethon/api-docs/api-ensemble-generation.html#globalreensemblegenerator">details</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LocalREEnsembleGenerator</span></code>: Extends <code class="docutils literal notranslate"><span class="pre">SimpleEnsembleGenerator</span></code> with additional data items that are available for locally searching RE processes (👉 <a class="reference external" href="https://re-models.github.io/rethon/api-docs/api-ensemble-generation.html#localreensemblegenerator">details</a>).</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">SimpleEnsembleGenerator</span>
@@ -697,93 +696,43 @@ The model run produced the following data items:  {&#39;last_coms&#39;: {1, 3, 4
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
+<div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2024-03-07 10:36:15,127 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+2024-03-14 09:37:47,457 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
+The model run produced the following data items:  {&#39;model_name&#39;: &#39;StandardGlobalReflectiveEquilibrium&#39;, &#39;tau&#39;: [[1, 3], [1, 4], [1, 5], [1, -6], [2, -4], [2, 5], [2, 6], [2, 7]], &#39;tau_name&#39;: None, &#39;n_sentence_pool&#39;: 7, &#39;tau_arg_size&#39;: 8, &#39;tau_infer_dens&#39;: 0.26143928550824114, &#39;tau_n_consistent_complete_positions&#39;: 36, &#39;tau_mean_prem&#39;: 2, &#39;tau_variance_prem&#39;: 0, &#39;tau_truths&#39;: set(), &#39;principles&#39;: [(1, 4), (2, 4)], &#39;account_penalties&#39;: [0.0, 0.3, 1.0, 1.0], &#39;faithfulness_penalties&#39;: [0.0, 0.0, 1.0, 1.0], &#39;weight_account&#39;: 0.35, &#39;weight_systematicity&#39;: 0.55, &#39;weight_faithfulness&#39;: 0.1, &#39;init_coms&#39;: {3, 4, 5}, &#39;init_coms_size&#39;: 3, &#39;init_coms_n_tau_truths&#39;: 0, &#39;init_coms_n_tau_falsehoods&#39;: 0, &#39;init_coms_n_consistent_complete_positions&#39;: 6, &#39;init_coms_dia_consistent&#39;: True, &#39;init_coms_closed&#39;: False, &#39;fixed_point_coms&#39;: {1, 3, 4, 5, -6, -2}, &#39;fixed_point_coms_size&#39;: 6, &#39;fixed_point_coms_n_tau_truths&#39;: 0, &#39;fixed_point_coms_n_tau_falsehoods&#39;: 0, &#39;fixed_point_coms_closed&#39;: True, &#39;fixed_point_coms_consistent&#39;: True, &#39;fixed_point_coms_n_consistent_complete_positions&#39;: 2, &#39;fixed_point_theory&#39;: {1}, &#39;fixed_point_theory_closure&#39;: {1, 3, 4, 5, -6, -2}, &#39;init_coms_min_ax_bases&#39;: [{3, 4, 5}], &#39;n_init_coms_min_ax_base&#39;: 3, &#39;achievements_evolution&#39;: [0, 0.9942142852544784, 1.0, 1.0, 1.0, 1.0], &#39;fixed_point_dia_consistent&#39;: True, &#39;init_final_coms_simple_hamming&#39;: 3, &#39;init_final_coms_hamming&#39;: 3, &#39;init_final_coms_contradictions&#39;: 0, &#39;init_final_coms_expansions&#39;: 3, &#39;init_final_coms_contractions&#39;: 0, &#39;init_final_coms_identities&#39;: 4, &#39;random_choices&#39;: [], &#39;n_random_choices&#39;: 0, &#39;coms_evolution&#39;: [{3, 4, 5}, {1, 3, 4, 5, -6, -2}, {1, 3, 4, 5, -6, -2}], &#39;theory_evolution&#39;: [{1}, {1}, {1}], &#39;process_length&#39;: 6, &#39;error_code&#39;: None}.
+The model run produced the following data items:  {&#39;model_name&#39;: &#39;StandardGlobalReflectiveEquilibrium&#39;, &#39;tau&#39;: [[1, 3], [1, 4], [1, 5], [1, -6], [2, -4], [2, 5], [2, 6], [2, 7]], &#39;tau_name&#39;: None, &#39;n_sentence_pool&#39;: 7, &#39;tau_arg_size&#39;: 8, &#39;tau_infer_dens&#39;: 0.26143928550824114, &#39;tau_n_consistent_complete_positions&#39;: 36, &#39;tau_mean_prem&#39;: 2, &#39;tau_variance_prem&#39;: 0, &#39;tau_truths&#39;: set(), &#39;principles&#39;: [(1, 4), (2, 4)], &#39;account_penalties&#39;: [0.0, 0.3, 1.0, 1.0], &#39;faithfulness_penalties&#39;: [0.0, 0.0, 1.0, 1.0], &#39;weight_account&#39;: 0.35, &#39;weight_systematicity&#39;: 0.55, &#39;weight_faithfulness&#39;: 0.1, &#39;init_coms&#39;: {3, 4, 5, 6, 7}, &#39;init_coms_size&#39;: 5, &#39;init_coms_n_tau_truths&#39;: 0, &#39;init_coms_n_tau_falsehoods&#39;: 0, &#39;init_coms_n_consistent_complete_positions&#39;: 1, &#39;init_coms_dia_consistent&#39;: True, &#39;init_coms_closed&#39;: False, &#39;fixed_point_coms&#39;: {1, 3, 4, 5, -6, -2}, &#39;fixed_point_coms_size&#39;: 6, &#39;fixed_point_coms_n_tau_truths&#39;: 0, &#39;fixed_point_coms_n_tau_falsehoods&#39;: 0, &#39;fixed_point_coms_closed&#39;: True, &#39;fixed_point_coms_consistent&#39;: True, &#39;fixed_point_coms_n_consistent_complete_positions&#39;: 2, &#39;fixed_point_theory&#39;: {1}, &#39;fixed_point_theory_closure&#39;: {1, 3, 4, 5, -6, -2}, &#39;init_coms_min_ax_bases&#39;: [{3, 4, 5, 6, 7}], &#39;n_init_coms_min_ax_base&#39;: 5, &#39;achievements_evolution&#39;: [0, 0.9704897953734105, 0.986734693877551, 0.9908163265306122, 0.9918367346938776, 0.9918367346938776, 0.9918367346938776, 0.9918367346938776], &#39;fixed_point_dia_consistent&#39;: True, &#39;init_final_coms_simple_hamming&#39;: 4, &#39;init_final_coms_hamming&#39;: 4, &#39;init_final_coms_contradictions&#39;: 1, &#39;init_final_coms_expansions&#39;: 2, &#39;init_final_coms_contractions&#39;: 1, &#39;init_final_coms_identities&#39;: 3, &#39;random_choices&#39;: [1], &#39;n_random_choices&#39;: 1, &#39;coms_evolution&#39;: [{3, 4, 5, 6, 7}, {1, 3, 4, 5, 7, -6, -2}, {1, 3, 4, 5, -6, -2}, {1, 3, 4, 5, -6, -2}], &#39;theory_evolution&#39;: [{1, 7}, {1}, {1}, {1}], &#39;process_length&#39;: 8, &#39;error_code&#39;: None}.
 </pre></div></div>
+</div>
+</section>
+<section id="Storing-ensemble-data-as-CSV-files">
+<h3>Storing ensemble data as CSV files<a class="headerlink" href="#Storing-ensemble-data-as-CSV-files" title="Link to this heading">#</a></h3>
+<p>You can save the created data to csv files to analyse them later (👉 <a class="reference external" href="https://re-models.github.io/rethon/api-docs/api-ensemble-generation.html#rethon.AbstractEnsembleGenerator.ensemble_items_to_csv">details</a>):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">on_colab</span><span class="p">:</span>
+    <span class="n">ensemble_gen</span><span class="o">.</span><span class="n">ensemble_items_to_csv</span><span class="p">(</span>
+                                  <span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;data_output.csv&#39;</span><span class="p">,</span>
+                                  <span class="n">output_dir_name</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">(),</span>
+                                  <span class="n">archive</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># save the csv as archived tar.gz</span>
+                                  <span class="n">save_preliminary_results</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># will create preliminary csv-data sets</span>
+                                  <span class="n">preliminary_results_interval</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[2], line 7</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> ensemble_gen <span style="color: rgb(98,98,98)">=</span> SimpleEnsembleGenerator(arguments_list <span style="color: rgb(98,98,98)">=</span> dia_structure_list,
-<span class="ansi-green-intense-fg ansi-bold">      4</span>                                  n_sentence_pool <span style="color: rgb(98,98,98)">=</span> n,
-<span class="ansi-green-intense-fg ansi-bold">      5</span>                                  initial_commitments_list <span style="color: rgb(98,98,98)">=</span> coms_list)
-<span class="ansi-green-intense-fg ansi-bold">      6</span> <span style="color: rgb(95,135,135)"># looping through the ensemble using the item_iter</span>
-<span class="ansi-green-fg">----&gt; 7</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> model_run_data_items <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> ensemble_gen<span style="color: rgb(98,98,98)">.</span>ensemble_items_iter():
-<span class="ansi-green-intense-fg ansi-bold">      8</span>     <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">The model run produced the following data items:  </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>model_run_data_items<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">.</span><span style="color: rgb(175,0,0)">&#34;</span>)
-
-File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:69</span>, in <span class="ansi-cyan-fg">AbstractEnsembleGenerator.ensemble_items_iter</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">     62</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34; Iterator through data items of model runs.</span>
-<span class="ansi-green-intense-fg ansi-bold">     63</span>
-<span class="ansi-green-intense-fg ansi-bold">     64</span> <span style="color: rgb(175,0,0)">This methods uses :py:func:`ensemble_iter` to return for each model run a dictionary with</span>
-<span class="ansi-green-intense-fg ansi-bold">     65</span> <span style="color: rgb(175,0,0)">predefined data items as key-value pairs. The data items can be added with :py:func:`add_item`.</span>
-<span class="ansi-green-intense-fg ansi-bold">     66</span>
-<span class="ansi-green-intense-fg ansi-bold">     67</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">     68</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> re <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>ensemble_iter():
-<span class="ansi-green-fg">---&gt; 69</span>     <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_fill_cols</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     70</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">yield</span> copy(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_items)
-
-File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:266</span>, in <span class="ansi-cyan-fg">AbstractEnsembleGenerator._fill_cols</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    264</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_items<span style="color: rgb(98,98,98)">.</span>clear()
-<span class="ansi-green-intense-fg ansi-bold">    265</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> key <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_item_funs<span style="color: rgb(98,98,98)">.</span>keys():
-<span class="ansi-green-fg">--&gt; 266</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_items[key] <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_item_funs</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">key</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">)</span>
-
-File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/rethon/rethon/ensemble_generation.py:1200</span>, in <span class="ansi-cyan-fg">_add_simple_data_items.&lt;locals&gt;.&lt;lambda&gt;</span><span class="ansi-blue-fg">(x)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1195</span> ensemble_generator<span style="color: rgb(98,98,98)">.</span>add_item(<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">achievements_evolution</span><span style="color: rgb(175,0,0)">&#39;</span>,
-<span class="ansi-green-intense-fg ansi-bold">   1196</span>                             <span class="ansi-bold" style="color: rgb(0,135,0)">lambda</span> x: achievements(x<span style="color: rgb(98,98,98)">.</span>reflective_equilibrium(), x<span style="color: rgb(98,98,98)">.</span>state()))
-<span class="ansi-green-intense-fg ansi-bold">   1198</span> <span style="color: rgb(95,135,135)"># whether the union of final theory &amp; commitments is dialectically consistent</span>
-<span class="ansi-green-intense-fg ansi-bold">   1199</span> ensemble_generator<span style="color: rgb(98,98,98)">.</span>add_item(<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">fixed_point_dia_consistent</span><span style="color: rgb(175,0,0)">&#39;</span>,
-<span class="ansi-green-fg">-&gt; 1200</span>                             <span class="ansi-bold" style="color: rgb(0,135,0)">lambda</span> x: <span class="ansi-yellow-bg">x</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">dialectical_structure</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">is_consistent</span><span class="ansi-yellow-bg">(</span>
-<span class="ansi-green-intense-fg ansi-bold">   1201</span> <span class="ansi-yellow-bg">                                </span><span class="ansi-yellow-bg">BitarrayPosition</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">union</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">{</span><span class="ansi-yellow-bg">x</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">state</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">last_commitments</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">x</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">state</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">last_theory</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">}</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">)</span>)
-<span class="ansi-green-intense-fg ansi-bold">   1202</span> ensemble_generator<span style="color: rgb(98,98,98)">.</span>add_item(<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">init_final_coms_simple_hamming</span><span style="color: rgb(175,0,0)">&#39;</span>,
-<span class="ansi-green-intense-fg ansi-bold">   1203</span>                             <span class="ansi-bold" style="color: rgb(0,135,0)">lambda</span> x: <span style="color: rgb(0,135,0)">len</span>(BitarrayPosition<span style="color: rgb(98,98,98)">.</span>union({x<span style="color: rgb(98,98,98)">.</span>state()<span style="color: rgb(98,98,98)">.</span>last_commitments(), x
-<span class="ansi-green-intense-fg ansi-bold">   1204</span>                                                                  <span style="color: rgb(98,98,98)">.</span>state()<span style="color: rgb(98,98,98)">.</span>initial_commitments()})<span style="color: rgb(98,98,98)">.</span>as_set()<span style="color: rgb(98,98,98)">.</span>
-<span class="ansi-green-intense-fg ansi-bold">   1205</span>                                           difference(BitarrayPosition<span style="color: rgb(98,98,98)">.</span>intersection({x<span style="color: rgb(98,98,98)">.</span>state()<span style="color: rgb(98,98,98)">.</span>last_commitments(),
-<span class="ansi-green-intense-fg ansi-bold">   1206</span>                                                                                     x<span style="color: rgb(98,98,98)">.</span>initial_commitments()})<span style="color: rgb(98,98,98)">.</span>as_set())))
-<span class="ansi-green-intense-fg ansi-bold">   1207</span> <span style="color: rgb(95,135,135)"># SetBasedPosition.union({pos1, pos2}).difference(SetBasedPosition.intersection({pos1, pos2})).size()</span>
-<span class="ansi-green-intense-fg ansi-bold">   1208</span> <span style="color: rgb(95,135,135)"># hamming distance as defined in BBB with d_3 = 1, d_2 = 1, d_1 = 1, d_0 = 0</span>
-
-File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/theodias/theodias/numpy_implementation.py:432</span>, in <span class="ansi-cyan-fg">DAGNumpyDialecticalStructure.is_consistent</span><span class="ansi-blue-fg">(self, position)</span>
-<span class="ansi-green-intense-fg ansi-bold">    431</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">is_consistent</span>(<span style="color: rgb(0,135,0)">self</span>, position: Position) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(0,135,0)">bool</span>:
-<span class="ansi-green-fg">--&gt; 432</span>     <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">__raise_value_error_if_sentence_pool_mismatch</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">position</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    433</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_update()
-<span class="ansi-green-intense-fg ansi-bold">    435</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> NumpyPosition<span style="color: rgb(98,98,98)">.</span>to_numpy_position(position) <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>__complete_consistent_extensions
-
-File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/re/reflective-equilibrium/github-repository/theodias/theodias/numpy_implementation.py:361</span>, in <span class="ansi-cyan-fg">DAGNumpyDialecticalStructure.__raise_value_error_if_sentence_pool_mismatch</span><span class="ansi-blue-fg">(self, position)</span>
-<span class="ansi-green-intense-fg ansi-bold">    360</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">__raise_value_error_if_sentence_pool_mismatch</span>(<span style="color: rgb(0,135,0)">self</span>, position: Position):
-<span class="ansi-green-fg">--&gt; 361</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> position <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>sentence_pool() <span style="color: rgb(98,98,98)">!=</span> <span class="ansi-yellow-bg">position</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">sentence_pool</span>():
-<span class="ansi-green-intense-fg ansi-bold">    362</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">ValueError</span>(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">The function you called expects positions to be based on the same sentence pool as</span><span style="color: rgb(175,0,0)">&#34;</span>,
-<span class="ansi-green-intense-fg ansi-bold">    363</span>                          <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)"> the dialectical structure.</span><span style="color: rgb(175,0,0)">&#34;</span>)
-
-<span class="ansi-red-fg">AttributeError</span>: &#39;set&#39; object has no attribute &#39;sentence_pool&#39;
+2024-03-14 09:42:31,878 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 </pre></div></div>
-</div>
-</section>
-<section id="Storing-ensemble-data-as-CSV-files">
-<h3>Storing ensemble data as CSV files<a class="headerlink" href="#Storing-ensemble-data-as-CSV-files" title="Link to this heading">#</a></h3>
-<p>You can save the created data to csv files to analyse them later (e.g. by using <a class="reference external" href="https://pandas.pydata.org/docs/index.html">pandas</a>):</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
-
-<span class="n">ensemble_gen</span><span class="o">.</span><span class="n">ensemble_items_to_csv</span><span class="p">(</span>
-                              <span class="n">output_file_name</span> <span class="o">=</span> <span class="s1">&#39;data_output.csv&#39;</span><span class="p">,</span>
-                              <span class="n">output_dir_name</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">(),</span>
-                              <span class="n">archive</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># save the csv as archived tar.gz</span>
-                              <span class="n">save_preliminary_results</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># will create preliminary csv-data sets</span>
-                              <span class="n">preliminary_results_interval</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </section>
 <section id="Complex-scenarios-of-creating-new-data-items">
@@ -793,7 +742,7 @@ File <span class="ansi-green-fg">~/Nextcloud/Documents/mindmaps/events/projekte/
 times.</p>
 <p>Instead, you can calculate this data once for every dialectical structure, store it in the ensemble generator object and use this data in the definition of the data item. You can do this by simply overwriting a function of <code class="docutils literal notranslate"><span class="pre">EnsembleGenerator</span></code>:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rethon</span> <span class="kn">import</span> <span class="n">EnsembleGenerator</span>
@@ -833,6 +782,7 @@ times.</p>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+2024-03-14 09:42:45,295 [INFO] rethon: Starting ensemble generation with 2 models runs (not counting branches)
 The model run produced the following data items:  {&#39;ds_number_of_args&#39;: 8}.
 The model run produced the following data items:  {&#39;ds_number_of_args&#39;: 8}.
 </pre></div></div>

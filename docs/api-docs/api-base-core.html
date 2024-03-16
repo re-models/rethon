@@ -1532,14 +1532,23 @@ the achievement function).</p>
 <dt class="sig sig-object py" id="rethon.REContainer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rethon.</span></span><span class="sig-name descname"><span class="pre">REContainer</span></span><a class="headerlink" href="#rethon.REContainer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An REContainer responsible for managing the execution of RE processes.</p>
+<p>Implementations of this class manage the execution and coordination of RE processes specified by the given
+list of <code class="code docutils literal notranslate"><span class="pre">re_models</span></code>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rethon.REContainer.re_models">
+<span class="sig-name descname"><span class="pre">re_models</span></span><a class="headerlink" href="#rethon.REContainer.re_models" title="Link to this definition">#</a></dt>
+<dd><p>A list of RE models (<a class="reference internal" href="#rethon.ReflectiveEquilibrium" title="rethon.ReflectiveEquilibrium"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReflectiveEquilibrium</span></code></a>).</p>
+</dd></dl>
+
 <p class="rubric">Methods</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#rethon.REContainer.add_object" title="rethon.REContainer.add_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_object</span></code></a>(key, object)</p></td>
-<td><p></p></td>
+<td><p>Helper function to store objects within the container.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#rethon.REContainer.get_object" title="rethon.REContainer.get_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_object</span></code></a>(key)</p></td>
-<td><p></p></td>
+<td><p>Helper function to retrieve stores objects (see <a class="reference internal" href="#rethon.REContainer.add_object" title="rethon.REContainer.add_object"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_object()</span></code></a>) from the container.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1566,7 +1575,8 @@ the achievement function).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="rethon.REContainer.add_object">
 <span class="sig-name descname"><span class="pre">add_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rethon.REContainer.add_object" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Helper function to store objects within the container.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (<em>Any</em>) – </p></li>
@@ -1579,7 +1589,8 @@ the achievement function).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="rethon.REContainer.get_object">
 <span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rethon.REContainer.get_object" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Helper function to retrieve stores objects (see <a class="reference internal" href="#rethon.REContainer.add_object" title="rethon.REContainer.add_object"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_object()</span></code></a>) from the container.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>key</strong> (<em>Any</em>) – </p>
 </dd>
@@ -2261,10 +2272,10 @@ non-converging processes).</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_object</span></code>(key, object)</p></td>
-<td><p></p></td>
+<td><p>Helper function to store objects within the container.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_object</span></code>(key)</p></td>
-<td><p></p></td>
+<td><p>Helper function to retrieve stores objects (see <code class="xref py py-func docutils literal notranslate"><span class="pre">add_object()</span></code>) from the container.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2422,6 +2433,7 @@ non-converging processes).</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recontainer">REContainer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rethon.REContainer"><code class="docutils literal notranslate"><span class="pre">REContainer</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rethon.REContainer.re_models"><code class="docutils literal notranslate"><span class="pre">REContainer.re_models</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rethon.REContainer.__init__"><code class="docutils literal notranslate"><span class="pre">REContainer.__init__()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rethon.REContainer.add_object"><code class="docutils literal notranslate"><span class="pre">REContainer.add_object()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rethon.REContainer.get_object"><code class="docutils literal notranslate"><span class="pre">REContainer.get_object()</span></code></a></li>

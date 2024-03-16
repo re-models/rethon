@@ -427,7 +427,6 @@ document.write(`
 <li><p><em>BDD (binary decision diagramm) based dialectical structures:</em> Important properties of the structure are calculated by using binary decision trees. This representation is comparably fast for most properties of the graph even if the sentence pool is larger (<span class="math notranslate nohighlight">\(n&gt;10\)</span>). However, for larger sentence it will become difficult to calculate all dialectically consistent positions, axiomatic bases (without a confining source) and minimal positions.</p></li>
 </ul>
 <p>Accordingly, we advise to use DAG based dialectical structures for globally searching RE processes and BDD based dialectical structures for locally searching RE processes.</p>
-<p><em>Source:</em> You can download this notebook from <a class="reference external" href="https://github.com/debatelab/re-docs/blob/master/source/rethon-docs/tutorials/rethon-tutorial.ipynb">here</a>.</p>
 <section id="Globally-searching-RE-processes">
 <h3>Globally searching RE processes<a class="headerlink" href="#Globally-searching-RE-processes" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
@@ -685,7 +684,7 @@ Commitments evolution: [{3, 4, 5}, {1, 3, 4, 5, -6, -2}, {1, 3, 4, 5, -6, -2}]
 <h2>Export to JSON<a class="headerlink" href="#Export-to-JSON" title="Link to this heading">#</a></h2>
 <section id="De-/serializing-rethon-objects">
 <h3>De-/serializing <code class="docutils literal notranslate"><span class="pre">rethon</span></code> objects<a class="headerlink" href="#De-/serializing-rethon-objects" title="Link to this heading">#</a></h3>
-<p>You can serialize and deserialize <code class="docutils literal notranslate"><span class="pre">tau</span></code> positions, dialectical structure, <code class="docutils literal notranslate"><span class="pre">rethon</span></code> re states and whole model runs as well as any compounds thereof as long as the <code class="docutils literal notranslate"><span class="pre">json</span></code> python module can handle them (e.g., lists, dictionaries). For more details, consult the <code class="docutils literal notranslate"><span class="pre">tau</span></code> tutorial (LINK NEEDED).</p>
+<p>You can serialize and deserialize <code class="docutils literal notranslate"><span class="pre">theodias</span></code> positions, dialectical structure, <code class="docutils literal notranslate"><span class="pre">rethon</span></code> re states and whole model runs as well as any compounds thereof as long as the <code class="docutils literal notranslate"><span class="pre">json</span></code> python module can handle them (e.g., lists, dictionaries). For more details, consult the <code class="docutils literal notranslate"><span class="pre">theodias</span></code> tutorial (👉 <a class="reference external" href="https://re-models.github.io/theodias/tutorials/theodias-tutorial.html">link</a>).</p>
 <p>For instance, the following code will serialize a model run:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
